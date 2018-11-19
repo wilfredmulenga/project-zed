@@ -1,4 +1,4 @@
-##projectZed
+## projectZed
 A webpage showing a list of projects done by Zambian Developers. A great place to find Zambian Developer works and contribute to Zambian Open Source projects.
 
 I am looking for anyone that would like to help contribute to this page. Just raise an issue if you want to suggest something to be added to the site.
