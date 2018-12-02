@@ -8,7 +8,6 @@ const whiteBackground = {
 }
 
 firebase.auth().signInAnonymously()
-
 class App extends Component {
     constructor(props){
       super(props)
@@ -21,7 +20,6 @@ loadData = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in.
-
       firebase.database()
             .ref('projects')
             .on('value', (snapshot) => {
@@ -36,11 +34,17 @@ loadData = () => {
     }
     })
 }
+
+componentWillUnmount(){
+  firebase.auth().signOut()
+  console.log('signed out')
+}
   
   render() {
     const { listOfProjects } = this.state
-        return (
-      <div style={{backgroundColor:'#000'}}>
+      //if data from firebase not yet loaded, show loader
+       if(listOfProjects.length !== 0){ return (
+        <div style={{backgroundColor:'#000'}}>
         {/* landing page */}
         <div style={{height:'100vh'}}>
         <div style={{
@@ -59,16 +63,16 @@ loadData = () => {
         {/* list of projects */}
           {(listOfProjects)? listOfProjects.map((element,i) => ( <div key={i}  className='row justify-content-center'>
               <div className='col-md-8 col-sm-8 mb-4'>
-              <div className="">
+              <div >
   <div className="card-body row" style={whiteBackground} >
   <div className="col-5">
         <p style={{display:'inline', marginBottom:20}} className="card-title">{element.githubUsername}</p>
-        <p>Tools</p>
-        {element.tools.map((element,i)=>( <p key={i} className="card-subtitle">{element}</p> ))}
+        <p>Tools: {element.tools.map((element,i)=>( <span key={i} className="card-subtitle mr-1">{element}</span> ))}</p>
+        <p>{element.type}</p>
   </div>
   <div className="col-7">
             <p style={{display:'inline', marginBottom:20}}>{element.description}</p>
-            <p> Link:<a rel="noopener noreferrer" target='_blank' href={element.link}>{element.link}</a> </p>
+            <p> Link: <a rel="noopener noreferrer" target='_blank' href={element.link}>{element.link}</a> </p>
   </div>
     </div>
     </div>
@@ -76,8 +80,16 @@ loadData = () => {
           </div>))
         : null  
         }
+      </div>  
+    );}else{
+     return(
+      <div style={{height:"100vh", backgroundColor:'#000'}} className=' row justify-content-center align-items-center'>
+         <div className='loader'>
+      
       </div>
-    );
+      </div>
+     )
+    }
   }
 }
 
