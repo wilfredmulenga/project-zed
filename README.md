@@ -13,6 +13,13 @@ Help on this project is very much needed. If you have a suggestion, kindly raise
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Technologies used
+
+- React
+- Bootstrap
+- firebase
+
+
 ## Available Scripts
 
 In the project directory, you can run:
