@@ -19,6 +19,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Bootstrap
 - firebase
 
+**Requirements**
+
+- Node(ˆv8.0)
+- npm (ˆv5) 
+- git
 
 ## Available Scripts
 
