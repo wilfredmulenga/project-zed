@@ -24,10 +24,27 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 **Requirements**
 
 - Node(ˆv8.0)
-- npm (ˆv5) 
+- npm (ˆv5)
 - git
 
-## Available Scripts
+## Development
+
+Clone the repo and run `npm i` in the root directory. The project uses [Firebase](https://firebase.google.com/) as a backend and for authentication. To create your own backend, create a project on Firebase then go to "Project settings" and select "web app". Register the app with a name of your preference. Once registered, copy the necessary keys and values of the firebase config which are used in the project. Authentication and databasei are already set up for you.
+
+### data structure
+
+the data structure for each project is as follows:
+  ```
+  {
+    description: string,
+    githubUsername: string,
+    link: string,
+    tools: Array<string>
+    type: string
+  }
+```
+
+Once that is set up, the project can be run for development.
 
 In the project directory, you can run:
 
@@ -39,9 +56,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
+##Deployment
+
 ### `npm build`
 
 Builds the app for production to the build folder.
+
+You can use Firebase's hosting to deploy the project. Ensure you are logged in with the curren project. You can check the list of projects by running, `firebase list`. to deploy first run `firebase init` and follow the steps. Next run `firebase deploy`
 
 ## License
 
