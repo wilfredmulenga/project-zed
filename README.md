@@ -15,6 +15,18 @@ Help on this project is very much needed. If you have a suggestion, kindly raise
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Technologies used
+
+- React
+- Bootstrap
+- firebase
+
+**Requirements**
+
+- Node(ˆv8.0)
+- npm (ˆv5) 
+- git
+
 ## Available Scripts
 
 In the project directory, you can run:
