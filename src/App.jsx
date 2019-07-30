@@ -19,10 +19,6 @@ class App extends Component {
     this.props.dispatch(loadProjects())
   }
 
-  componentWillReceiveProps() {
-    console.log('this props', this.props)
-  }
-
   componentWillUnmount() {
     firebase.auth().signOut();
   }
