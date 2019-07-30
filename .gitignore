@@ -28,3 +28,6 @@ yarn-error.log*
 database.rules.json
 firebase.json
 .firebase
+
+# vs code workspace
+projectzed.code-workspace
