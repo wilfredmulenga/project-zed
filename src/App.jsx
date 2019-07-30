@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
+import { connect } from 'react-redux'
+import { loadProjects } from './actions/actions'
 import './App.css'
 
 firebase.auth().signInAnonymously();
@@ -10,7 +12,15 @@ class App extends Component {
     this.state = {
       listOfProjects: [],
     };
-    this.loadData();
+    // this.loadData();
+  }
+
+  componentDidMount(){
+    this.props.dispatch(loadProjects())
+  }
+
+  componentWillReceiveProps() {
+    console.log('this props', this.props)
   }
 
   componentWillUnmount() {
@@ -67,6 +77,7 @@ render() {
           </div>
         </div>
         {/* list of projects */}
+        <button onClick={() => this.props.dispatch(loadProjects('projects'))}>Click me</button>
        <div id='projects'>
        { listOfProjects ? listOfProjects.map((project, i) => <Card key={i} project= {project} />) : null }
       </div>
@@ -81,4 +92,9 @@ render() {
 }
 }
 
-export default App
+function mapStateToProps (state) {
+  console.log('app', state)
+  return state
+}
+
+export default connect(mapStateToProps)(App)
