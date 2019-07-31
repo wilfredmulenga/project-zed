@@ -5,15 +5,14 @@ import { connect } from 'react-redux'
 import { loadProjects } from './actions/actions'
 import './App.css'
 
-firebase.auth().signInAnonymously();
+firebase.auth().signInAnonymously()
 class App extends Component {
-
-  componentDidMount(){
+  componentDidMount () {
     this.props.dispatch(loadProjects())
   }
 
-  componentWillUnmount() {
-    firebase.auth().signOut();
+  componentWillUnmount () {
+    firebase.auth().signOut()
   }
 
 loadData = () => {
@@ -24,20 +23,18 @@ loadData = () => {
         .ref('projects')
         .on('value', (snapshot) => {
           this.setState({
-            projects: snapshot.val(),
-          });
-        });
+            projects: snapshot.val()
+          })
+        })
       // ...
     } else {
       // User is signed out.
     }
-  });
+  })
 }
 
-
-render() {
-  const { projects } = this.props;
-  // if data from firebase not yet loaded, show loader
+render () {
+  const { projects } = this.props
   if (projects && projects.length !== 0) {
     return (
       <div style={{ backgroundColor: '#000' }}>
@@ -48,29 +45,29 @@ render() {
             bottom: 0,
             width: '100%',
             height: '70%',
-            textAlign: 'center',
+            textAlign: 'center'
           }}
           >
             <div>
               <p style={{ fontSize: 60, color: '#FFF', float: 'center' }}>Project Zed</p>
             </div>
             <p style={{
-              fontSize: 40, color: '#FFF', float: 'center', marginLeft: '20px',
+              fontSize: 40, color: '#FFF', float: 'center', marginLeft: '20px'
             }}
             >
               Find projects done by Zambian Developers
             </p>
             <div className="arrow bounce">
-                <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"></a>
+              <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"></a>
             </div>
           </div>
         </div>
         {/* list of projects */}
         <button onClick={() => this.props.dispatch(loadProjects('projects'))}>Click me</button>
-       <div id='projects'>
-       { projects ? projects.map((project, i) => <Card key={i} project= {project} />) : null }
+        <div id='projects'>
+          { projects ? projects.map((project, i) => <Card key={i} project= {project} />) : null }
+        </div>
       </div>
-       </div>
     )
   }
   return (
@@ -81,7 +78,7 @@ render() {
 }
 }
 
-function mapStateToProps ({projectsReducer}) {
+function mapStateToProps ({ projectsReducer }) {
   const { projects } = projectsReducer
   return {
     projects
