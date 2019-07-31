@@ -65,6 +65,7 @@ render () {
         {/* list of projects */}
         <button onClick={() => this.props.dispatch(loadProjects('projects'))}>Click me</button>
         <div id='projects'>
+          {/* TODO: pass all props to card. something like this {...this.props} */}
           { projects ? projects.map((project, i) => <Card key={i} project= {project} />) : null }
         </div>
       </div>
@@ -84,5 +85,5 @@ function mapStateToProps ({ projectsReducer }) {
     projects
   }
 }
-
+// TODO: add mapStateToProps
 export default connect(mapStateToProps)(App)

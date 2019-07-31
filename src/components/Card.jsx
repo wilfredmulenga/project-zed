@@ -28,6 +28,7 @@ const Card = ({ key, project }) => (
             </p>
           </div>
           <div>
+            {/* TODO: add prop to dispatch action */}
             <button>Upvote</button>
           </div>
         </div>

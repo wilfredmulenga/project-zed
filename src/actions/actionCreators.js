@@ -7,9 +7,10 @@ export const LIKE_PROJECT = 'LIKE_PROJECT'
 
 // actionCreators
 
-export function likeProject (liked) {
+export function likeProject (liked, index) {
   return {
     type: LIKE_PROJECT,
+    index,
     liked
   }
 }
@@ -20,6 +21,7 @@ export function loadProjects () {
       .ref('projects')
       .on('value', (snapshot) => {
         dispatch(receiveProjects(snapshot.val()))
+        console.log(snapshot.val())
       })
   }
 }
