@@ -27,6 +27,9 @@ const Card = ({ key, project }) => (
               {' '}
             </p>
           </div>
+          <div>
+            <button>Upvote</button>
+          </div>
         </div>
       </div>
     </div>
