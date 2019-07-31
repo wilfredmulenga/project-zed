@@ -7,13 +7,6 @@ import './App.css'
 
 firebase.auth().signInAnonymously();
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listOfProjects: [],
-    };
-    // this.loadData();
-  }
 
   componentDidMount(){
     this.props.dispatch(loadProjects())
@@ -31,7 +24,7 @@ loadData = () => {
         .ref('projects')
         .on('value', (snapshot) => {
           this.setState({
-            listOfProjects: snapshot.val(),
+            projects: snapshot.val(),
           });
         });
       // ...
@@ -43,9 +36,9 @@ loadData = () => {
 
 
 render() {
-  const { listOfProjects } = this.state;
+  const { projects } = this.props;
   // if data from firebase not yet loaded, show loader
-  if (listOfProjects.length !== 0) {
+  if (projects && projects.length !== 0) {
     return (
       <div style={{ backgroundColor: '#000' }}>
         {/* landing page */}
@@ -75,7 +68,7 @@ render() {
         {/* list of projects */}
         <button onClick={() => this.props.dispatch(loadProjects('projects'))}>Click me</button>
        <div id='projects'>
-       { listOfProjects ? listOfProjects.map((project, i) => <Card key={i} project= {project} />) : null }
+       { projects ? projects.map((project, i) => <Card key={i} project= {project} />) : null }
       </div>
        </div>
     )
@@ -88,9 +81,11 @@ render() {
 }
 }
 
-function mapStateToProps (state) {
-  console.log('app', state)
-  return state
+function mapStateToProps ({projectsReducer}) {
+  const { projects } = projectsReducer
+  return {
+    projects
+  }
 }
 
 export default connect(mapStateToProps)(App)

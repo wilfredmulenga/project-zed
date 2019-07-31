@@ -2,15 +2,13 @@ import { combineReducers } from 'redux'
 
 import { RECEIVE_PROJECTS } from '../actions/actions'
 
-export function projectsReducer (state = [], action) {
+export function projectsReducer (state = {}, action) {
   switch(action.type){
     case RECEIVE_PROJECTS:
-    return [
+    return {
       ...state,
-     {
        projects: action.projects
      }
-    ]
     default: return state
   }
 }
