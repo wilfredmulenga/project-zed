@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
 import { connect } from 'react-redux'
-import { likeProject, loadProjects } from './actions/actionCreators'
+import { loadProjects } from './actions/actionCreators'
 import './App.css'
 
 firebase.auth().signInAnonymously()
 class App extends Component {
   componentDidMount () {
-    // this.props.loadProjects()
+    this.props.loadProjects()
   }
 
   componentWillUnmount () {
@@ -80,7 +80,6 @@ render () {
 
 function mapStateToProps ({ projectsReducer }) {
   const { projects } = projectsReducer
-  console.log('props', projects)
   return {
     projects
   }

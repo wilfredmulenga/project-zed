@@ -2,16 +2,24 @@ import firebase from '../config/firebase'
 
 // actions
 export const LOAD_PROJECTS_START = 'LOAD_PROJECTS_START'
-export const RECEIVE_PROJECTS = 'RECEIVE_POSTS'
+export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS'
+export const DISLIKE_PROJECT = 'DISLIKE_PROJECT'
 export const LIKE_PROJECT = 'LIKE_PROJECT'
 
 // actionCreators
-
 export function likeProject (liked, index) {
   return {
     type: LIKE_PROJECT,
-    index,
-    liked
+    liked,
+    index
+  }
+}
+
+export function dislikeProject (liked, index) {
+  return {
+    type: DISLIKE_PROJECT,
+    liked,
+    index
   }
 }
 

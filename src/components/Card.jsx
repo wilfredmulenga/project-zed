@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { likeProject } from '../actions/actionCreators'
+import { likeProject, dislikeProject } from '../actions/actionCreators'
 
 const whiteBackground = {
   backgroundColor: '#FFF'
@@ -12,8 +12,12 @@ class Card extends React.Component {
   }
 
   handleCick = (liked, index) => {
-    this.props.dispatch(likeProject(liked, index))
-    this.setState({ liked: !liked })
+    if (!this.state.liked) {
+      this.props.dispatch(likeProject(liked, index))
+    } else {
+      this.props.dispatch(dislikeProject(liked, index))
+    }
+    this.setState({ liked: !this.state.liked })
   }
 
   render () {
