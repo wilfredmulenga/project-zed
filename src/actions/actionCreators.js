@@ -25,6 +25,7 @@ export function dislikeProject (liked, index) {
 
 export function loadProjects () {
   return function (dispatch) {
+    // TODO: add actions for LOAD_START, FETCH_SUCCESS and FETCH_FAIL
     firebase.database()
       .ref('projects')
       .on('value', (snapshot) => {

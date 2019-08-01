@@ -78,10 +78,10 @@ render () {
 }
 }
 
+// this receives the state. it has a property 'projectsReducer' so we destructure here
 function mapStateToProps ({ projectsReducer }) {
-  const { projects } = projectsReducer
   return {
-    projects
+    projects: projectsReducer
   }
 }
 
