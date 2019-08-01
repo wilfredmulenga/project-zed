@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
 import { connect } from 'react-redux'
-import { loadProjects } from './actions/actionCreators'
+import { likeProject, loadProjects } from './actions/actionCreators'
 import './App.css'
 
 firebase.auth().signInAnonymously()
 class App extends Component {
   componentDidMount () {
-    this.props.dispatch(loadProjects())
+    // this.props.loadProjects()
   }
 
   componentWillUnmount () {
@@ -62,11 +62,10 @@ render () {
             </div>
           </div>
         </div>
-        {/* list of projects */}
-        <button onClick={() => this.props.dispatch(loadProjects('projects'))}>Click me</button>
         <div id='projects'>
-          {/* TODO: pass all props to card. something like this {...this.props} */}
-          { projects ? projects.map((project, i) => <Card key={i} project= {project} />) : null }
+          { projects ? projects.map((project, i) =>
+            <Card key={i} index={i} project= {project} />) : null
+          }
         </div>
       </div>
     )
@@ -81,9 +80,17 @@ render () {
 
 function mapStateToProps ({ projectsReducer }) {
   const { projects } = projectsReducer
+  console.log('props', projects)
   return {
     projects
   }
 }
-// TODO: add mapStateToProps
-export default connect(mapStateToProps)(App)
+
+function mapDispatchToProps (dispatch) {
+  return {
+    loadProjects: () => {
+      dispatch(loadProjects())
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App)

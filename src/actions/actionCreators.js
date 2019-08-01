@@ -21,7 +21,6 @@ export function loadProjects () {
       .ref('projects')
       .on('value', (snapshot) => {
         dispatch(receiveProjects(snapshot.val()))
-        console.log(snapshot.val())
       })
   }
 }
