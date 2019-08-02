@@ -1,7 +1,6 @@
 import firebase from '../config/firebase'
 
-// actions
-export const LOAD_PROJECTS_START = 'LOAD_PROJECTS_START'
+// actions types
 export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS'
 export const DISLIKE_PROJECT = 'DISLIKE_PROJECT'
 export const LIKE_PROJECT = 'LIKE_PROJECT'
@@ -25,7 +24,6 @@ export function dislikeProject (liked, index) {
 
 export function loadProjects () {
   return function (dispatch) {
-    // TODO: add actions for LOAD_START, FETCH_SUCCESS and FETCH_FAIL
     firebase.database()
       .ref('projects')
       .on('value', (snapshot) => {
