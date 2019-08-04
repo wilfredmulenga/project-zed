@@ -3,7 +3,7 @@ import firebase from './config/firebase'
 import Card from './components/Card'
 import { connect } from 'react-redux'
 import { loadProjects } from './actions/actionCreators'
-import './App.css'
+import './App.scss'
 
 firebase.auth().signInAnonymously()
 class App extends Component {
