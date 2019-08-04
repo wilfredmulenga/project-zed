@@ -1,4 +1,4 @@
-import firebase from '../config/firebase'
+// import firebase from '../config/firebase'
 
 // actions types
 export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS'
@@ -24,11 +24,11 @@ export function dislikeProject (liked, index) {
 
 export function loadProjects () {
   return function (dispatch) {
-    firebase.database()
-      .ref('projects')
-      .on('value', (snapshot) => {
-        dispatch(receiveProjects(snapshot.val()))
-      })
+    // firebase.database()
+    //   .ref('projects')
+    //   .on('value', (snapshot) => {
+    //     dispatch(receiveProjects(snapshot.val()))
+    //   })
   }
 }
 
