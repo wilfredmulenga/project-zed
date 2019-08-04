@@ -36,7 +36,10 @@ class Card extends React.Component {
                   {project.tools.map((element, i) => (<span key={i} className="card-subtitle mr-1">{element}</span>))}
                 </p>
                 <p>{project.type}</p>
-                <p>Likes: {project.likes}</p>
+                <div className='likeContainer'>
+                  <div className="like"><p>{liked ? 'unlike' : 'like' }</p></div>
+                  <div className='likeCount'>{project.likes}</div>
+                </div>
               </div>
               <div className="col-7">
                 <p style={{ display: 'inline', marginBottom: 20 }}>{project.description}</p>
@@ -47,11 +50,6 @@ class Card extends React.Component {
                   <a rel="noopener noreferrer" target="_blank" href={project.link}>{project.link}</a>
                   {' '}
                 </p>
-              </div>
-              <div>
-                <button className={`btn btn-primary ${liked ? `active` : null}`}
-                  onClick={this.handleCick.bind(null, liked, index)}>
-                  Upvote</button>
               </div>
             </div>
           </div>
