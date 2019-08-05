@@ -1,7 +1,7 @@
 import { RECEIVE_PROJECTS, LIKE_PROJECT, DISLIKE_PROJECT } from '../actions/actionCreators'
 import data from '../data'
 
-export default function projectsReducer (state = data, action) {
+export default function projectsReducer (state = [], action) {
   switch (action.type) {
     case RECEIVE_PROJECTS:
       return [
