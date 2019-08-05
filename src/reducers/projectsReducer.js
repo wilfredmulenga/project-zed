@@ -1,12 +1,12 @@
-import { RECEIVE_PROJECTS, LIKE_PROJECT, DISLIKE_PROJECT } from '../actions/actionCreators'
+import { LOAD_PROJECTS_SUCCESS, LIKE_PROJECT, DISLIKE_PROJECT } from '../actions/actionCreators'
 import data from '../data'
 
 export default function projectsReducer (state = [], action) {
   switch (action.type) {
-    case RECEIVE_PROJECTS:
+    case LOAD_PROJECTS_SUCCESS:
       return [
         ...state,
-        ...action.projects
+        ...action.payload
       ]
     case LIKE_PROJECT:
       const i = action.index

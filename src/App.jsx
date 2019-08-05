@@ -33,6 +33,15 @@ loadData = () => {
   })
 }
 
+authenticate = provider => {
+  const authProvider = new firebase.auth[`${provider}AuthProvider`]()
+  firebase.auth().signInWithPopup(authProvider).then(this.authHandler)
+}
+
+authHandler = async authData => {
+  console.log(authData)
+}
+
 render () {
   const { projects } = this.props
   if (projects && projects.length !== 0) {
@@ -57,6 +66,7 @@ render () {
             >
               Find projects done by Zambian Developers
             </p>
+            <button onClick={() => this.authenticate('Facebook')}>Facebook</button>
             <div className="arrow bounce">
               <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"></a>
             </div>

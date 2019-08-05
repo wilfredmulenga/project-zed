@@ -41,10 +41,12 @@ export function loadProjects () {
     dispatch({ type: LOAD_PROJECTS_START })
 
     const projectsRef = firebase.database().ref('projects')
-    projectsRef.on('value', (snapshot) => {
+    projectsRef.once('value', (snapshot) => {
       if (snapshot.val()) {
-        dispatch(receiveProjects(snapshot.val()))
-        dispatch({ type: LOAD_PROJECTS_SUCCESS })
+        dispatch({
+          type: LOAD_PROJECTS_SUCCESS,
+          payload: snapshot.val()
+        })
       }
     }, error => {
       dispatch({
@@ -52,12 +54,5 @@ export function loadProjects () {
         payload: error
       })
     })
-  }
-}
-
-export function receiveProjects (projects) {
-  return {
-    type: RECEIVE_PROJECTS,
-    projects: projects
   }
 }
