@@ -6,18 +6,16 @@ export const DISLIKE_PROJECT = 'DISLIKE_PROJECT'
 export const LIKE_PROJECT = 'LIKE_PROJECT'
 
 // actionCreators
-export function likeProject (liked, index) {
+export function likeProject (index) {
   return {
     type: LIKE_PROJECT,
-    liked,
     index
   }
 }
 
-export function dislikeProject (liked, index) {
+export function dislikeProject (index) {
   return {
     type: DISLIKE_PROJECT,
-    liked,
     index
   }
 }

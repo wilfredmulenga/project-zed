@@ -11,11 +11,11 @@ class Card extends React.Component {
     liked: false
   }
 
-  handleCick = (liked, index) => {
+  handleCick = (index) => {
     if (!this.state.liked) {
-      this.props.dispatch(likeProject(liked, index))
+      this.props.dispatch(likeProject(index))
     } else {
-      this.props.dispatch(dislikeProject(liked, index))
+      this.props.dispatch(dislikeProject(index))
     }
     this.setState({ liked: !this.state.liked })
   }
@@ -37,7 +37,7 @@ class Card extends React.Component {
                 </p>
                 <p>{project.type}</p>
                 <div className='likeContainer'>
-                  <div className="like"><p>{liked ? 'unlike' : 'like' }</p></div>
+                  <div className="like" onClick={() => this.handleCick(index)}><p>{liked ? 'unlike' : 'like' }</p></div>
                   <div className='likeCount'>{project.likes}</div>
                 </div>
               </div>

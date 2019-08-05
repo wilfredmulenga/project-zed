@@ -4,7 +4,6 @@ import data from '../data'
 export default function projectsReducer (state = data, action) {
   switch (action.type) {
     case RECEIVE_PROJECTS:
-      console.log('here', action)
       return [
         ...state,
         ...action.projects
