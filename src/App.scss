@@ -106,7 +106,10 @@
     border-bottom-left-radius: 4px;
     justify-content: center;
     padding-top: 6px;
-
+    cursor: pointer;
+    &:hover {
+      background-color: #8D0400;
+    }
     & p {
       margin: 0
     }
