@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
+import Navbar from './components/Navbar'
+import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import { loadProjects } from './actions/actionCreators'
 import './App.scss'
@@ -8,7 +10,7 @@ import './App.scss'
 firebase.auth().signInAnonymously()
 class App extends Component {
   componentDidMount () {
-    this.props.loadProjects()
+    // this.props.loadProjects()
   }
 
   componentWillUnmount () {
@@ -35,7 +37,11 @@ loadData = () => {
 
 authenticate = provider => {
   const authProvider = new firebase.auth[`${provider}AuthProvider`]()
-  firebase.auth().signInWithPopup(authProvider).then(this.authHandler)
+  firebase.auth().signInWithPopup(authProvider)
+    .then(this.authHandler)
+    .catch(function (error) {
+      console.log(error)
+    })
 }
 
 authHandler = async authData => {
@@ -47,26 +53,16 @@ render () {
   if (projects && projects.length !== 0) {
     return (
       <div style={{ backgroundColor: '#000' }}>
+        <Navbar/>
         {/* landing page */}
         <div style={{ height: '100vh' }}>
-          <div style={{
-            position: 'absolute',
-            bottom: 0,
-            width: '100%',
-            height: '70%',
-            textAlign: 'center'
-          }}
-          >
+          <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '70%', textAlign: 'center' }}>
             <div>
               <p style={{ fontSize: 60, color: '#FFF', float: 'center' }}>Project Zed</p>
             </div>
-            <p style={{
-              fontSize: 40, color: '#FFF', float: 'center', marginLeft: '20px'
-            }}
-            >
+            <p style={{ fontSize: 40, color: '#FFF', float: 'center', marginLeft: '20px' }}>
               Find projects done by Zambian Developers
             </p>
-            <button onClick={() => this.authenticate('Facebook')}>Facebook</button>
             <div className="arrow bounce">
               <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"></a>
             </div>
@@ -77,6 +73,18 @@ render () {
             <Card key={i} index={i} project= {project} />) : null
           }
         </div>
+        <Modal
+          isOpen={true}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Sign in modal">
+          <div className='SigninModal'>
+            <div className='socialSigninButton facebook' onClick={() => this.authenticate('Facebook')}>Facebook</div>
+            <div className='socialSigninButton google' onClick={() => this.authenticate('Google')}>Google</div>
+            <div className='socialSigninButton github' onClick={() => this.authenticate('Github')}>Github</div>
+          </div>
+        </Modal>
       </div>
     )
   }
@@ -86,6 +94,19 @@ render () {
     </div>
   )
 }
+}
+
+const customStyles = {
+  content: {
+    width: '40%',
+    height: '40%',
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
 }
 
 // this receives the state. it has a property 'projectsReducer' so we destructure here

@@ -129,3 +129,22 @@
       margin: 0
     }
   }
+
+  .signinModal {
+    width: 80%;
+  }
+
+  .socialSigninButton {
+    &.facebook {
+      background-color: #3b5998;
+      color: #ffffff;
+    }
+    &.google {
+      background-color: #ffffff;
+    }
+    &.github {
+      background-color: #24292d;
+      color: #ffffff;
+    }
+  }
+
