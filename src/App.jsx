@@ -5,6 +5,9 @@ import Navbar from './components/Navbar'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import { loadProjects } from './actions/actionCreators'
+import facebook from './images/facebook.svg'
+import google from './images/google.png'
+import github from './images/github.png'
 import './App.scss'
 
 firebase.auth().signInAnonymously()
@@ -80,9 +83,20 @@ render () {
           style={customStyles}
           contentLabel="Sign in modal">
           <div className='SigninModal'>
-            <div className='socialSigninButton facebook' onClick={() => this.authenticate('Facebook')}>Facebook</div>
-            <div className='socialSigninButton google' onClick={() => this.authenticate('Google')}>Google</div>
-            <div className='socialSigninButton github' onClick={() => this.authenticate('Github')}>Github</div>
+            <h3>Sign In</h3>
+            <hr/>
+            <div className='socialSigninButton facebook' onClick={() => this.authenticate('Facebook')}>
+              <img src={facebook} />
+              <p>Facebook</p>
+            </div>
+            <div className='socialSigninButton google' onClick={() => this.authenticate('Google')}>
+              <img src={google} />
+              <p>Google</p>
+            </div>
+            <div className='socialSigninButton github' onClick={() => this.authenticate('Github')}>
+              <img src={github} />
+              <p>Github</p>
+            </div>
           </div>
         </Modal>
       </div>
@@ -99,7 +113,6 @@ render () {
 const customStyles = {
   content: {
     width: '40%',
-    height: '40%',
     top: '50%',
     left: '50%',
     right: 'auto',
