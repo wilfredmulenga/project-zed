@@ -5,7 +5,7 @@ class Navbar extends React.Component {
     return (
       <div>
         <nav className="navbar navbar-dark bg-dark">
-          <a className="navbar-brand" style={{ color: '#FFF' }}>Project Zed</a>
+          <a className="navbar-brand" style={{ color: '#FFF' }} href='/'>Project Zed</a>
           <form className="form-inline">
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Sign In</button>
           </form>

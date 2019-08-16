@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
 import Navbar from './components/Navbar'
-import Modal from 'react-modal'
+import SigninModal from './components/Modals/SigninModal'
+
 import { connect } from 'react-redux'
 import { loadProjects } from './actions/actionCreators'
-import facebook from './images/facebook.svg'
-import google from './images/google.png'
-import github from './images/github.png'
 import './App.scss'
 
 firebase.auth().signInAnonymously()
@@ -76,50 +74,17 @@ render () {
             <Card key={i} index={i} project= {project} />) : null
           }
         </div>
-        <Modal
-          isOpen={true}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Sign in modal">
-          <div className='SigninModal'>
-            <h3>Sign In</h3>
-            <hr/>
-            <div className='socialSigninButton facebook' onClick={() => this.authenticate('Facebook')}>
-              <img src={facebook} />
-              <p>Facebook</p>
-            </div>
-            <div className='socialSigninButton google' onClick={() => this.authenticate('Google')}>
-              <img src={google} />
-              <p>Google</p>
-            </div>
-            <div className='socialSigninButton github' onClick={() => this.authenticate('Github')}>
-              <img src={github} />
-              <p>Github</p>
-            </div>
-          </div>
-        </Modal>
+        <SigninModal isOpen={true} />
       </div>
     )
   }
   return (
-    <div style={{ height: '100vh', backgroundColor: '#000' }} className=" row justify-content-center align-items-center">
+    <div style={{ height: '100vh', backgroundColor: '#000' }}
+      className=" row justify-content-center align-items-center">
       <div className="loader" />
     </div>
   )
 }
-}
-
-const customStyles = {
-  content: {
-    width: '40%',
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
 }
 
 // this receives the state. it has a property 'projectsReducer' so we destructure here
