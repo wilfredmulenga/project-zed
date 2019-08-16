@@ -51,6 +51,7 @@ authHandler = async authData => {
 
 render () {
   const { projects } = this.props
+  const { signinModalOpen } = this.props.home
   if (projects && projects.length !== 0) {
     return (
       <div style={{ backgroundColor: '#000' }}>
@@ -74,7 +75,7 @@ render () {
             <Card key={i} index={i} project= {project} />) : null
           }
         </div>
-        <SigninModal isOpen={true} />
+        <SigninModal isOpen={signinModalOpen} />
       </div>
     )
   }
@@ -88,9 +89,10 @@ render () {
 }
 
 // this receives the state. it has a property 'projectsReducer' so we destructure here
-function mapStateToProps ({ projectsReducer }) {
+function mapStateToProps ({ projectsReducer, homeReducer }) {
   return {
-    projects: projectsReducer
+    projects: projectsReducer,
+    home: homeReducer
   }
 }
 
