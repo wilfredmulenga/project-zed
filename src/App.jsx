@@ -5,33 +5,28 @@ import Navbar from './components/Navbar'
 import SigninModal from './components/Modals/SigninModal'
 
 import { connect } from 'react-redux'
-import { loadProjects } from './actions/actionCreators'
+import { loadProjects, logInStateChange } from './actions/actionCreators'
 import './App.scss'
 
+// TODO: remove the line below
 firebase.auth().signInAnonymously()
 class App extends Component {
   componentDidMount () {
-    // this.props.loadProjects()
+    // this.props.dispatch(loadProjects())
+    this.checkLoggedInUser()
   }
 
   componentWillUnmount () {
     firebase.auth().signOut()
+    this.props.dispatch(({ userUID: null, userLoggedIn: false }))
   }
 
-loadData = () => {
+checkLoggedInUser = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      // User is signed in.
-      firebase.database()
-        .ref('projects')
-        .on('value', (snapshot) => {
-          this.setState({
-            projects: snapshot.val()
-          })
-        })
-      // ...
+      this.props.dispatch(logInStateChange({ userUID: user.uid, loggedIn: true }))
     } else {
-      // User is signed out.
+      this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
     }
   })
 }
@@ -96,11 +91,4 @@ function mapStateToProps ({ projectsReducer, homeReducer }) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    loadProjects: () => {
-      dispatch(loadProjects())
-    }
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, null)(App)

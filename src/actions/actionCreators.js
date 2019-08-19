@@ -8,7 +8,8 @@ import {
   UPDATE_PROJECTS_START,
   UPDATE_PROJECTS_FAIL,
   UPDATE_PROJECTS_SUCCESS,
-  TOGGLE_SIGN_IN_MODAL
+  TOGGLE_SIGN_IN_MODAL,
+  LOG_IN_STATUS_CHANGE
 } from './actionTypes'
 
 // actions types
@@ -62,5 +63,17 @@ export function loadProjects () {
 export function toggleSigninModal () {
   return {
     type: TOGGLE_SIGN_IN_MODAL
+  }
+}
+
+export function logInStateChange ({ userUID, loggedIn }) {
+  return function (dispatch) {
+    dispatch({
+      type: LOG_IN_STATUS_CHANGE,
+      payload: {
+        userUID,
+        loggedIn
+      }
+    })
   }
 }
