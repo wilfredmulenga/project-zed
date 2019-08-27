@@ -174,7 +174,18 @@
     }
   }
 
-  .modalCloseButton {
-    text-align: end;
-    margin-top: 40px;
+  .SignOutModal {
+    text-align: center;
+    margin-bottom: 15px;
+    & hr {
+      margin-bottom: 40px;
+    }
+  }
+
+  .SignOutModal .SignOutModalYes {
+    margin-right: 50px;
+  }
+
+  .SignOutModal .SignOutModalNo {
+    margin-left: 50px;
   }

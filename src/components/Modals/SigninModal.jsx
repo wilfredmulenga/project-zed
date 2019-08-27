@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
+import firebase from '../../config/firebase'
 import { toggleSigninModal } from '../../actions/actionCreators'
 import facebook from '../../images/facebook.svg'
 import google from '../../images/google.png'
@@ -8,7 +9,23 @@ import github from '../../images/github.png'
 
 Modal.setAppElement('#root')
 
-class SiginModal extends React.Component {
+class SignInModal extends React.Component {
+  authenticate = provider => {
+    const authProvider = new firebase.auth[`${provider}AuthProvider`]()
+    firebase.auth().signInWithPopup(authProvider)
+      .then(this.authHandler)
+      .catch(function (error) {
+        console.log(error)
+        // TODO: handle error when user is already signed in
+      })
+  }
+
+  authHandler = async authData => {
+    if (authData.credential.email) {
+      this.props.dispatch(toggleSigninModal())
+    }
+  }
+
   render () {
     const { isOpen } = this.props
     return (
@@ -61,4 +78,4 @@ const customStyles = {
   }
 }
 
-export default connect(null)(SiginModal)
+export default connect(null)(SignInModal)

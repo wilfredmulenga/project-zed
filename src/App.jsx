@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
 import Navbar from './components/Navbar'
-import SigninModal from './components/Modals/SigninModal'
+import SignInModal from './components/Modals/SignInModal'
+import SignOutModal from './components/Modals/SignOutModal'
 
 import { connect } from 'react-redux'
 import { loadProjects, logInStateChange } from './actions/actionCreators'
 import './App.scss'
 
 // TODO: remove the line below
-firebase.auth().signInAnonymously()
+// firebase.auth().signInAnonymously()
 class App extends Component {
   componentDidMount () {
     // this.props.dispatch(loadProjects())
@@ -18,7 +19,7 @@ class App extends Component {
 
   componentWillUnmount () {
     firebase.auth().signOut()
-    this.props.dispatch(({ userUID: null, userLoggedIn: false }))
+    this.props.dispatch(logInStateChange({ userUID: null, userLoggedIn: false }))
   }
 
 checkLoggedInUser = () => {
@@ -31,22 +32,9 @@ checkLoggedInUser = () => {
   })
 }
 
-authenticate = provider => {
-  const authProvider = new firebase.auth[`${provider}AuthProvider`]()
-  firebase.auth().signInWithPopup(authProvider)
-    .then(this.authHandler)
-    .catch(function (error) {
-      console.log(error)
-    })
-}
-
-authHandler = async authData => {
-  console.log(authData)
-}
-
 render () {
   const { projects } = this.props
-  const { signinModalOpen } = this.props.home
+  const { signInModalOpen, signOutModalOpen } = this.props.home
   if (projects && projects.length !== 0) {
     return (
       <div style={{ backgroundColor: '#000' }}>
@@ -70,7 +58,8 @@ render () {
             <Card key={i} index={i} project= {project} />) : null
           }
         </div>
-        <SigninModal isOpen={signinModalOpen} />
+        <SignInModal isOpen={signInModalOpen} />
+        <SignOutModal isOpen={signOutModalOpen} />
       </div>
     )
   }

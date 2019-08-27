@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { toggleSigninModal } from '../actions/actionCreators'
+import { toggleSigninModal, toggleSignOutModal } from '../actions/actionCreators'
 
 class Navbar extends React.Component {
   render () {
+    const { loggedIn } = this.props.home
     return (
       <div>
         <nav className="navbar navbar-dark bg-dark">
@@ -12,11 +13,11 @@ class Navbar extends React.Component {
             <button
               onClick={(e) => {
                 e.preventDefault()
-                this.props.dispatch(toggleSigninModal())
+                loggedIn ? this.props.dispatch(toggleSignOutModal()) : this.props.dispatch(toggleSigninModal())
               }}
               className="btn btn-outline-success my-2 my-sm-0"
               type="submit">
-               Sign In
+              { loggedIn ? `Sign Out` : `Sign In` }
             </button>
           </form>
         </nav>
@@ -25,4 +26,10 @@ class Navbar extends React.Component {
   }
 }
 
-export default connect(null)(Navbar)
+function mapStateToProps ({ homeReducer }) {
+  return {
+    home: homeReducer
+  }
+}
+
+export default connect(mapStateToProps, null)(Navbar)
