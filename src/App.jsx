@@ -25,7 +25,7 @@ class App extends Component {
 checkLoggedInUser = () => {
   const userInfoJSON = localStorage.getItem('userInfo')
   const userInfo = JSON.parse(userInfoJSON)
-  if (userInfo.loggedIn) {
+  if (userInfo && userInfo.loggedIn) {
     this.props.dispatch(logInStateChange(userInfo))
   } else {
     this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))

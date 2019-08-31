@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { likeOrDislike } from '../actions/actionCreators'
+import { likeOrDislike, toggleSigninModal } from '../actions/actionCreators'
 
 const whiteBackground = {
   backgroundColor: '#FFF'
@@ -12,8 +12,13 @@ class Card extends React.Component {
   }
 
   handleCick = (index) => {
-    this.setState({ liked: !this.state.liked },
-      () => this.props.dispatch(likeOrDislike(index, this.state.liked)))
+    const { loggedIn } = this.props.home
+    if (loggedIn) {
+      this.setState({ liked: !this.state.liked },
+        () => this.props.dispatch(likeOrDislike(index, this.state.liked)))
+    } else {
+      this.props.dispatch(toggleSigninModal())
+    }
   }
 
   render () {
@@ -55,4 +60,10 @@ class Card extends React.Component {
   }
 }
 
-export default connect()(Card)
+function mapStateToProps ({ homeReducer }) {
+  return {
+    home: homeReducer
+  }
+}
+
+export default connect(mapStateToProps, null)(Card)

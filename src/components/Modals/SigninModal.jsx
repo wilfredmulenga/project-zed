@@ -11,9 +11,10 @@ Modal.setAppElement('#root')
 
 class SignInModal extends React.Component {
   authenticate = provider => {
+    this.props.dispatch(toggleSigninModal())
     const authProvider = new firebase.auth[`${provider}AuthProvider`]()
     firebase.auth().signInWithPopup(authProvider)
-      // .then(this.authHandler)
+      .then(this.authHandler)
       .catch(function (error) {
         console.log(error)
       })
@@ -23,6 +24,7 @@ class SignInModal extends React.Component {
         localStorage.setItem('userInfo', JSON.stringify(userInfo))
         this.props.dispatch(logInStateChange(userInfo))
       } else {
+        localStorage.removeItem('userInfo')
         this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
       }
     })
