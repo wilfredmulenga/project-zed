@@ -43,12 +43,12 @@ class Card extends React.Component {
                 </div>
               </div>
               <div className="col-7">
-                <p style={{ display: 'inline', marginBottom: 20 }}>{project.description}</p>
+                <p className='removeOverflowText' style={{ display: 'inline', marginBottom: 20 }}>{project.description}</p>
                 <p>
                   {' '}
               Link:
                   {' '}
-                  <a rel="noopener noreferrer" target="_blank" href={project.link}>{project.link}</a>
+                  <a className='removeOverflowText' rel="noopener noreferrer" target="_blank" href={project.link}>{project.link}</a>
                   {' '}
                 </p>
               </div>

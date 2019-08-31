@@ -9,11 +9,9 @@ import { connect } from 'react-redux'
 import { loadProjects, logInStateChange } from './actions/actionCreators'
 import './App.scss'
 
-// TODO: remove the line below
-// firebase.auth().signInAnonymously()
 class App extends Component {
   componentDidMount () {
-    // this.props.dispatch(loadProjects())
+    this.props.dispatch(loadProjects())
     this.checkLoggedInUser()
   }
 
