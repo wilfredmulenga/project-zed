@@ -23,13 +23,13 @@ class App extends Component {
   }
 
 checkLoggedInUser = () => {
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      this.props.dispatch(logInStateChange({ userUID: user.uid, loggedIn: true }))
-    } else {
-      this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
-    }
-  })
+  const userInfoJSON = localStorage.getItem('userInfo')
+  const userInfo = JSON.parse(userInfoJSON)
+  if (userInfo.loggedIn) {
+    this.props.dispatch(logInStateChange(userInfo))
+  } else {
+    this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
+  }
 }
 
 render () {

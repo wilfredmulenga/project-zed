@@ -9,6 +9,7 @@ Modal.setAppElement('#root')
 class SignOutModal extends React.Component {
   signOut = () => {
     firebase.auth().signOut()
+    localStorage.removeItem('userInfo')
     this.props.dispatch(logInStateChange({ userUID: null, userLoggedIn: false }))
     this.props.dispatch(toggleSignOutModal())
   }

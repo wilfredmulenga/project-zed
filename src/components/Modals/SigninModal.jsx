@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import firebase from '../../config/firebase'
-import { toggleSigninModal } from '../../actions/actionCreators'
+import { toggleSigninModal, logInStateChange } from '../../actions/actionCreators'
 import facebook from '../../images/facebook.svg'
 import google from '../../images/google.png'
 import github from '../../images/github.png'
@@ -13,16 +13,25 @@ class SignInModal extends React.Component {
   authenticate = provider => {
     const authProvider = new firebase.auth[`${provider}AuthProvider`]()
     firebase.auth().signInWithPopup(authProvider)
-      .then(this.authHandler)
+      // .then(this.authHandler)
       .catch(function (error) {
         console.log(error)
-        // TODO: handle error when user is already signed in
       })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const userInfo = { userUID: user.uid, loggedIn: true }
+        localStorage.setItem('userInfo', JSON.stringify(userInfo))
+        this.props.dispatch(logInStateChange(userInfo))
+      } else {
+        this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
+      }
+    })
   }
 
+  // TODO: check if this line is needed
   authHandler = async authData => {
     if (authData.credential.email) {
-      this.props.dispatch(toggleSigninModal())
+      // this.props.dispatch(toggleSigninModal())
     }
   }
 
