@@ -1,0 +1,200 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  border: 16px solid #FFF;
+  border-radius: 50%;
+  border-top: 16px solid darkgrey;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* down arrow */
+  .downArrow {
+   color: white;
+   text-decoration: none;
+  }
+
+  .fa-arrow-down:hover {
+    text-decoration: none;
+  }
+
+.arrow {
+  text-align: center;
+  margin: 8% 0;
+}
+.bounce {
+  -moz-animation: bounce 2s infinite;
+  -webkit-animation: bounce 2s infinite;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+/* projects div */
+#projects {
+  padding-top: 5%;
+}
+
+
+  .likeContainer {
+    height: 36px;
+    border: 4px ;
+    display: inline-flex;
+    text-align: center;
+  }
+
+  .like {
+    width: 60px; // TODO: find out why absolute values cannot be used here
+    color: #fff;
+    text-shadow: none;
+    background-color: #db332e;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    justify-content: center;
+    padding-top: 6px;
+    cursor: pointer;
+    &:hover {
+      background-color: #8D0400;
+    }
+    & p {
+      margin: 0
+    }
+  }
+
+  .likeCount {
+    background-color: #FFF;
+    padding-left: 10px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #db332e;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding-top: 6px;
+    padding-right: 10px;
+    & p {
+      margin: 0
+    }
+  }
+
+  .SigninModal {
+    text-align: center;
+    & hr {
+      margin-bottom: 60px;
+    }
+  }
+
+  .socialSigninButton {
+    width: 100%;
+    height: 48px;
+    font-size: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    & p {
+      margin-bottom: 0px;
+      width: 130px;
+    }
+    &.facebook {
+      background-color: #3b5998;
+      color: #ffffff;
+      &:hover {
+        background-color: #14306B;
+      }
+    }
+    &.google {
+      background-color: #ffffff;
+      border-style: solid;
+      border-width: 0.5px;
+      border-color: #24292d;
+      &:hover {
+        background-color: #CECECE;
+      }
+    }
+    &.github {
+      background-color: #24292d;
+      color: #ffffff;
+      &:hover {
+        background-color: #7F7E7E;
+      }
+    }
+  }
+
+  .SignOutModal {
+    text-align: center;
+    margin-bottom: 15px;
+    & hr {
+      margin-bottom: 40px;
+    }
+  }
+
+  .SignOutModal .SignOutModalYes {
+    margin-right: 50px;
+  }
+
+  .SignOutModal .SignOutModalNo {
+    margin-left: 50px;
+  }
+
+  .modalCloseButton {
+    margin-top: 20px;
+    text-align: end;
+  }
+
+.removeOverflowText {
+  overflow-wrap: break-word;
+}
