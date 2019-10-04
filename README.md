@@ -7,7 +7,7 @@ I am looking for anyone that would like to help contribute to this page. Just ra
 
 If you are Zambian and have a project you would like on the page just hit me a message on twitter( @MulengaWilfred)
 
-Lets make the Zambian Developer Community Bigger Together
+Let's make the Zambian Developer Community Bigger Together
 
 ## Contributors
 
@@ -29,7 +29,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Development
 
-Clone the repo and run `npm i` in the root directory. The project uses [Firebase](https://firebase.google.com/) as a backend and for authentication. To create your own backend, create a project on Firebase then go to "Project settings" and select "web app". Register the app with a name of your preference. Once registered, copy the necessary keys and values of the firebase config which are used in the project. Authentication and databasei are already set up for you.
+Clone the repo and run `npm i` in the root directory. The project uses [Firebase](https://firebase.google.com/) as a backend and for authentication. To create your own backend, create a project on Firebase then go to "Project settings" and select "web app". Register the app with the name of your preference. Once registered, copy the necessary keys and values of the firebase config which are used in the project. Authentication and database are already set up for you.
 
 ### data structure
 
@@ -62,7 +62,7 @@ You will also see any lint errors in the console.
 
 Builds the app for production to the build folder.
 
-You can use Firebase's hosting to deploy the project. Ensure you are logged in with the curren project. You can check the list of projects by running, `firebase list`. to deploy first run `firebase init` and follow the steps. Next run `firebase deploy`
+You can use Firebase's hosting to deploy the project. Ensure you are logged in with the current project. You can check the list of projects by running, `firebase list`. to deploy first run `firebase init` and follow the steps. Next, run `firebase deploy`
 
 ## License
 
