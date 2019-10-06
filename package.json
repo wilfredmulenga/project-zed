@@ -11,6 +11,7 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-standard": "^4.0.0",
     "firebase": "^5.5.8",
+    "flow-bin": "^0.109.0",
     "node-sass": "^4.12.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -24,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "flow": "flow"
   },
   "browserslist": [
     ">0.2%",

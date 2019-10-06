@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import Modal from 'react-modal'
 import firebase from '../../config/firebase'

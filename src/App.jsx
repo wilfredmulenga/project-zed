@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
@@ -53,9 +55,7 @@ render () {
           </div>
         </div>
         <div id='projects'>
-          { projects ? projects.map((project, i) =>
-            <Card key={i} index={i} project= {project} />) : null
-          }
+          { projects.map((project, i) => <Card key={i} index={i} project= {project} />) }
         </div>
         <SignInModal isOpen={signInModalOpen} />
         <SignOutModal isOpen={signOutModalOpen} />

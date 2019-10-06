@@ -34,3 +34,6 @@ projectzed.code-workspace
 
 # database file
 /src/data.js
+
+#flow
+.flowconfig

@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import { connect } from 'react-redux'
 import { likeOrDislike, toggleSigninModal } from '../actions/actionCreators'
@@ -6,7 +8,11 @@ const whiteBackground = {
   backgroundColor: '#FFF'
 }
 
-class Card extends React.Component {
+type State = {
+  liked: boolean
+}
+
+class Card extends React.Component<State> {
   state = {
     liked: false
   }
