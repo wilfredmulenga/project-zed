@@ -10,7 +10,8 @@ import {
   UPDATE_PROJECTS_SUCCESS,
   TOGGLE_SIGN_IN_MODAL,
   LOG_IN_STATUS_CHANGE,
-  TOGGLE_SIGN_OUT_MODAL
+  TOGGLE_SIGN_OUT_MODAL,
+  TOGGLE_SUBMIT_PROJECT_MODAL
 } from './actionTypes'
 
 // actions types
@@ -82,5 +83,11 @@ export function logInStateChange ({ userUID, loggedIn }) {
 export function toggleSignOutModal () {
   return {
     type: TOGGLE_SIGN_OUT_MODAL
+  }
+}
+
+export function toggleSubmitProjectModal () {
+  return {
+    type: TOGGLE_SUBMIT_PROJECT_MODAL
   }
 }

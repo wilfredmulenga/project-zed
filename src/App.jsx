@@ -6,10 +6,16 @@ import Card from './components/Card'
 import Navbar from './components/Navbar'
 import SignInModal from './components/Modals/SignInModal'
 import SignOutModal from './components/Modals/SignOutModal'
+import SubmitProposalModal from './components/Modals/SubmitProjectModal'
 
 import { connect } from 'react-redux'
-import { loadProjects, logInStateChange } from './actions/actionCreators'
-import './App.scss'
+import {
+  // loadProjects,
+  logInStateChange,
+  toggleSubmitProjectModal
+} from './actions/actionCreators'
+
+// import './App.scss'
 
 class App extends Component {
   componentDidMount () {
@@ -35,7 +41,7 @@ checkLoggedInUser = () => {
 
 render () {
   const { projects } = this.props
-  const { signInModalOpen, signOutModalOpen } = this.props.home
+  const { signInModalOpen, signOutModalOpen, submitProjectModalOpen } = this.props.home
   if (projects && projects.length !== 0) {
     return (
       <div style={{ backgroundColor: '#000' }}>
@@ -49,7 +55,10 @@ render () {
             <p style={{ fontSize: 40, color: '#FFF', float: 'center', marginLeft: '20px' }}>
               Find projects done by Zambian Developers
             </p>
-            <button className="btn btn-outline-info my-2 my-sm-0">Submit a project</button>
+            <button
+              onClick={() => this.props.dispatch(toggleSubmitProjectModal())}
+              className="btn btn-outline-info my-2 my-sm-0">
+              Submit a project</button>
             <div className="arrow bounce">
               <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"></a>
             </div>
@@ -60,6 +69,7 @@ render () {
         </div>
         <SignInModal isOpen={signInModalOpen} />
         <SignOutModal isOpen={signOutModalOpen} />
+        <SubmitProposalModal isOpen={submitProjectModalOpen} />
       </div>
     )
   }

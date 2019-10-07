@@ -24,28 +24,28 @@ class SumbitProjectModal extends React.Component {
           <input
             placeholder="Project owner"
             type='text'
-            value={projectOwner}
+            // value={projectOwner}
             onChange={(e) => this.handleInput('projectOwner', e.target.value)}
             required
           />
           <input
             placeholder="tools used"
             type='text'
-            value={projectOwner}
+            // value={projectOwner}
             onChange={(e) => this.handleInput('projectOwner', e.target.value)}
             required
           />
           <input
             placeholder="description"
             type='text'
-            value={projectOwner}
+            // value={projectOwner}
             onChange={(e) => this.handleInput('description', e.target.value)}
             required
           />
           <input
             placeholder="link to project"
             type='text'
-            value={projectOwner}
+            // value={projectOwner}
             onChange={(e) => this.handleInput('link', e.target.value)}
             required
           />
