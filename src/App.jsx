@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
 import Navbar from './components/Navbar'
-import SignInModal from './components/Modals/SignInModal'
+import SignInModal from './components/Modals/SigninModal'
 import SignOutModal from './components/Modals/SignOutModal'
 
 import { connect } from 'react-redux'

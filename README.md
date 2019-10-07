@@ -29,7 +29,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Development
 
-Clone the repo and run `npm i` in the root directory. The project uses [Firebase](https://firebase.google.com/) as a backend and for authentication. To create your own backend, create a project on Firebase then go to "Project settings" and select "web app". Register the app with a name of your preference. Once registered, copy the necessary keys and values of the firebase config which are used in the project. Authentication and databasei are already set up for you.
+Clone the repo and run `npm i` in the root directory and `npm install node-sass`. The project uses [Firebase](https://firebase.google.com/) as a backend and for authentication. To create your own backend, create a project on Firebase then go to "Project settings" and select "web app". Register the app with a name of your preference. Once registered, copy the necessary keys and values of the firebase config which are used in the project. Authentication and databasei are already set up for you.
 
 ### data structure
 
