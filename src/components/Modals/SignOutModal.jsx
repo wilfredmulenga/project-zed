@@ -21,8 +21,6 @@ class SignOutModal extends React.Component {
     return (
       <Modal
         isOpen={isOpen}
-        onAfterOpen={this.afterOpenModal}
-        onRequestClose={this.closeModal}
         style={customStyles}
         contentLabel="Sign out modal">
         <div className='SignOutModal'>

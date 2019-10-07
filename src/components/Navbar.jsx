@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { toggleSigninModal, toggleSignOutModal } from '../actions/actionCreators'
+import { toggleSignInModal, toggleSignOutModal } from '../actions/actionCreators'
 
 class Navbar extends React.Component {
   render () {
@@ -15,7 +15,7 @@ class Navbar extends React.Component {
             <button
               onClick={(e) => {
                 e.preventDefault()
-                loggedIn ? this.props.dispatch(toggleSignOutModal()) : this.props.dispatch(toggleSigninModal())
+                loggedIn ? this.props.dispatch(toggleSignOutModal()) : this.props.dispatch(toggleSignInModal())
               }}
               className="btn btn-outline-success my-2 my-sm-0"
               type="submit">

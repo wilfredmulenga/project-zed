@@ -49,6 +49,7 @@ render () {
             <p style={{ fontSize: 40, color: '#FFF', float: 'center', marginLeft: '20px' }}>
               Find projects done by Zambian Developers
             </p>
+            <button className="btn btn-outline-info my-2 my-sm-0">Submit a project</button>
             <div className="arrow bounce">
               <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"></a>
             </div>
