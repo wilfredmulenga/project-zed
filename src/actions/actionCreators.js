@@ -61,7 +61,7 @@ export function loadProjects () {
   }
 }
 
-export function toggleSigninModal () {
+export function toggleSignInModal () {
   return {
     type: TOGGLE_SIGN_IN_MODAL
   }
