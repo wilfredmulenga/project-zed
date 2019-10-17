@@ -1,7 +1,8 @@
 import { LOAD_PROJECTS_SUCCESS, LIKE_PROJECT, DISLIKE_PROJECT } from '../actions/actionTypes'
-// import data from '../data'
+// comment the line below if you are using data from your firebase database and set the state param in the projectsReducer to []
+import data from '../data'
 
-export default function projectsReducer (state = [], action) {
+export default function projectsReducer (state = data, action) {
   switch (action.type) {
     case LOAD_PROJECTS_SUCCESS:
       return [

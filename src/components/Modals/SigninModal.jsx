@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import firebase from '../../config/firebase'
-import { toggleSigninModal, logInStateChange } from '../../actions/actionCreators'
+import { toggleSignInModal, logInStateChange } from '../../actions/actionCreators'
 import facebook from '../../images/facebook.svg'
 import google from '../../images/google.png'
 import github from '../../images/github.png'
@@ -11,7 +11,7 @@ Modal.setAppElement('#root')
 
 class SignInModal extends React.Component {
   authenticate = provider => {
-    this.props.dispatch(toggleSigninModal())
+    this.props.dispatch(toggleSignInModal())
     const authProvider = new firebase.auth[`${provider}AuthProvider`]()
     firebase.auth().signInWithPopup(authProvider)
       .then(this.authHandler)
@@ -33,7 +33,7 @@ class SignInModal extends React.Component {
   // TODO: check if this line is needed
   authHandler = async authData => {
     if (authData.credential.email) {
-      // this.props.dispatch(toggleSigninModal())
+      // this.props.dispatch(toggleSignInModal())
     }
   }
 
@@ -48,7 +48,7 @@ class SignInModal extends React.Component {
         style={customStyles}
         contentLabel="Sign in modal"
         onClick={() => console.log('modal clicked')}>
-        <div className='SigninModal'>
+        <div className='SignInModal'>
           <h3>Sign In</h3>
           <hr/>
           <div className='socialSigninButton facebook' onClick={() => this.authenticate('Facebook')}>
@@ -66,7 +66,7 @@ class SignInModal extends React.Component {
         </div>
         <div className='modalCloseButton'>
           <button
-            onClick={() => this.props.dispatch(toggleSigninModal())}
+            onClick={() => this.props.dispatch(toggleSignInModal())}
             type="button"
             className="btn btn-outline-danger">
             Close
