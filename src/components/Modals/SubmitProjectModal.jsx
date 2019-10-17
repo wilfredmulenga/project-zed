@@ -1,57 +1,97 @@
 // @flow
 
-import React from 'react'
+import * as React from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
-import firebase from '../../config/firebase'
-import { toggleSignInModal, logInStateChange } from '../../actions/actionCreators'
+import ChipInput from 'material-ui-chip-input'
+// import firebase from '../../config/firebase'
+import { toggleSignInModal, logInStateChange, toggleSubmitProjectModal } from '../../actions/actionCreators'
+import '../../App.scss'
+
+type Props = {
+  isOpen: boolean
+}
+
+type State = {
+  projectOwner: string,
+  tools: Array<string>,
+  description: string,
+  link: string
+}
 
 Modal.setAppElement('#root')
 
-class SumbitProjectModal extends React.Component {
+class SumbitProjectModal extends React.Component<Props, State> {
+    state = {
+      projectOwner: '',
+      tools: [],
+      description: '',
+      link: '',
+      chips: ''
+    }
+
+  handleInput = (field: string, value: string) => {
+    this.setState({ [field]: value })
+  }
+
   render () {
     const { isOpen } = this.props
+    const { projectOwner, tools, description, link } = this.state
     return (
-
       <Modal
         isOpen={isOpen}
         style={customStyles}
-        contentLabel="Sign in modal"
-        onClick={() => console.log('modal clicked')}>
-        <div className='SubmitProjectModal'>
+        contentLabel="submit project modal">
+        <div className='submitProjectModal'>
           <h3>Share your project with the community</h3>
           <hr/>
-          <input
-            placeholder="Project owner"
-            type='text'
-            // value={projectOwner}
-            onChange={(e) => this.handleInput('projectOwner', e.target.value)}
-            required
-          />
-          <input
-            placeholder="tools used"
-            type='text'
-            // value={projectOwner}
-            onChange={(e) => this.handleInput('projectOwner', e.target.value)}
-            required
-          />
-          <input
-            placeholder="description"
-            type='text'
-            // value={projectOwner}
-            onChange={(e) => this.handleInput('description', e.target.value)}
-            required
-          />
-          <input
-            placeholder="link to project"
-            type='text'
-            // value={projectOwner}
-            onChange={(e) => this.handleInput('link', e.target.value)}
-            required
-          />
+          <div className="inputField">
+            <label>project owner</label>
+            <input
+              placeholder="project owner"
+              type='text'
+              value={projectOwner}
+              onChange={(e) => this.handleInput('projectOwner', e.target.value)}
+              required
+            />
+          </div>
+          <div className="inputField">
+            <label>tools used</label>
+            <ChipInput
+              defaultValue={['javascript', 'css']}
+              onChange={(chips) => this.handleInput(chips)}
+            />
+            <input
+              placeholder="tools"
+              type='text'
+              value={tools}
+              onChange={(e) => this.handleInput('tools', e.target.value)}
+              required
+            />
+          </div>
+          <div className="inputField">
+            <label>description</label>
+            <textarea
+              placeholder="description"
+              type='text'
+              value={description}
+              onChange={(e) => this.handleInput('description', e.target.value)}
+              required
+            />
+          </div>
+          <div className="inputField">
+            <label>link to projects</label>
+            <input
+              placeholder="link"
+              type='text'
+              value={link}
+              onChange={(e) => this.handleInput('link', e.target.value)}
+              required
+            />
+          </div>
           <div className='modalCloseButton'>
             <button
-              onClick={() => this.props.dispatch(toggleSignInModal())}
+              onClick={() => this.props.dispatch(toggleSubmitProjectModal())}
               type="button"
               className="btn btn-outline-danger">
             Close

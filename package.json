@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.5.0",
     "bootstrap": "^4.1.3",
     "eslint": "^6.1.0",
     "eslint-config-standard": "^13.0.1",
@@ -12,6 +13,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "firebase": "^5.5.8",
     "flow-bin": "^0.109.0",
+    "material-ui-chip-input": "^1.0.0",
     "node-sass": "^4.12.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
