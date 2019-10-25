@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { likeOrDislike, toggleSigninModal } from '../actions/actionCreators'
+import { likeOrDislike, toggleSignInModal } from '../actions/actionCreators'
 
 const whiteBackground = {
   backgroundColor: '#FFF'
@@ -17,7 +17,7 @@ class Card extends React.Component {
       this.setState({ liked: !this.state.liked },
         () => this.props.dispatch(likeOrDislike(index, this.state.liked)))
     } else {
-      this.props.dispatch(toggleSigninModal())
+      this.props.dispatch(toggleSignInModal())
     }
   }
 
