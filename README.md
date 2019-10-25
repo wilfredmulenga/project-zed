@@ -7,7 +7,7 @@ I am looking for anyone that would like to help contribute to this page. Just ra
 
 If you are Zambian and have a project you would like on the page just hit me a message on twitter( @MulengaWilfred)
 
-Lets make the Zambian Developer Community Bigger Together
+Let's make the Zambian Developer Community Bigger Together
 
 ## Contributors
 
@@ -66,7 +66,7 @@ You will also see any lint errors in the console.
 
 Builds the app for production to the build folder.
 
-You can use Firebase's hosting to deploy the project. Ensure you are logged in with the curren project. You can check the list of projects by running, `firebase list`. to deploy first run `firebase init` and follow the steps. Next run `firebase deploy`
+You can use Firebase's hosting to deploy the project. Ensure you are logged in with the current project. You can check the list of projects by running, `firebase list`. to deploy first run `firebase init` and follow the steps. Next, run `firebase deploy`
 
 ## License
 

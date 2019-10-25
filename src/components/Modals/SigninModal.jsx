@@ -48,7 +48,7 @@ class SignInModal extends React.Component {
         style={customStyles}
         contentLabel="Sign in modal"
         onClick={() => console.log('modal clicked')}>
-        <div className='SigninModal'>
+        <div className='SignInModal'>
           <h3>Sign In</h3>
           <hr/>
           <div className='socialSigninButton facebook' onClick={() => this.authenticate('Facebook')}>
