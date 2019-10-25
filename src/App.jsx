@@ -6,7 +6,10 @@ import SignInModal from './components/Modals/SignInModal'
 import SignOutModal from './components/Modals/SignOutModal'
 
 import { connect } from 'react-redux'
-import { loadProjects, logInStateChange } from './actions/actionCreators'
+import {
+  // loadProjects,
+  logInStateChange
+} from './actions/actionCreators'
 import './App.scss'
 
 class App extends Component {
@@ -53,8 +56,9 @@ render () {
           </div>
         </div>
         <div id='projects'>
-          { projects ? projects.map((project, i) =>
-            <Card key={i} index={i} project= {project} />) : null
+          {
+            projects.map((project, i) =>
+              <Card key={i} index={i} project= {project} />)
           }
         </div>
         <SignInModal isOpen={signInModalOpen} />
