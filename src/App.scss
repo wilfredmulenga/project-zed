@@ -195,10 +195,15 @@
     margin-left: 50px;
   }
 
-  .modalCloseButton {
-    margin-top: 20px;
+  .modal-button-container {
+    margin-top:3rem;
     text-align: end;
+
+    .btn-outline-info {
+      margin-left: 2rem;
+    }
   }
+
 
 .removeOverflowText {
   overflow-wrap: break-word;
