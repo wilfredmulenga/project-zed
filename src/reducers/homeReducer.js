@@ -9,7 +9,6 @@ const initialState = {
 }
 
 export default function homeReducer (state = initialState, action) {
-  console.log('here')
   switch (action.type) {
     case TOGGLE_SIGN_IN_MODAL:
       return {

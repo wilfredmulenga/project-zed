@@ -21,22 +21,30 @@ type State = {
 
 Modal.setAppElement('#root')
 
+const chipsPlaceholderValues = ['javascript', 'css']
+
 class SumbitProjectModal extends React.Component<Props, State> {
     state = {
       projectOwner: '',
       tools: [],
       description: '',
-      link: '',
-      chips: ''
+      link: ''
     }
 
   handleInput = (field: string, value: string) => {
     this.setState({ [field]: value })
   }
 
+  handleToolsChange = (value: string) => {
+    const tools = this.state.tools
+    this.setState({
+      tools: [...tools, ...value]
+    })
+  }
+
   render () {
     const { isOpen } = this.props
-    const { projectOwner, tools, description, link } = this.state
+    const { projectOwner, description, link } = this.state
     return (
       <Modal
         isOpen={isOpen}
@@ -58,15 +66,8 @@ class SumbitProjectModal extends React.Component<Props, State> {
           <div className="inputField">
             <label>tools used</label>
             <ChipInput
-              defaultValue={['javascript', 'css']}
-              onChange={(chips) => this.handleInput(chips)}
-            />
-            <input
-              placeholder="tools"
-              type='text'
-              value={tools}
-              onChange={(e) => this.handleInput('tools', e.target.value)}
-              required
+              defaultValue={chipsPlaceholderValues}
+              onChange={(tools) => this.handleToolsChange(tools)}
             />
           </div>
           <div className="inputField">
