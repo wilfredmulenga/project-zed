@@ -1,13 +1,13 @@
-.App {
+.app {
   text-align: center;
 }
 
-.App-logo {
+.app-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
 }
 
-.App-header {
+.app-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -18,11 +18,11 @@
   color: white;
 }
 
-.App-link {
+.app-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+@keyframes app-logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -58,7 +58,7 @@
 }
 
 /* down arrow */
-  .downArrow {
+  .down-arrow {
    color: white;
    text-decoration: none;
   }
@@ -95,7 +95,7 @@
 }
 
 
-  .likeContainer {
+  .like-container {
     height: 36px;
     border: 4px ;
     display: inline-flex;
@@ -120,7 +120,7 @@
     }
   }
 
-  .likeCount {
+  .like-count {
     background-color: #FFF;
     padding-left: 10px;
     border-style: solid;
@@ -135,14 +135,14 @@
     }
   }
 
-  .SignInModal {
+  .sign-in-modal {
     text-align: center;
     & hr {
       margin-bottom: 60px;
     }
   }
 
-  .socialSigninButton {
+  .social-signin-button {
     width: 100%;
     height: 48px;
     font-size: 1.5rem;
@@ -179,7 +179,7 @@
     }
   }
 
-  .SignOutModal {
+  .sign-out-modal {
     text-align: center;
     margin-bottom: 15px;
     & hr {
@@ -187,19 +187,19 @@
     }
   }
 
-  .SignOutModal .SignOutModalYes {
+  .sign-out-modal .sign-out-modal-yes {
     margin-right: 50px;
   }
 
-  .SignOutModal .SignOutModalNo {
+  .sign-out-modal .sign-out-modal-no {
     margin-left: 50px;
   }
 
-  .modalCloseButton {
+  .modal-close-button {
     margin-top: 20px;
     text-align: end;
   }
 
-.removeOverflowText {
+.remove-overflow-text {
   overflow-wrap: break-word;
 }

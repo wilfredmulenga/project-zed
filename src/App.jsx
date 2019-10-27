@@ -51,7 +51,7 @@ render () {
               Find projects done by Zambian Developers
             </p>
             <div className="arrow bounce">
-              <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"></a>
+              <a className="fa fa-arrow-down fa-2x down-arrow" href="#projects"></a>
             </div>
           </div>
         </div>
