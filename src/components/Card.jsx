@@ -11,7 +11,7 @@ class Card extends React.Component {
     liked: false
   }
 
-  handleCick = (index) => {
+  handleClick = (index) => {
     const { loggedIn } = this.props.home
     if (loggedIn) {
       this.setState({ liked: !this.state.liked },
@@ -38,7 +38,7 @@ class Card extends React.Component {
                 </p>
                 <p>{project.type}</p>
                 <div className='like-container'>
-                  <div className="like" onClick={() => this.handleCick(index)}><p>{liked ? 'unlike' : 'like' }</p></div>
+                  <div className="like" onClick={() => this.handleClick(index)}><p>{liked ? 'unlike' : 'like' }</p></div>
                   <div className='like-count'>{project.likes}</div>
                 </div>
               </div>
