@@ -26,7 +26,7 @@ const Card = ({
     if (loggedIn) {
       setLiked(!liked);
     } else {
-      dispatch(toggleSigninModal());
+      dispatch(toggleSignInModal());
     }
   };
 
