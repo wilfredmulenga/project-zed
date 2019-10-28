@@ -44,7 +44,7 @@ const Card = ({
               </p>
               <p>{project.type}</p>
               <div className='like-container'>
-                <div className="like" onClick={() => this.handleCick(index)}><p>{liked ? 'unlike' : 'like' }</p></div>
+                <div className="like" onClick={handleCick}><p>{liked ? 'unlike' : 'like' }</p></div>
                 <div className='like-count'>{project.likes}</div>
               </div>
             </div>
