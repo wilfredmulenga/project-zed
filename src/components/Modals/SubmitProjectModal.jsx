@@ -3,18 +3,21 @@
 import * as React from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
+import firebase from '../../config/firebase'
 import ChipInput from 'material-ui-chip-input'
-import { toggleSubmitProjectModal, submitProject } from '../../actions/actionCreators'
+import { toggleSubmitProjectModal } from '../../actions/actionCreators'
 import '../../App.scss'
 
 type Props = {
-  isOpen: boolean
+  isOpen: boolean,
+  dispatch: (any) => void
 }
 
 type State = {
   projectOwner: string,
   tools: Array<string>,
   description: string,
+  typeOfProject: string,
   link: string
 }
 
@@ -25,29 +28,47 @@ const chipsPlaceholderValues = ['javascript', 'css']
 class SumbitProjectModal extends React.Component<Props, State> {
     state = {
       projectOwner: '',
-      tools: [],
+      tools: chipsPlaceholderValues,
       description: '',
+      typeOfProject: 'Open Source',
       link: ''
     }
 
   handleInput = (field: string, value: string) => {
-    this.setState({ [field]: value })
+    this.setState({
+      [field]: value
+    })
   }
 
-  handleToolsChange = (value: string) => {
-    const tools = this.state.tools
-    this.setState({
-      tools: [...tools, ...value]
-    })
+  handleToolsChange = (value: Array<string>) => {
+    this.setState(state => ({
+      ...state,
+      tools: value
+    }))
+  }
+
+  handleTypeOfProjectChange = (typeOfProject: string) => {
+    this.setState(state => ({
+      ...state,
+      typeOfProject
+    }))
   }
 
   onFormSubmit = (evt) => {
     evt.preventDefault()
+    const { projectOwner, tools, description, typeOfProject, link } = this.state
+    firebase.database().ref('projects/').set({
+      projectOwner,
+      tools,
+      description,
+      typeOfProject,
+      link
+    })
   }
 
   render () {
     const { isOpen } = this.props
-    const { projectOwner, description, link } = this.state
+    const { projectOwner, description, link, typeOfProject } = this.state
     return (
       <Modal
         isOpen={isOpen}
@@ -85,18 +106,28 @@ class SumbitProjectModal extends React.Component<Props, State> {
                 required
               />
             </div>
+            <p>type of project</p>
             <div>
               <input
                 type="radio"
-                id="huey"
-                name="drone"
-                value="huey"
-                checked />
-              <label htmlFor="huey">Huey</label>
+                id="Open Source"
+                name="type-of-project"
+                value="Open Source"
+                checked={typeOfProject === 'Open Source' }
+                onChange={(evt) => this.handleTypeOfProjectChange(evt.target.value) }
+              />
+              <label htmlFor="Open Source">Open Source</label>
             </div>
             <div>
-              <input type="radio" id="dewey" name="drone" value="dewey"/>
-              <label htmlFor="dewey">Dewey</label>
+              <input
+                type="radio"
+                id="Closed Source"
+                name="type-of-project"
+                value="Closed Source"
+                checked={typeOfProject === 'Closed Source' }
+                onChange={(evt) => this.handleTypeOfProjectChange(evt.target.value) }
+              />
+              <label htmlFor="Closed Source">Closed Source</label>
             </div>
             <div className="inputField">
               <label>link to projects</label>
