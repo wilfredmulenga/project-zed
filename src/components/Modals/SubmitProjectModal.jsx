@@ -27,13 +27,16 @@ type State = {
   description: string,
   typeOfProject: string,
   link: string,
-  loading: boolean
+  loading: boolean,
+  responseMessage: string,
+  submitted: boolean
 }
 
 Modal.setAppElement('#root')
 
 const chipsPlaceholderValues = ['javascript', 'css']
 
+// TODO: refactor this modal to a page
 class SumbitProjectModal extends React.Component<Props, State> {
     state = {
       projectOwner: '',
@@ -41,8 +44,9 @@ class SumbitProjectModal extends React.Component<Props, State> {
       description: '',
       typeOfProject: 'Open Source',
       link: '',
-      loading: true,
-      responseMessage: ''
+      loading: false,
+      responseMessage: '',
+      submitted: false
     }
 
   handleInput = (field: string, value: string) => {
@@ -67,7 +71,10 @@ class SumbitProjectModal extends React.Component<Props, State> {
 
   onFormSubmit = (evt) => {
     evt.preventDefault()
-    this.setState({ loading: true })
+    this.setState({
+      loading: true,
+      submitted: true
+    })
     const { projectOwner, tools, description, typeOfProject, link } = this.state
     const { userUID } = this.props.home
     const newProjectKey = firebase.database().ref().child(userUID).push().key
@@ -77,7 +84,8 @@ class SumbitProjectModal extends React.Component<Props, State> {
       description,
       typeOfProject,
       link
-    }, function (error) {
+    }).then((error) => {
+      console.log(error)
       if (error) {
         this.setState({
           loading: false,
@@ -93,7 +101,7 @@ class SumbitProjectModal extends React.Component<Props, State> {
   }
 
   renderForm = () => {
-    const { projectOwner, description, link, typeOfProject } = this.state
+    const { projectOwner, description, link, typeOfProject, submitted } = this.state
     return (
       <form onSubmit={this.onFormSubmit}>
         <h3>Share your project with the community</h3>
@@ -178,19 +186,30 @@ class SumbitProjectModal extends React.Component<Props, State> {
 
   render () {
     const { isOpen } = this.props
-    const { loading, responseMessage } = this.state
+    const { loading, responseMessage, submitted } = this.state
+
     return (
       <Modal
         isOpen={isOpen}
         style={customStyles}
         contentLabel="submit project modal">
-        <div className='submitProjectModal'>
-          {
-            loading
-              ? <Loader color={} />
-              : <p>{responseMessage}</p>
-          }
-        </div>
+        {
+          submitted
+            ? <div className="response-message-container">
+              <p>{responseMessage}</p>
+              <div className='modal-button-container'>
+                <button
+                  onClick={() => this.props.dispatch(toggleSubmitProjectModal())}
+                  type="button"
+                  className="btn btn-outline-danger">
+                      Close
+                </button>
+              </div>
+            </div>
+            : loading
+              ? <Loader darkSpinner={true} />
+              : this.renderForm()
+        }
       </Modal>
     )
   }
@@ -198,7 +217,10 @@ class SumbitProjectModal extends React.Component<Props, State> {
 
 const customStyles = {
   content: {
+    display: 'flex',
+    alignItems: 'center',
     width: '40%',
+    minHeight: '40%',
     top: '50%',
     left: '50%',
     right: 'auto',

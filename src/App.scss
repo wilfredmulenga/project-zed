@@ -59,11 +59,21 @@ $DARK-GREY: #7F7E7E;
 .loader {
   border: 16px solid $PURE-WHITE;
   border-radius: 50%;
-  border-top: 16px solid darkgrey;
+  border-top: 16px solid $DARK-GREY;
   width: 120px;
   height: 120px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
+
+  &.dark-spinner {
+    border: 16px solid $LIGHT-GREY;
+    border-radius: 50%;
+    border-top: 16px solid $MATTE-BLACK;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
 }
 
 /* Safari */
@@ -236,4 +246,9 @@ $DARK-GREY: #7F7E7E;
 
 label {
   margin-left: 0.4rem;
+}
+
+.response-message-container {
+  width: 100%;
+  text-align: center;
 }
