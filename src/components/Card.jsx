@@ -36,7 +36,7 @@ class Card extends React.Component<State> {
           <div>
             <div className="card-body row" style={whiteBackground}>
               <div className="col-5">
-                <p style={{ display: 'inline', marginBottom: 20 }} className="card-title">{project.githubUsername}</p>
+                <p style={{ display: 'inline', marginBottom: 20 }} className="card-title">{project.projectOwner}</p>
                 <p>
               Tools:
                   {' '}

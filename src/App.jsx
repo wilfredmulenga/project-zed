@@ -7,10 +7,11 @@ import Navbar from './components/Navbar'
 import SignInModal from './components/Modals/SignInModal'
 import SignOutModal from './components/Modals/SignOutModal'
 import SubmitProposalModal from './components/Modals/SubmitProjectModal'
+import Loader from './components/Loader'
 
 import { connect } from 'react-redux'
 import {
-  // loadProjects,
+  loadProjects,
   logInStateChange,
   toggleSubmitProjectModal
 } from './actions/actionCreators'
@@ -76,7 +77,7 @@ render () {
   return (
     <div style={{ height: '100vh', backgroundColor: '#000' }}
       className=" row justify-content-center align-items-center">
-      <div className="loader" />
+      <Loader />
     </div>
   )
 }

@@ -6,9 +6,14 @@ import firebase from '../../config/firebase'
 import { connect } from 'react-redux'
 import { toggleSignOutModal, logInStateChange } from '../../actions/actionCreators'
 
+type Props = {
+  isOpen: boolean,
+  dispatch: (any) => void
+}
+
 Modal.setAppElement('#root')
 
-class SignOutModal extends React.Component {
+class SignOutModal extends React.Component<Props> {
   signOut = () => {
     firebase.auth().signOut()
     localStorage.removeItem('userInfo')

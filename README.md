@@ -41,7 +41,7 @@ the data structure for each project is as follows:
   ```
   {
     description: string,
-    githubUsername: string,
+    projectOwner: string,
     link: string,
     tools: Array<string>
     type: string
