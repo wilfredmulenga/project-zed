@@ -85,7 +85,6 @@ class SumbitProjectModal extends React.Component<Props, State> {
       typeOfProject,
       link
     }).then((error) => {
-      console.log(error)
       if (error) {
         this.setState({
           loading: false,
@@ -94,14 +93,27 @@ class SumbitProjectModal extends React.Component<Props, State> {
       } else {
         this.setState({
           loading: false,
-          responseMessage: "You're project has successfully been submitted"
+          responseMessage: "You're project has successfully been submitted!"
         })
       }
     })
   }
 
   renderForm = () => {
-    const { projectOwner, description, link, typeOfProject, submitted } = this.state
+    const { projectOwner, description, link, typeOfProject, responseMessage } = this.state
+    if (responseMessage) {
+      return (<div className="response-message-container">
+        <p>{responseMessage}</p>
+        <div className="modal-button-container">
+          <button
+            onClick={() => this.props.dispatch(toggleSubmitProjectModal())}
+            type="button"
+            className="btn btn-outline-danger">
+            Close
+          </button>
+        </div>
+      </div>)
+    }
     return (
       <form onSubmit={this.onFormSubmit}>
         <h3>Share your project with the community</h3>
@@ -110,7 +122,7 @@ class SumbitProjectModal extends React.Component<Props, State> {
           <label>project owner</label>
           <input
             placeholder="project owner"
-            type='text'
+            type="text"
             value={projectOwner}
             onChange={(evt) => this.handleInput('projectOwner', evt.target.value)}
             required
@@ -127,7 +139,7 @@ class SumbitProjectModal extends React.Component<Props, State> {
           <label>description</label>
           <textarea
             placeholder="description"
-            type='text'
+            type="text"
             value={description}
             rows={3}
             onChange={(evt) => this.handleInput('description', evt.target.value)}
@@ -161,13 +173,13 @@ class SumbitProjectModal extends React.Component<Props, State> {
           <label>link to projects</label>
           <input
             placeholder="link"
-            type='text'
+            type="text"
             value={link}
             onChange={(evt) => this.handleInput('link', evt.target.value)}
             required
           />
         </div>
-        <div className='modal-button-container'>
+        <div className="modal-button-container">
           <button
             onClick={() => this.props.dispatch(toggleSubmitProjectModal())}
             type="button"
@@ -186,7 +198,7 @@ class SumbitProjectModal extends React.Component<Props, State> {
 
   render () {
     const { isOpen } = this.props
-    const { loading, responseMessage, submitted } = this.state
+    const { loading } = this.state
 
     return (
       <Modal
@@ -194,21 +206,9 @@ class SumbitProjectModal extends React.Component<Props, State> {
         style={customStyles}
         contentLabel="submit project modal">
         {
-          submitted
-            ? <div className="response-message-container">
-              <p>{responseMessage}</p>
-              <div className='modal-button-container'>
-                <button
-                  onClick={() => this.props.dispatch(toggleSubmitProjectModal())}
-                  type="button"
-                  className="btn btn-outline-danger">
-                      Close
-                </button>
-              </div>
-            </div>
-            : loading
-              ? <Loader darkSpinner={true} />
-              : this.renderForm()
+          loading
+            ? <Loader darkSpinner={true} />
+            : this.renderForm()
         }
       </Modal>
     )

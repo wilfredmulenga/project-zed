@@ -4,21 +4,24 @@ import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
 import Navbar from './components/Navbar'
-import SignInModal from './components/Modals/SignInModal'
-import SignOutModal from './components/Modals/SignOutModal'
-import SubmitProposalModal from './components/Modals/SubmitProjectModal'
+import SignInModal from './components/modals/SignInModal'
+import SignOutModal from './components/modals/SignOutModal'
+import SubmitProposalModal from './components/modals/SubmitProjectModal'
 import Loader from './components/Loader'
 
 import { connect } from 'react-redux'
 import {
   loadProjects,
   logInStateChange,
-  toggleSubmitProjectModal
+  toggleSubmitProjectModal,
+  toggleSignInModal
 } from './actions/actionCreators'
 
 // import './App.scss'
 
-class App extends Component {
+type Props = {}
+
+class App extends Component<Props> {
   componentDidMount () {
     // uncomment the line below if you are using data from your firebase database
     // this.props.dispatch(loadProjects())
@@ -42,7 +45,7 @@ checkLoggedInUser = () => {
 
 render () {
   const { projects } = this.props
-  const { signInModalOpen, signOutModalOpen, submitProjectModalOpen } = this.props.home
+  const { signInModalOpen, signOutModalOpen, submitProjectModalOpen, loggedIn } = this.props.home
   if (projects && projects.length !== 0) {
     return (
       <div style={{ backgroundColor: '#000' }}>
@@ -57,7 +60,7 @@ render () {
               Find projects done by Zambian Developers
             </p>
             <button
-              onClick={() => this.props.dispatch(toggleSubmitProjectModal())}
+              onClick={() => loggedIn ? this.props.dispatch(toggleSubmitProjectModal()) : this.props.dispatch(toggleSignInModal())}
               className="btn btn-outline-info my-2 my-sm-0">
               Submit a project</button>
             <div className="arrow bounce">
