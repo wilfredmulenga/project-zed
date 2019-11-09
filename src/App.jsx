@@ -1,18 +1,27 @@
+// @flow
+
 import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
 import Navbar from './components/Navbar'
-import SignInModal from './components/Modals/SignInModal'
-import SignOutModal from './components/Modals/SignOutModal'
+import SignInModal from './components/modals/SignInModal'
+import SignOutModal from './components/modals/SignOutModal'
+import SubmitProposalModal from './components/modals/SubmitProjectModal'
+import Loader from './components/Loader'
 
 import { connect } from 'react-redux'
 import {
-  // loadProjects,
-  logInStateChange
+  loadProjects,
+  logInStateChange,
+  toggleSubmitProjectModal,
+  toggleSignInModal
 } from './actions/actionCreators'
-import './App.scss'
 
-class App extends Component {
+// import './App.scss'
+
+type Props = {}
+
+class App extends Component<Props> {
   componentDidMount () {
     // uncomment the line below if you are using data from your firebase database
     // this.props.dispatch(loadProjects())
@@ -36,7 +45,7 @@ checkLoggedInUser = () => {
 
 render () {
   const { projects } = this.props
-  const { signInModalOpen, signOutModalOpen } = this.props.home
+  const { signInModalOpen, signOutModalOpen, submitProjectModalOpen, loggedIn } = this.props.home
   if (projects && projects.length !== 0) {
     return (
       <div style={{ backgroundColor: '#000' }}>
@@ -50,26 +59,28 @@ render () {
             <p style={{ fontSize: 40, color: '#FFF', float: 'center', marginLeft: '20px' }}>
               Find projects done by Zambian Developers
             </p>
+            <button
+              onClick={() => loggedIn ? this.props.dispatch(toggleSubmitProjectModal()) : this.props.dispatch(toggleSignInModal())}
+              className="btn btn-outline-info my-2 my-sm-0">
+              Submit a project</button>
             <div className="arrow bounce">
               <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"></a>
             </div>
           </div>
         </div>
         <div id='projects'>
-          {
-            projects.map((project, i) =>
-              <Card key={i} index={i} project= {project} />)
-          }
+          { projects.map((project, i) => <Card key={i} index={i} project= {project} />) }
         </div>
         <SignInModal isOpen={signInModalOpen} />
         <SignOutModal isOpen={signOutModalOpen} />
+        <SubmitProposalModal isOpen={submitProjectModalOpen} />
       </div>
     )
   }
   return (
     <div style={{ height: '100vh', backgroundColor: '#000' }}
       className=" row justify-content-center align-items-center">
-      <div className="loader" />
+      <Loader />
     </div>
   )
 }

@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
@@ -43,8 +45,6 @@ class SignInModal extends React.Component {
 
       <Modal
         isOpen={isOpen}
-        onAfterOpen={this.afterOpenModal}
-        onRequestClose={this.closeModal}
         style={customStyles}
         contentLabel="Sign in modal"
         onClick={() => console.log('modal clicked')}>

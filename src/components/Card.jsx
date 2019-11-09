@@ -1,20 +1,46 @@
+// @flow
+
 import React from 'react'
 import { connect } from 'react-redux'
 import { likeOrDislike, toggleSignInModal } from '../actions/actionCreators'
+import { Home } from '../types/types'
 
 const whiteBackground = {
   backgroundColor: '#FFF'
 }
 
-class Card extends React.Component {
-  state = {
-    liked: false
+type Project = {
+  description: string,
+  likes: number,
+  link: string,
+  projectOwner: string,
+  tools: Array<string>,
+  type: string
+}
+
+type Props = {
+  home: Home,
+  dispatch: (any) => void,
+  index: number,
+  project: Project
+}
+
+type State = {
+  liked: boolean
+}
+
+class Card extends React.Component<Props, State> {
+  constructor () {
+    super()
+    this.state = {
+      liked: false
+    }
   }
 
   handleCick = (index) => {
     const { loggedIn } = this.props.home
     if (loggedIn) {
-      this.setState({ liked: !this.state.liked },
+      this.setState(state => ({ liked: !state.liked }),
         () => this.props.dispatch(likeOrDislike(index, this.state.liked)))
     } else {
       this.props.dispatch(toggleSignInModal())
@@ -30,7 +56,7 @@ class Card extends React.Component {
           <div>
             <div className="card-body row" style={whiteBackground}>
               <div className="col-5">
-                <p style={{ display: 'inline', marginBottom: 20 }} className="card-title">{project.githubUsername}</p>
+                <p style={{ display: 'inline', marginBottom: 20 }} className="card-title">{project.projectOwner}</p>
                 <p>
               Tools:
                   {' '}
