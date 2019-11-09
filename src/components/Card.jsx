@@ -8,19 +8,38 @@ const whiteBackground = {
   backgroundColor: '#FFF'
 }
 
+type Project = {
+  description: string,
+  likes: number,
+  link: string,
+  projectOwner: string,
+  tools: Array<string>,
+  type: string
+}
+
+type Props = {
+  home: any,
+  dispatch: (any) => void,
+  index: number,
+  project: Project
+}
+
 type State = {
   liked: boolean
 }
 
-class Card extends React.Component<State> {
-  state = {
-    liked: false
+class Card extends React.Component<Props, State> {
+  constructor () {
+    super()
+    this.state = {
+      liked: false
+    }
   }
 
   handleCick = (index) => {
     const { loggedIn } = this.props.home
     if (loggedIn) {
-      this.setState({ liked: !this.state.liked },
+      this.setState(state => ({ liked: !state.liked }),
         () => this.props.dispatch(likeOrDislike(index, this.state.liked)))
     } else {
       this.props.dispatch(toggleSignInModal())
