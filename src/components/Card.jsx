@@ -3,19 +3,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { likeOrDislike, toggleSignInModal } from '../actions/actionCreators'
-import { Home } from '../types/types'
+import { Home, Project } from '../types/types'
 
 const whiteBackground = {
   backgroundColor: '#FFF'
-}
-
-type Project = {
-  description: string,
-  likes: number,
-  link: string,
-  projectOwner: string,
-  tools: Array<string>,
-  type: string
 }
 
 type Props = {
@@ -37,21 +28,21 @@ class Card extends React.Component<Props, State> {
     }
   }
 
-  handleCick = (index) => {
-    const { loggedIn } = this.props.home
+  handleCick = (projectId) => {
+    const { loggedIn, userUID } = this.props.home
     if (loggedIn) {
       this.setState(state => ({ liked: !state.liked }),
-        () => this.props.dispatch(likeOrDislike(index, this.state.liked)))
+        () => this.props.dispatch(likeOrDislike(projectId, userUID, this.state.liked)))
     } else {
       this.props.dispatch(toggleSignInModal())
     }
   }
 
   render () {
-    const { index, project } = this.props
+    const { project, project: { projectId } } = this.props
     const { liked } = this.state
     return (
-      <div key={index} className="row justify-content-center">
+      <div key={projectId} className="row justify-content-center">
         <div className="col-md-8 col-sm-8 mb-4">
           <div>
             <div className="card-body row" style={whiteBackground}>
@@ -64,7 +55,7 @@ class Card extends React.Component<Props, State> {
                 </p>
                 <p>{project.type}</p>
                 <div className='likeContainer'>
-                  <div className="like" onClick={() => this.handleCick(index)}><p>{liked ? 'unlike' : 'like' }</p></div>
+                  <div className="like" onClick={() => this.handleCick(projectId)}><p>{liked ? 'unlike' : 'like' }</p></div>
                   <div className='likeCount'>{project.likes}</div>
                 </div>
               </div>
