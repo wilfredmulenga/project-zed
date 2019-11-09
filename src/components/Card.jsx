@@ -3,6 +3,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { likeOrDislike, toggleSignInModal } from '../actions/actionCreators'
+import { Home } from '../types/types'
 
 const whiteBackground = {
   backgroundColor: '#FFF'
@@ -18,7 +19,7 @@ type Project = {
 }
 
 type Props = {
-  home: any,
+  home: Home,
   dispatch: (any) => void,
   index: number,
   project: Project

@@ -7,16 +7,11 @@ import firebase from '../../config/firebase'
 import ChipInput from 'material-ui-chip-input'
 import { toggleSubmitProjectModal } from '../../actions/actionCreators'
 import Loader from '../Loader'
+import { Home } from '../../types/types'
 import '../../App.scss'
 
 type Props = {
-  home: {
-    signInModalOpen: boolean,
-    signOutModalOpen: boolean,
-    userUID: string,
-    loggedIn: boolean,
-    submitProjectModalOpen: boolean
-  },
+  home: Home,
   isOpen: boolean,
   dispatch: (any) => void
 }
@@ -36,7 +31,6 @@ Modal.setAppElement('#root')
 
 const chipsPlaceholderValues = ['javascript', 'css']
 
-// TODO: refactor this modal to a page
 class SumbitProjectModal extends React.Component<Props, State> {
     state = {
       projectOwner: '',
@@ -78,7 +72,7 @@ class SumbitProjectModal extends React.Component<Props, State> {
     const { projectOwner, tools, description, typeOfProject, link } = this.state
     const { userUID } = this.props.home
     const newProjectKey = firebase.database().ref().child(userUID).push().key
-    firebase.database().ref(`${userUID}/projects/${newProjectKey}/`).set({
+    firebase.database().ref(`users/${userUID}/projects/${newProjectKey}/`).set({
       projectOwner,
       tools,
       description,
