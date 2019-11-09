@@ -9,9 +9,11 @@ If you are Zambian and have a project you would like on the page just hit me a m
 
 Let's make the Zambian Developer Community Bigger Together
 
-## Contributors
+## Contributors Guide
 
-Help on this project is very much needed. If you have a suggestion, kindly raise and issue and I will respond as soon as possible. After the issue has been discussed, a pull request can be made.
+To contribute to the project, branch out from the `dev` branch. One you are ready to make a pull request, make sure it is pointing to the `dev` branch.
+
+If you have a suggestion, kindly raise and issue and I will respond as soon as possible. After the issue has been discussed, a pull request can be made.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -44,7 +46,8 @@ the data structure for each project is as follows:
     projectOwner: string,
     link: string,
     tools: Array<string>
-    type: string
+    type: string,
+    liked: number
   }
 ```
 
