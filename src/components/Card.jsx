@@ -28,18 +28,18 @@ class Card extends React.Component<Props, State> {
     }
   }
 
-  handleCick = (projectId) => {
+  handleCick = (projectId, index) => {
     const { loggedIn, userUID } = this.props.home
     if (loggedIn) {
       this.setState(state => ({ liked: !state.liked }),
-        () => this.props.dispatch(likeOrDislike(projectId, userUID, this.state.liked)))
+        () => this.props.dispatch(likeOrDislike(projectId, userUID, this.state.liked, index)))
     } else {
       this.props.dispatch(toggleSignInModal())
     }
   }
 
   render () {
-    const { project, project: { projectId } } = this.props
+    const { project, project: { projectId }, index } = this.props
     const { liked } = this.state
     return (
       <div key={projectId} className="row justify-content-center">
@@ -55,7 +55,7 @@ class Card extends React.Component<Props, State> {
                 </p>
                 <p>{project.type}</p>
                 <div className='likeContainer'>
-                  <div className="like" onClick={() => this.handleCick(projectId)}><p>{liked ? 'unlike' : 'like' }</p></div>
+                  <div className="like" onClick={() => this.handleCick(projectId, index)}><p>{liked ? 'unlike' : 'like' }</p></div>
                   <div className='likeCount'>{project.likes}</div>
                 </div>
               </div>

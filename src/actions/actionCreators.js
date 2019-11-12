@@ -15,12 +15,12 @@ import {
 } from './actionTypes'
 
 // actionCreators
-export function likeOrDislike (projectId, userUID, liked) {
+export function likeOrDislike (projectId, userUID, liked, index) {
   return function (dispatch, getState) {
     if (liked) {
-      dispatch({ type: LIKE_PROJECT, projectId })
+      dispatch({ type: LIKE_PROJECT, index })
     } else {
-      dispatch({ type: DISLIKE_PROJECT, projectId })
+      dispatch({ type: DISLIKE_PROJECT, index })
     }
     dispatch({ type: UPDATE_PROJECTS_START })
 

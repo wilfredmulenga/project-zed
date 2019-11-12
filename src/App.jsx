@@ -16,15 +16,20 @@ import {
   toggleSubmitProjectModal,
   toggleSignInModal
 } from './actions/actionCreators'
+import { Dispatch, Project, Home } from './types/types'
 
-// import './App.scss'
+import './App.scss'
 
-type Props = {}
+type Props = {
+  dispatch: Dispatch,
+  projects: Array<Project>,
+  home: Home
+}
 
 class App extends Component<Props> {
   componentDidMount () {
     // uncomment the line below if you are using data from your firebase database
-    // this.props.dispatch(loadProjects())
+    this.props.dispatch(loadProjects())
     this.checkLoggedInUser()
   }
 
