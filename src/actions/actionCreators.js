@@ -11,34 +11,33 @@ import {
   TOGGLE_SIGN_IN_MODAL,
   LOG_IN_STATUS_CHANGE,
   TOGGLE_SIGN_OUT_MODAL,
-  TOGGLE_SUBMIT_PROJECT_MODAL,
-  SUBMIT_PROJECT
+  TOGGLE_SUBMIT_PROJECT_MODAL
 } from './actionTypes'
 
-// actions types
-
 // actionCreators
-export function likeOrDislike (index, liked) {
+export function likeOrDislike (projectId, userUID, liked) {
   return function (dispatch, getState) {
-    const { projectsReducer: projects } = getState()
     if (liked) {
-      dispatch({ type: LIKE_PROJECT, index })
+      dispatch({ type: LIKE_PROJECT, projectId })
     } else {
-      dispatch({ type: DISLIKE_PROJECT, index })
+      dispatch({ type: DISLIKE_PROJECT, projectId })
     }
     dispatch({ type: UPDATE_PROJECTS_START })
-    const updateProjectsRef = firebase.database().ref(`projects/${index}`)
-    updateProjectsRef.set({
-      ...projects[index],
-      likes: (liked) ? projects[index].likes + 1 : projects[index].likes - 1
-    }, function () {
-      dispatch({ type: UPDATE_PROJECTS_SUCCESS })
-    }).catch(function (error) {
-      dispatch({
-        type: UPDATE_PROJECTS_FAIL,
-        payload: error
+
+    firebase.database().ref(`users/${userUID}/projects/${projectId}/`).once('value')
+      .then(function (snapshot) {
+        const project = snapshot.val()
+        firebase.database().ref(`users/${userUID}/projects/${projectId}/`).update({
+          likes: (liked) ? project.likes + 1 : project.likes - 1
+        }, function () {
+          dispatch({ type: UPDATE_PROJECTS_SUCCESS })
+        }).catch(function (error) {
+          dispatch({
+            type: UPDATE_PROJECTS_FAIL,
+            payload: error
+          })
+        })
       })
-    })
   }
 }
 
@@ -46,14 +45,20 @@ export function loadProjects () {
   return function (dispatch) {
     dispatch({ type: LOAD_PROJECTS_START })
 
-    const projectsRef = firebase.database().ref('projects')
+    const projectsRef = firebase.database().ref('users')
     projectsRef.once('value', (snapshot) => {
-      if (snapshot.val()) {
-        dispatch({
-          type: LOAD_PROJECTS_SUCCESS,
-          payload: snapshot.val()
-        })
+      const listOfProjects = []
+
+      for (const project in snapshot.val()) {
+        const projects = snapshot.val()[project]['projects']
+        for (const i in projects) {
+          listOfProjects.push(projects[i])
+        }
       }
+      dispatch({
+        type: LOAD_PROJECTS_SUCCESS,
+        payload: listOfProjects
+      })
     }, error => {
       dispatch({
         type: LOAD_PROJECTS_FAIL,
