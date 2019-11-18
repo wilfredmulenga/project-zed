@@ -19,8 +19,21 @@ class SignInModal extends React.Component {
       .then(this.authHandler)
       .catch(function (error) {
         console.log(error)
+
+        if (error.code === 'auth/account-exists-with-different-credential') {
+          const email = error.email
+          firebase.auth().fetchSignInMethodsForEmail(email).then(function (methods) {
+            console.log(methods) // TODO: returns the auth provider the user previously logged in with
+            // we should show this information to the user so that they log in using that log in auth provider
+          })
+            .catch(function (error) {
+              console.log(error)
+            })
+        }
       })
+
     firebase.auth().onAuthStateChanged((user) => {
+      console.log(user)
       if (user) {
         const userInfo = { userUID: user.uid, loggedIn: true }
         localStorage.setItem('userInfo', JSON.stringify(userInfo))
@@ -34,6 +47,7 @@ class SignInModal extends React.Component {
 
   // TODO: check if this line is needed
   authHandler = async authData => {
+    console.log('authdata', authData)
     if (authData.credential.email) {
       // this.props.dispatch(toggleSignInModal())
     }
