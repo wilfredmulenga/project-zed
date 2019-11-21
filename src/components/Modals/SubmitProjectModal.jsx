@@ -43,7 +43,8 @@ class SumbitProjectModal extends React.Component<Props, State> {
       loading: false,
       responseMessage: '',
       submitted: false,
-      projectId: ''
+      projectId: '',
+      likedBy: []
     }
 
   handleInput = (field: string, value: string) => {
@@ -72,7 +73,7 @@ class SumbitProjectModal extends React.Component<Props, State> {
       loading: true,
       submitted: true
     })
-    const { projectOwner, tools, description, typeOfProject, link, likes } = this.state
+    const { projectOwner, tools, description, typeOfProject, link, likes, likedBy } = this.state
     const { userUID } = this.props.home
     const newProjectKey = firebase.database().ref().child(userUID).push().key
     firebase.database().ref(`users/${userUID}/projects/${newProjectKey}/`).set({
@@ -82,7 +83,8 @@ class SumbitProjectModal extends React.Component<Props, State> {
       typeOfProject,
       link,
       likes,
-      projectId: newProjectKey
+      projectId: newProjectKey,
+      likedBy
     }).then((error) => {
       if (error) {
         this.setState({

@@ -18,17 +18,19 @@ import {
 export function likeOrDislike (projectId, userUID, liked, index) {
   return function (dispatch, getState) {
     if (liked) {
-      dispatch({ type: LIKE_PROJECT, index })
+      dispatch({ type: LIKE_PROJECT, index, userUID })
     } else {
-      dispatch({ type: DISLIKE_PROJECT, index })
+      dispatch({ type: DISLIKE_PROJECT, index, userUID })
     }
     dispatch({ type: UPDATE_PROJECTS_START })
 
     firebase.database().ref(`users/${userUID}/projects/${projectId}/`).once('value')
       .then(function (snapshot) {
         const project = snapshot.val()
+        const { likes, likedBy } = project
         firebase.database().ref(`users/${userUID}/projects/${projectId}/`).update({
-          likes: (liked) ? project.likes + 1 : project.likes - 1
+          likes: liked ? likes + 1 : likes - 1,
+          likedBy: liked ? [...likedBy, userUID] : likedBy.filter(userUIDs => userUIDs !== userUID)
         }, function () {
           dispatch({ type: UPDATE_PROJECTS_SUCCESS })
         }).catch(function (error) {
