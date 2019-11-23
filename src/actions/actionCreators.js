@@ -24,22 +24,23 @@ export function likeOrDislike (projectId, projectUserUID, userUID, liked, index)
     }
     dispatch({ type: UPDATE_PROJECTS_START })
 
-    firebase.database().ref(`users/${projectUserUID}/projects/${projectId}/`).once('value')
-      .then(function (snapshot) {
-        const project = snapshot.val()
-        const { likes, likedBy } = project
-        firebase.database().ref(`users/${projectUserUID}/projects/${projectId}/`).update({
-          likes: liked ? likes + 1 : likes - 1,
-          likedBy: liked ? [...likedBy, userUID] : likedBy.filter(userUIDs => userUIDs !== userUID)
-        }, function () {
-          dispatch({ type: UPDATE_PROJECTS_SUCCESS })
-        }).catch(function (error) {
-          dispatch({
-            type: UPDATE_PROJECTS_FAIL,
-            payload: error
-          })
-        })
-      })
+    // uncomment this code block if you are using firebase database
+    // firebase.database().ref(`users/${projectUserUID}/projects/${projectId}/`).once('value')
+    //   .then(function (snapshot) {
+    //     const project = snapshot.val()
+    //     const { likes, likedBy } = project
+    //     firebase.database().ref(`users/${projectUserUID}/projects/${projectId}/`).update({
+    //       likes: liked ? likes + 1 : likes - 1,
+    //       likedBy: liked ? [...likedBy, userUID] : likedBy.filter(userUIDs => userUIDs !== userUID)
+    //     }, function () {
+    //       dispatch({ type: UPDATE_PROJECTS_SUCCESS })
+    //     }).catch(function (error) {
+    //       dispatch({
+    //         type: UPDATE_PROJECTS_FAIL,
+    //         payload: error
+    //       })
+    //     })
+    //   })
   }
 }
 
