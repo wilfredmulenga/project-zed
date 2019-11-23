@@ -49,8 +49,7 @@ checkLoggedInUser = () => {
 }
 
 render () {
-  const { projects } = this.props
-  const { signInModalOpen, signOutModalOpen, submitProjectModalOpen, loggedIn } = this.props.home
+  const { home: { signInModalOpen, signOutModalOpen, submitProjectModalOpen, loggedIn }, projects } = this.props
   if (projects && projects.length !== 0) {
     return (
       <div style={{ backgroundColor: '#000' }}>
