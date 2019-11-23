@@ -16,10 +16,15 @@ import {
   toggleSubmitProjectModal,
   toggleSignInModal
 } from './actions/actionCreators'
+import { Dispatch, Project, Home } from './types/types'
 
-// import './App.scss'
+import './App.scss'
 
-type Props = {}
+type Props = {
+  dispatch: Dispatch,
+  projects: Array<Project>,
+  home: Home
+}
 
 class App extends Component<Props> {
   componentDidMount () {
@@ -44,8 +49,7 @@ checkLoggedInUser = () => {
 }
 
 render () {
-  const { projects } = this.props
-  const { signInModalOpen, signOutModalOpen, submitProjectModalOpen, loggedIn } = this.props.home
+  const { home: { signInModalOpen, signOutModalOpen, submitProjectModalOpen, loggedIn }, projects } = this.props
   if (projects && projects.length !== 0) {
     return (
       <div style={{ backgroundColor: '#000' }}>
@@ -64,7 +68,7 @@ render () {
               className="btn btn-outline-info my-2 my-sm-0">
               Submit a project</button>
             <div className="arrow bounce">
-              <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"></a>
+              <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"><span></span></a>
             </div>
           </div>
         </div>

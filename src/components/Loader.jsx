@@ -3,7 +3,7 @@
 import * as React from 'react'
 
 type Props = {
-  darkSpinner: boolean
+  darkSpinner?: boolean
 }
 
 const Loader = ({ darkSpinner } : Props) => {

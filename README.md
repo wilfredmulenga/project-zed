@@ -42,12 +42,15 @@ If you wish to use your own data from a firebase database, you can as well. The 
 the data structure for each project is as follows:
   ```
   {
+    userUID: string,
     description: string,
     projectOwner: string,
+    projectId: string,
     link: string,
+    likedBy: Array<string>,
     tools: Array<string>
     type: string,
-    liked: number
+    likes: number
   }
 ```
 

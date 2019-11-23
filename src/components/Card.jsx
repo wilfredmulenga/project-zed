@@ -3,19 +3,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { likeOrDislike, toggleSignInModal } from '../actions/actionCreators'
-import { Home } from '../types/types'
+import { Home, Project } from '../types/types'
 
 const whiteBackground = {
   backgroundColor: '#FFF'
-}
-
-type Project = {
-  description: string,
-  likes: number,
-  link: string,
-  projectOwner: string,
-  tools: Array<string>,
-  type: string
 }
 
 type Props = {
@@ -25,56 +16,44 @@ type Props = {
   project: Project
 }
 
-type State = {
-  liked: boolean
-}
-
-class Card extends React.Component<Props, State> {
-  constructor () {
-    super()
-    this.state = {
-      liked: false
-    }
-  }
-
-  handleCick = (index) => {
-    const { loggedIn } = this.props.home
+class Card extends React.Component<Props> {
+  handleClick = (projectId, index) => {
+    const { home: { loggedIn, userUID }, dispatch, project, project: { userUID: projectUserUID } } = this.props
     if (loggedIn) {
-      this.setState(state => ({ liked: !state.liked }),
-        () => this.props.dispatch(likeOrDislike(index, this.state.liked)))
+      dispatch(likeOrDislike(projectId, projectUserUID, userUID, !project.likedBy.includes(userUID), index))
     } else {
-      this.props.dispatch(toggleSignInModal())
+      dispatch(toggleSignInModal())
     }
   }
 
   render () {
-    const { index, project } = this.props
-    const { liked } = this.state
+    const { project: { projectId, likes, projectOwner, description, tools, link, likedBy, type },
+      index, home: { userUID } } = this.props
     return (
-      <div key={index} className="row justify-content-center">
+      <div key={projectId} className="row justify-content-center">
         <div className="col-md-8 col-sm-8 mb-4">
           <div>
             <div className="card-body row" style={whiteBackground}>
               <div className="col-5">
-                <p style={{ display: 'inline', marginBottom: 20 }} className="card-title">{project.projectOwner}</p>
+                <p style={{ display: 'inline', marginBottom: 20 }} className="card-title">{projectOwner}</p>
                 <p>
               Tools:
                   {' '}
-                  {project.tools.map((element, i) => (<span key={i} className="card-subtitle mr-1">{element}</span>))}
+                  {tools.map((element, i) => (<span key={i} className="card-subtitle mr-1">{element}</span>))}
                 </p>
-                <p>{project.type}</p>
+                <p>{type}</p>
                 <div className='likeContainer'>
-                  <div className="like" onClick={() => this.handleCick(index)}><p>{liked ? 'unlike' : 'like' }</p></div>
-                  <div className='likeCount'>{project.likes}</div>
+                  <div className="like" onClick={() => this.handleClick(projectId, index)}><p>{likedBy.includes(userUID) ? 'unlike' : 'like' }</p></div>
+                  <div className='likeCount'>{likes}</div>
                 </div>
               </div>
               <div className="col-7">
-                <p className='removeOverflowText' style={{ display: 'inline', marginBottom: 20 }}>{project.description}</p>
+                <p className='removeOverflowText' style={{ display: 'inline', marginBottom: 20 }}>{description}</p>
                 <p>
                   {' '}
               Link:
                   {' '}
-                  <a className='removeOverflowText' rel="noopener noreferrer" target="_blank" href={project.link}>{project.link}</a>
+                  <a className='removeOverflowText' rel="noopener noreferrer" target="_blank" href={link}>{link}</a>
                   {' '}
                 </p>
               </div>

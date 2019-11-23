@@ -7,13 +7,12 @@ import firebase from '../../config/firebase'
 import ChipInput from 'material-ui-chip-input'
 import { toggleSubmitProjectModal } from '../../actions/actionCreators'
 import Loader from '../Loader'
-import { Home } from '../../types/types'
-import '../../App.scss'
+import { Home, Dispatch } from '../../types/types'
 
 type Props = {
   home: Home,
   isOpen: boolean,
-  dispatch: (any) => void
+  dispatch: Dispatch
 }
 
 type State = {
@@ -22,9 +21,12 @@ type State = {
   description: string,
   typeOfProject: string,
   link: string,
+  likes: number,
   loading: boolean,
   responseMessage: string,
-  submitted: boolean
+  submitted: boolean,
+  projectId: string,
+  likedBy: Array<string>
 }
 
 Modal.setAppElement('#root')
@@ -38,9 +40,12 @@ class SumbitProjectModal extends React.Component<Props, State> {
       description: '',
       typeOfProject: 'Open Source',
       link: '',
+      likes: 0,
       loading: false,
       responseMessage: '',
-      submitted: false
+      submitted: false,
+      projectId: '',
+      likedBy: []
     }
 
   handleInput = (field: string, value: string) => {
@@ -69,7 +74,7 @@ class SumbitProjectModal extends React.Component<Props, State> {
       loading: true,
       submitted: true
     })
-    const { projectOwner, tools, description, typeOfProject, link } = this.state
+    const { projectOwner, tools, description, typeOfProject, link, likes, likedBy } = this.state
     const { userUID } = this.props.home
     const newProjectKey = firebase.database().ref().child(userUID).push().key
     firebase.database().ref(`users/${userUID}/projects/${newProjectKey}/`).set({
@@ -77,7 +82,10 @@ class SumbitProjectModal extends React.Component<Props, State> {
       tools,
       description,
       typeOfProject,
-      link
+      link,
+      likes,
+      projectId: newProjectKey,
+      likedBy
     }).then((error) => {
       if (error) {
         this.setState({

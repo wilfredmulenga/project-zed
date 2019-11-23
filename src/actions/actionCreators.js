@@ -11,34 +11,36 @@ import {
   TOGGLE_SIGN_IN_MODAL,
   LOG_IN_STATUS_CHANGE,
   TOGGLE_SIGN_OUT_MODAL,
-  TOGGLE_SUBMIT_PROJECT_MODAL,
-  SUBMIT_PROJECT
+  TOGGLE_SUBMIT_PROJECT_MODAL
 } from './actionTypes'
 
-// actions types
-
 // actionCreators
-export function likeOrDislike (index, liked) {
+export function likeOrDislike (projectId, projectUserUID, userUID, liked, index) {
   return function (dispatch, getState) {
-    const { projectsReducer: projects } = getState()
     if (liked) {
-      dispatch({ type: LIKE_PROJECT, index })
+      dispatch({ type: LIKE_PROJECT, index, userUID })
     } else {
-      dispatch({ type: DISLIKE_PROJECT, index })
+      dispatch({ type: DISLIKE_PROJECT, index, userUID })
     }
     dispatch({ type: UPDATE_PROJECTS_START })
-    const updateProjectsRef = firebase.database().ref(`projects/${index}`)
-    updateProjectsRef.set({
-      ...projects[index],
-      likes: (liked) ? projects[index].likes + 1 : projects[index].likes - 1
-    }, function () {
-      dispatch({ type: UPDATE_PROJECTS_SUCCESS })
-    }).catch(function (error) {
-      dispatch({
-        type: UPDATE_PROJECTS_FAIL,
-        payload: error
-      })
-    })
+
+    // uncomment this code block if you are using firebase database
+    // firebase.database().ref(`users/${projectUserUID}/projects/${projectId}/`).once('value')
+    //   .then(function (snapshot) {
+    //     const project = snapshot.val()
+    //     const { likes, likedBy } = project
+    //     firebase.database().ref(`users/${projectUserUID}/projects/${projectId}/`).update({
+    //       likes: liked ? likes + 1 : likes - 1,
+    //       likedBy: liked ? [...likedBy, userUID] : likedBy.filter(userUIDs => userUIDs !== userUID)
+    //     }, function () {
+    //       dispatch({ type: UPDATE_PROJECTS_SUCCESS })
+    //     }).catch(function (error) {
+    //       dispatch({
+    //         type: UPDATE_PROJECTS_FAIL,
+    //         payload: error
+    //       })
+    //     })
+    //   })
   }
 }
 
@@ -46,14 +48,20 @@ export function loadProjects () {
   return function (dispatch) {
     dispatch({ type: LOAD_PROJECTS_START })
 
-    const projectsRef = firebase.database().ref('projects')
+    const projectsRef = firebase.database().ref('users')
     projectsRef.once('value', (snapshot) => {
-      if (snapshot.val()) {
-        dispatch({
-          type: LOAD_PROJECTS_SUCCESS,
-          payload: snapshot.val()
-        })
+      const listOfProjects = []
+
+      for (const project in snapshot.val()) {
+        const projects = snapshot.val()[project]['projects']
+        for (const i in projects) {
+          listOfProjects.push(projects[i])
+        }
       }
+      dispatch({
+        type: LOAD_PROJECTS_SUCCESS,
+        payload: listOfProjects
+      })
     }, error => {
       dispatch({
         type: LOAD_PROJECTS_FAIL,
