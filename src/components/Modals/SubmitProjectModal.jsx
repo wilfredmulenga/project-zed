@@ -25,7 +25,8 @@ type State = {
   loading: boolean,
   responseMessage: string,
   submitted: boolean,
-  projectId: string
+  projectId: string,
+  likedBy: Array<string>
 }
 
 Modal.setAppElement('#root')
