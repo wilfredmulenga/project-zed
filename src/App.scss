@@ -101,6 +101,10 @@ $DARK-GREY: #7F7E7E;
 .arrow {
   text-align: center;
   margin: 8% 0;
+  text-decoration: none;
+  a:hover {
+    color: $PURE-WHITE;
+  }
 }
 .bounce {
   -moz-animation: bounce 2s infinite;
