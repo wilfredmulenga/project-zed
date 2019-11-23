@@ -258,3 +258,8 @@ label {
   color: $PERSIAN-RED;
   margin-bottom: 3rem;
 }
+
+.modalCloseButton {
+  display: flex;
+  justify-content: flex-end;
+}
