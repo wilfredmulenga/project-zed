@@ -34,3 +34,7 @@ projectzed.code-workspace
 
 #flow
 .flowconfig
+
+node_modules/
+
+config.json
