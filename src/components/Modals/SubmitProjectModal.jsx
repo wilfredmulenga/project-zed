@@ -45,7 +45,7 @@ class SumbitProjectModal extends React.Component<Props, State> {
       responseMessage: '',
       submitted: false,
       projectId: '',
-      likedBy: []
+      likedBy: ['0'] // firebase does not allow empty arrays
     }
 
   handleInput = (field: string, value: string) => {
@@ -84,8 +84,8 @@ class SumbitProjectModal extends React.Component<Props, State> {
       typeOfProject,
       link,
       likes,
-      projectId: newProjectKey,
-      likedBy
+      likedBy,
+      projectId: newProjectKey
     }).then((error) => {
       if (error) {
         this.setState({
