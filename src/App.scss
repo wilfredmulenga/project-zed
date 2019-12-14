@@ -11,29 +11,12 @@ $CHARCOAL-BLUE: #24292D;
 $LIGHT-GREY: #CECECE;
 $DARK-GREY: #7F7E7E;
 
-.App {
-  text-align: center;
-}
 
 .app-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
 }
 
-.App-header {
-  background-color: $MATTE-BLACK;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color:$PURE-WHITE;
-}
-
-.App-link {
-  color: $TURQUOISE-BLUE;
-}
 
 @keyframes app-logo-spin {
   from {
@@ -89,7 +72,7 @@ $DARK-GREY: #7F7E7E;
 }
 
 /* down arrow */
-  .downArrow {
+  .down-arrow {
    color: $PURE-WHITE;
    text-decoration: none;
   }
@@ -155,7 +138,7 @@ $DARK-GREY: #7F7E7E;
     }
   }
 
-  .likeCount {
+  .like-count {
     background-color: $PURE-WHITE;
     padding-left: 10px;
     border-style: solid;
@@ -238,7 +221,7 @@ $DARK-GREY: #7F7E7E;
     }
   }
 
-.removeOverflowText {
+.remove-overflow-text {
   overflow-wrap: break-word;
 }
 
