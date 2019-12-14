@@ -15,7 +15,7 @@ $DARK-GREY: #7F7E7E;
   text-align: center;
 }
 
-.App-logo {
+.app-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
 }
@@ -35,7 +35,7 @@ $DARK-GREY: #7F7E7E;
   color: $TURQUOISE-BLUE;
 }
 
-@keyframes App-logo-spin {
+@keyframes app-logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -130,7 +130,7 @@ $DARK-GREY: #7F7E7E;
 }
 
 
-  .likeContainer {
+  .like-container {
     height: 36px;
     border: 4px ;
     display: inline-flex;
@@ -170,14 +170,14 @@ $DARK-GREY: #7F7E7E;
     }
   }
 
-  .SignInModal {
+  .sign-in-modal {
     text-align: center;
     & hr {
       margin-bottom: 60px;
     }
   }
 
-  .socialSigninButton {
+  .social-signin-button {
     width: 100%;
     height: 48px;
     font-size: 1.5rem;
@@ -214,7 +214,7 @@ $DARK-GREY: #7F7E7E;
     }
   }
 
-  .SignOutModal {
+  .sign-out-modal {
     text-align: center;
     margin-bottom: 15px;
     & hr {
@@ -222,23 +222,21 @@ $DARK-GREY: #7F7E7E;
     }
   }
 
-  .SignOutModal .SignOutModalYes {
+  .sign-out-modal .sign-out-modal-yes {
     margin-right: 50px;
   }
 
-  .SignOutModal .SignOutModalNo {
+  .sign-out-modal .sign-out-modal-no {
     margin-left: 50px;
   }
 
   .modal-button-container {
     margin-top:3rem;
     text-align: end;
-
     .btn-outline-info {
       margin-left: 2rem;
     }
   }
-
 
 .removeOverflowText {
   overflow-wrap: break-word;
