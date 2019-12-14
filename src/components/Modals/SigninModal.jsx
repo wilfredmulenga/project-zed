@@ -84,7 +84,7 @@ class SignInModal extends React.Component<Props, State> {
           {
             <div className='error-message'>{errorMessage}</div>
           }
-          <div className='socialSigninButton facebook' onClick={() => this.authenticate('Facebook')}>
+          <div className='social-signin-button facebook' onClick={() => this.authenticate('Facebook')}>
             <img src={facebook} alt='facebook icon' />
             <p>Facebook</p>
           </div>
