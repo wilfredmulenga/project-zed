@@ -68,7 +68,7 @@ render () {
               className="btn btn-outline-info my-2 my-sm-0">
               Submit a project</button>
             <div className="arrow bounce">
-              <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"><span></span></a>
+              <a className="fa fa-arrow-down fa-2x down-arrow" href="#projects"><span></span></a>
             </div>
           </div>
         </div>

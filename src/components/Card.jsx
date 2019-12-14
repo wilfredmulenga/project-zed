@@ -16,11 +16,10 @@ type Props = {
   project: Project
 }
 
-
 class Card extends React.Component<Props> {
   handleClick = (projectId, index) => {
     const { home: { loggedIn, userUID }, dispatch, project, project: { userUID: projectUserUID } } = this.props
-    
+
     if (loggedIn) {
       dispatch(likeOrDislike(projectId, projectUserUID, userUID, !project.likedBy.includes(userUID), index))
     } else {
@@ -45,18 +44,18 @@ class Card extends React.Component<Props> {
                 </p>
 
                 <p>{type}</p>
-                <div className='likeContainer'>
+                <div className="like-container">
                   <div className="like" onClick={() => this.handleClick(projectId, index)}><p>{likedBy.includes(userUID) ? 'unlike' : 'like' }</p></div>
-                  <div className='likeCount'>{likes}</div>
+                  <div className="like-count">{likes}</div>
                 </div>
               </div>
               <div className="col-7">
-                <p className='removeOverflowText' style={{ display: 'inline', marginBottom: 20 }}>{description}</p>
+                <p className="remove-overflow-text" style={{ display: 'inline', marginBottom: 20 }}>{description}</p>
                 <p>
                   {' '}
               Link:
                   {' '}
-                  <a className='removeOverflowText' rel="noopener noreferrer" target="_blank" href={link}>{link}</a>
+                  <a className="remove-overflow-text" rel="noopener noreferrer" target="_blank" href={link}>{link}</a>
                   {' '}
                 </p>
               </div>
