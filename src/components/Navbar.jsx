@@ -1,8 +1,16 @@
+// @flow
+
 import React from 'react'
 import { connect } from 'react-redux'
 import { toggleSignInModal, toggleSignOutModal } from '../actions/actionCreators'
+import { Dispatch, Home } from '../types/types'
 
-class Navbar extends React.Component {
+type Props = {
+  dispatch: Dispatch,
+  home: Home
+}
+
+class Navbar extends React.Component<Props> {
   render () {
     const { loggedIn } = this.props.home
     return (
