@@ -78,26 +78,25 @@ class SignInModal extends React.Component<Props, State> {
         style={customStyles}
         contentLabel="Sign in modal"
         onClick={() => console.log('modal clicked')}>
-        <div className='SignInModal'>
+        <div className='sign-in-modal'>
           <h3>Sign In</h3>
           <hr/>
           {
             <div className='error-message'>{errorMessage}</div>
           }
-          <div className='socialSigninButton facebook' onClick={() => this.authenticate('Facebook')}>
+          <div className='social-signin-button facebook' onClick={() => this.authenticate('Facebook')}>
             <img src={facebook} alt='facebook icon' />
             <p>Facebook</p>
           </div>
-          <div className='socialSigninButton google' onClick={() => this.authenticate('Google')}>
+          <div className='social-signin-button google' onClick={() => this.authenticate('Google')}>
             <img src={google} alt='google icon' />
             <p>Google</p>
           </div>
-          <div className='socialSigninButton github' onClick={() => this.authenticate('Github')}>
+          <div className='social-signin-button github' onClick={() => this.authenticate('Github')}>
             <img src={github} alt='github icon' />
             <p>Github</p>
           </div>
         </div>
-
         <div className='modalCloseButton'>
           <button
             onClick={() => this.props.dispatch(toggleSignInModal())}

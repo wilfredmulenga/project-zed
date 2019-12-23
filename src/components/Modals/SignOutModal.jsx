@@ -28,20 +28,20 @@ class SignOutModal extends React.Component<Props> {
         isOpen={isOpen}
         style={customStyles}
         contentLabel="Sign out modal">
-        <div className='SignOutModal'>
+        <div className='sign-out-modal'>
           <h3>Sign Out ?</h3>
           <hr/>
-          <div className='SignOutModal'>
+          <div className='sign-out-modal'>
             <button
               onClick={this.signOut}
               type="button"
-              className="btn btn-outline-danger SignOutModalYes">
+              className="btn btn-outline-danger sign-out-modal-yes">
             Yes
             </button>
             <button
               onClick={() => this.props.dispatch(toggleSignOutModal())}
               type="button"
-              className="btn btn-outline-danger SignOutModalNo">
+              className="btn btn-outline-danger sign-out-modal-no">
             No
             </button>
           </div>
