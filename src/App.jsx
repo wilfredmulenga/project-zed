@@ -29,7 +29,7 @@ type Props = {
 class App extends Component<Props> {
   componentDidMount () {
     // uncomment the line below if you are using data from your firebase database
-    this.props.dispatch(loadProjects())
+    // this.props.dispatch(loadProjects())
     this.checkLoggedInUser()
   }
 
