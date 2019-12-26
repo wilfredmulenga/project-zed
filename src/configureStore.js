@@ -1,8 +1,11 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import rootReducer from './reducers/index'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = composeWithDevTools({
+  name: 'projectZed', actionsBlacklist: ['REDUX_STORAGE_SAVE']
+})
 
 export default function configureStore () {
   return createStore(
