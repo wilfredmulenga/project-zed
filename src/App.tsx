@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
