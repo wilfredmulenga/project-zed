@@ -4,21 +4,36 @@ import Card from './components/Card'
 import Navbar from './components/Navbar'
 import SignInModal from './components/Modals/SignInModal'
 import SignOutModal from './components/Modals/SignOutModal'
+import SubmitProposalModal from './components/Modals/SubmitProjectModal'
+import Loader from './components/Loader'
 
 import { connect } from 'react-redux'
-import { loadProjects, logInStateChange } from './actions/actionCreators'
+import {
+  loadProjects,
+  logInStateChange,
+  toggleSubmitProjectModal,
+  toggleSignInModal
+} from './actions/actionCreators'
+import { Dispatch, Project, Home } from './types/types'
+
 import './App.scss'
+
+// type Props = {
+//   dispatch: Dispatch,
+//   projects: Array<Project>,
+//   home: Home
+// }
 
 class App extends Component {
   componentDidMount () {
     // uncomment the line below if you are using data from your firebase database
-    // this.props.dispatch(loadProjects())
+    this.props.dispatch(loadProjects())
     this.checkLoggedInUser()
   }
 
   componentWillUnmount () {
     firebase.auth().signOut()
-    this.props.dispatch(logInStateChange({ userUID: null, userLoggedIn: false }))
+    this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
   }
 
 checkLoggedInUser = () => {
@@ -32,8 +47,7 @@ checkLoggedInUser = () => {
 }
 
 render () {
-  const { projects } = this.props
-  const { signInModalOpen, signOutModalOpen } = this.props.home
+  const { home: { signInModalOpen, signOutModalOpen, submitProjectModalOpen, loggedIn }, projects } = this.props
   if (projects && projects.length !== 0) {
     return (
       <div style={{ backgroundColor: '#000' }}>
@@ -47,25 +61,28 @@ render () {
             <p style={{ fontSize: 40, color: '#FFF', float: 'center', marginLeft: '20px' }}>
               Find projects done by Zambian Developers
             </p>
+            <button
+              onClick={() => loggedIn ? this.props.dispatch(toggleSubmitProjectModal()) : this.props.dispatch(toggleSignInModal())}
+              className="btn btn-outline-info my-2 my-sm-0">
+              Submit a project</button>
             <div className="arrow bounce">
-              <a className="fa fa-arrow-down fa-2x downArrow" href="#projects"></a>
+              <a className="fa fa-arrow-down fa-2x down-arrow" href="#projects"><span></span></a>
             </div>
           </div>
         </div>
         <div id='projects'>
-          { projects ? projects.map((project, i) =>
-            <Card key={i} index={i} project= {project} />) : null
-          }
+          { projects.map((project, i) => <Card key={i} index={i} project= {project} />) }
         </div>
         <SignInModal isOpen={signInModalOpen} />
         <SignOutModal isOpen={signOutModalOpen} />
+        <SubmitProposalModal isOpen={submitProjectModalOpen} />
       </div>
     )
   }
   return (
     <div style={{ height: '100vh', backgroundColor: '#000' }}
       className=" row justify-content-center align-items-center">
-      <div className="loader" />
+      <Loader />
     </div>
   )
 }

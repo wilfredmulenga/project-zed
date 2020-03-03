@@ -32,5 +32,9 @@ firebase.json
 # vs code workspace
 projectzed.code-workspace
 
-# database file
-/src/data.js
+#flow
+.flowconfig
+
+node_modules/
+
+config.json

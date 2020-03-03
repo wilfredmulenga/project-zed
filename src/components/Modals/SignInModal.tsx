@@ -3,21 +3,52 @@ import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import firebase from '../../config/firebase'
 import { toggleSignInModal, logInStateChange } from '../../actions/actionCreators'
+import { Dispatch } from '../../types/types'
 import facebook from '../../images/facebook.svg'
 import google from '../../images/google.png'
 import github from '../../images/github.png'
 
+type Props = {
+  isOpen: boolean,
+  dispatch: Dispatch
+}
+
+type State = {
+  errorMessage: string
+}
+
 Modal.setAppElement('#root')
 
-class SignInModal extends React.Component {
-  authenticate = provider => {
+class SignInModal extends React.Component<Props, State> {
+  state: State = {
+    errorMessage: ''
+  }
+
+  componentDidUpdate (props: Props) {
+    this.setState({ errorMessage: '' })
+  }
+
+  updateErrorMessage = (methods: string[]) => {
+    this.setState({
+      errorMessage: `You previously signed up using ${methods[0]}. Please select this sign in provider to sign in`
+    }, () => {
+      this.props.dispatch(toggleSignInModal)
+    })
+  }
+
+  authenticate = async (provider: string) => {
     this.props.dispatch(toggleSignInModal())
     const authProvider = new firebase.auth[`${provider}AuthProvider`]()
-    firebase.auth().signInWithPopup(authProvider)
-      .then(this.authHandler)
-      .catch(function (error) {
-        console.log(error)
-      })
+    try {
+      await firebase.auth().signInWithPopup(authProvider)
+    } catch (error) {
+      if (error.code === 'auth/account-exists-with-different-credential') {
+        const email = error.email
+        const methods = await firebase.auth().fetchSignInMethodsForEmail(email)
+        this.updateErrorMessage(methods)
+      }
+    }
+
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const userInfo = { userUID: user.uid, loggedIn: true }
@@ -30,36 +61,30 @@ class SignInModal extends React.Component {
     })
   }
 
-  // TODO: check if this line is needed
-  authHandler = async authData => {
-    if (authData.credential.email) {
-      // this.props.dispatch(toggleSignInModal())
-    }
-  }
-
   render () {
     const { isOpen } = this.props
+    const { errorMessage } = this.state
     return (
 
       <Modal
-        isOpen={isOpen}
-        onAfterOpen={this.afterOpenModal}
-        onRequestClose={this.closeModal}
+        isOpen={isOpen || !!errorMessage}
         style={customStyles}
-        contentLabel="Sign in modal"
-        onClick={() => console.log('modal clicked')}>
-        <div className='SignInModal'>
+        contentLabel="Sign in modal">
+        <div className='sign-in-modal'>
           <h3>Sign In</h3>
           <hr/>
-          <div className='socialSigninButton facebook' onClick={() => this.authenticate('Facebook')}>
+          {
+            <div className='error-message'>{errorMessage}</div>
+          }
+          <div className='social-signin-button facebook' onClick={() => this.authenticate('Facebook')}>
             <img src={facebook} alt='facebook icon' />
             <p>Facebook</p>
           </div>
-          <div className='socialSigninButton google' onClick={() => this.authenticate('Google')}>
+          <div className='social-signin-button google' onClick={() => this.authenticate('Google')}>
             <img src={google} alt='google icon' />
             <p>Google</p>
           </div>
-          <div className='socialSigninButton github' onClick={() => this.authenticate('Github')}>
+          <div className='social-signin-button github' onClick={() => this.authenticate('Github')}>
             <img src={github} alt='github icon' />
             <p>Github</p>
           </div>

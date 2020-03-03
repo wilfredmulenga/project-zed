@@ -1,28 +1,24 @@
-.App {
-  text-align: center;
-}
+// App colors
 
-.App-logo {
+$PURE-WHITE : #FFFFFF;
+$MATTE-BLACK: #282C34;
+$TURQUOISE-BLUE: #61DAFB;
+$PERSIAN-RED: #DB332E;
+$DARK-RED: #8D0400;
+$MARINER-BLUE: #3B5998;
+$SAPPHIRE-BLUE: #14306B;
+$CHARCOAL-BLUE: #24292D;
+$LIGHT-GREY: #CECECE;
+$DARK-GREY: #7F7E7E;
+
+
+.app-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+@keyframes app-logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -31,14 +27,37 @@
   }
 }
 
+#body{
+   max-width: 100%;
+   overflow-x: hidden;
+}
+
+.loader-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12rem;
+}
+
 .loader {
-  border: 16px solid #FFF;
+  border: 16px solid $PURE-WHITE;
   border-radius: 50%;
-  border-top: 16px solid darkgrey;
+  border-top: 16px solid $DARK-GREY;
   width: 120px;
   height: 120px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
+
+  &.dark-spinner {
+    border: 16px solid $LIGHT-GREY;
+    border-radius: 50%;
+    border-top: 16px solid $MATTE-BLACK;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
 }
 
 /* Safari */
@@ -53,8 +72,8 @@
 }
 
 /* down arrow */
-  .downArrow {
-   color: white;
+  .down-arrow {
+   color: $PURE-WHITE;
    text-decoration: none;
   }
 
@@ -65,6 +84,10 @@
 .arrow {
   text-align: center;
   margin: 8% 0;
+  text-decoration: none;
+  a:hover {
+    color: $PURE-WHITE;
+  }
 }
 .bounce {
   -moz-animation: bounce 2s infinite;
@@ -90,7 +113,7 @@
 }
 
 
-  .likeContainer {
+  .like-container {
     height: 36px;
     border: 4px ;
     display: inline-flex;
@@ -99,28 +122,28 @@
 
   .like {
     width: 60px; // TODO: find out why absolute values cannot be used here
-    color: #fff;
+    color: $PURE-WHITE;
     text-shadow: none;
-    background-color: #db332e;
+    background-color: $PERSIAN-RED;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
     justify-content: center;
     padding-top: 6px;
     cursor: pointer;
     &:hover {
-      background-color: #8D0400;
+      background-color: $DARK-RED;
     }
     & p {
       margin: 0
     }
   }
 
-  .likeCount {
-    background-color: #FFF;
+  .like-count {
+    background-color: $PURE-WHITE;
     padding-left: 10px;
     border-style: solid;
     border-width: 0.5px;
-    border-color: #db332e;
+    border-color: $PERSIAN-RED;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
     padding-top: 6px;
@@ -130,14 +153,14 @@
     }
   }
 
-  .SignInModal {
+  .sign-in-modal {
     text-align: center;
     & hr {
       margin-bottom: 60px;
     }
   }
 
-  .socialSigninButton {
+  .social-signin-button {
     width: 100%;
     height: 48px;
     font-size: 1.5rem;
@@ -150,31 +173,31 @@
       width: 130px;
     }
     &.facebook {
-      background-color: #3b5998;
-      color: #ffffff;
+      background-color: $MARINER-BLUE;
+      color: $PURE-WHITE;
       &:hover {
-        background-color: #14306B;
+        background-color: $SAPPHIRE-BLUE;
       }
     }
     &.google {
-      background-color: #ffffff;
+      background-color: $PURE-WHITE;
       border-style: solid;
       border-width: 0.5px;
-      border-color: #24292d;
+      border-color: $CHARCOAL-BLUE;
       &:hover {
-        background-color: #CECECE;
+        background-color: $LIGHT-GREY;
       }
     }
     &.github {
-      background-color: #24292d;
-      color: #ffffff;
+      background-color: $CHARCOAL-BLUE;
+      color: $PURE-WHITE;
       &:hover {
-        background-color: #7F7E7E;
+        background-color: $DARK-GREY;
       }
     }
   }
 
-  .SignOutModal {
+  .sign-out-modal {
     text-align: center;
     margin-bottom: 15px;
     & hr {
@@ -182,19 +205,46 @@
     }
   }
 
-  .SignOutModal .SignOutModalYes {
+  .sign-out-modal .sign-out-modal-yes {
     margin-right: 50px;
   }
 
-  .SignOutModal .SignOutModalNo {
+  .sign-out-modal .sign-out-modal-no {
     margin-left: 50px;
   }
 
-  .modalCloseButton {
-    margin-top: 20px;
+  .modal-button-container {
+    margin-top:3rem;
     text-align: end;
+    .btn-outline-info {
+      margin-left: 2rem;
+    }
   }
 
-.removeOverflowText {
+.remove-overflow-text {
   overflow-wrap: break-word;
+}
+
+.inputField {
+  display: grid;
+  margin-bottom: 5%;
+}
+
+label {
+  margin-left: 0.4rem;
+}
+
+.response-message-container {
+  width: 100%;
+  text-align: center;
+}
+
+.error-message {
+  color: $PERSIAN-RED;
+  margin-bottom: 3rem;
+}
+
+.modalCloseButton {
+  display: flex;
+  justify-content: flex-end;
 }

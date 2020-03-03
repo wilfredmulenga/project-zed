@@ -4,13 +4,18 @@ import firebase from '../../config/firebase'
 import { connect } from 'react-redux'
 import { toggleSignOutModal, logInStateChange } from '../../actions/actionCreators'
 
+type Props = {
+  isOpen: boolean,
+  dispatch: (any) => void
+}
+
 Modal.setAppElement('#root')
 
-class SignOutModal extends React.Component {
+class SignOutModal extends React.Component<Props> {
   signOut = () => {
     firebase.auth().signOut()
     localStorage.removeItem('userInfo')
-    this.props.dispatch(logInStateChange({ userUID: null, userLoggedIn: false }))
+    this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
     this.props.dispatch(toggleSignOutModal())
   }
 
@@ -19,24 +24,22 @@ class SignOutModal extends React.Component {
     return (
       <Modal
         isOpen={isOpen}
-        onAfterOpen={this.afterOpenModal}
-        onRequestClose={this.closeModal}
         style={customStyles}
         contentLabel="Sign out modal">
-        <div className='SignOutModal'>
+        <div className='sign-out-modal'>
           <h3>Sign Out ?</h3>
           <hr/>
-          <div className='SignOutModal'>
+          <div className='sign-out-modal'>
             <button
               onClick={this.signOut}
               type="button"
-              className="btn btn-outline-danger SignOutModalYes">
+              className="btn btn-outline-danger sign-out-modal-yes">
             Yes
             </button>
             <button
               onClick={() => this.props.dispatch(toggleSignOutModal())}
               type="button"
-              className="btn btn-outline-danger SignOutModalNo">
+              className="btn btn-outline-danger sign-out-modal-no">
             No
             </button>
           </div>
