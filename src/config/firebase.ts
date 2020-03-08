@@ -1,9 +1,8 @@
 // firebase configuration
-const firebase = require('firebase/app')
-require('firebase/auth')
-require('firebase/database')
-require('firebase/storage')
-
+import * as firebase from 'firebase'
+import 'firebase/auth'
+import 'firebase/database'
+import 'firebase/storage'
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -13,6 +12,8 @@ const config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 }
 
-firebase.initializeApp(config)
+if (!firebase.apps.length) {
+  firebase.initializeApp(config)
+}
 
 export default firebase

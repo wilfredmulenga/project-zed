@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
@@ -22,20 +20,15 @@ type State = {
 Modal.setAppElement('#root')
 
 class SignInModal extends React.Component<Props, State> {
-  constructor () {
-    super()
-    this.state = {
-      errorMessage: ''
-    }
+  state: State = {
+    errorMessage: ''
   }
 
-  componentDidUpdate (prevProps, props) {
-    if (prevProps === props) {
-      this.setState({ errorMessage: '' })
-    }
+  componentDidUpdate (props: Props) {
+    this.setState({ errorMessage: '' })
   }
 
-  updateErrorMessage = (methods) => {
+  updateErrorMessage = (methods: string[]) => {
     this.setState({
       errorMessage: `You previously signed up using ${methods[0]}. Please select this sign in provider to sign in`
     }, () => {
@@ -43,11 +36,28 @@ class SignInModal extends React.Component<Props, State> {
     })
   }
 
-  authenticate = async provider => {
+   authenticationProvider = (provider: string) => {
+     let authProvider
+     switch (provider) {
+       case 'Facebook':
+         authProvider = new firebase.auth.FacebookAuthProvider()
+         break
+       case 'Google':
+         authProvider = new firebase.auth.GoogleAuthProvider()
+         break
+       case 'Github':
+         authProvider = new firebase.auth.GithubAuthProvider()
+         break
+       default:
+         authProvider = new firebase.auth.GoogleAuthProvider()
+     }
+     return authProvider
+   }
+
+  authenticate = async (provider: string) => {
     this.props.dispatch(toggleSignInModal())
-    const authProvider = new firebase.auth[`${provider}AuthProvider`]()
     try {
-      await firebase.auth().signInWithPopup(authProvider)
+      await firebase.auth().signInWithPopup(this.authenticationProvider(provider))
     } catch (error) {
       if (error.code === 'auth/account-exists-with-different-credential') {
         const email = error.email
@@ -76,8 +86,7 @@ class SignInModal extends React.Component<Props, State> {
       <Modal
         isOpen={isOpen || !!errorMessage}
         style={customStyles}
-        contentLabel="Sign in modal"
-        onClick={() => console.log('modal clicked')}>
+        contentLabel="Sign in modal">
         <div className='sign-in-modal'>
           <h3>Sign In</h3>
           <hr/>

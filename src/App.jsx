@@ -1,12 +1,10 @@
-// @flow
-
 import React, { Component } from 'react'
 import firebase from './config/firebase'
 import Card from './components/Card'
 import Navbar from './components/Navbar'
-import SignInModal from './components/modals/SignInModal'
-import SignOutModal from './components/modals/SignOutModal'
-import SubmitProposalModal from './components/modals/SubmitProjectModal'
+import SignInModal from './components/Modals/SignInModal'
+import SignOutModal from './components/Modals/SignOutModal'
+import SubmitProposalModal from './components/Modals/SubmitProjectModal'
 import Loader from './components/Loader'
 
 import { connect } from 'react-redux'
@@ -16,26 +14,25 @@ import {
   toggleSubmitProjectModal,
   toggleSignInModal
 } from './actions/actionCreators'
-import { Dispatch, Project, Home } from './types/types'
 
 import './App.scss'
 
-type Props = {
-  dispatch: Dispatch,
-  projects: Array<Project>,
-  home: Home
-}
+// type Props = {
+//   dispatch: Dispatch,
+//   projects: Array<Project>,
+//   home: Home
+// }
 
-class App extends Component<Props> {
+class App extends Component {
   componentDidMount () {
     // uncomment the line below if you are using data from your firebase database
-    // this.props.dispatch(loadProjects())
+    this.props.dispatch(loadProjects())
     this.checkLoggedInUser()
   }
 
   componentWillUnmount () {
     firebase.auth().signOut()
-    this.props.dispatch(logInStateChange({ userUID: null, userLoggedIn: false }))
+    this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
   }
 
 checkLoggedInUser = () => {
