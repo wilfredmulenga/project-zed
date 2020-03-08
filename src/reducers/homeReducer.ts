@@ -1,5 +1,5 @@
 import { TOGGLE_SIGN_IN_MODAL, LOG_IN_STATUS_CHANGE, TOGGLE_SIGN_OUT_MODAL, TOGGLE_SUBMIT_PROJECT_MODAL } from '../actions/actionTypes'
-import { HOME_REDUCER } from '../types/types'
+import { HomeReducer, Action } from '../types/types'
 const initialState = {
   signInModalOpen: false,
   signOutModalOpen: false,
@@ -8,7 +8,7 @@ const initialState = {
   submitProjectModalOpen: false
 }
 
-export default function homeReducer (state = initialState, action): HOME_REDUCER {
+export default function homeReducer (state = initialState, action: Action): HomeReducer {
   switch (action.type) {
     case TOGGLE_SIGN_IN_MODAL:
       return {

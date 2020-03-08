@@ -6,7 +6,7 @@ import { toggleSignOutModal, logInStateChange } from '../../actions/actionCreato
 
 type Props = {
   isOpen: boolean,
-  dispatch: (any) => void
+  dispatch: (arg0: any) => void
 }
 
 Modal.setAppElement('#root')

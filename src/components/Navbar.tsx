@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { toggleSignInModal, toggleSignOutModal } from '../actions/actionCreators'
-import { Dispatch, Home } from '../types/types'
+import { Dispatch, Home, HomeReducer } from '../types/types'
 
 type Props = {
   dispatch: Dispatch,
@@ -32,7 +32,7 @@ class Navbar extends React.Component<Props> {
   }
 }
 
-function mapStateToProps ({ homeReducer }) {
+function mapStateToProps ({ homeReducer }: { homeReducer : HomeReducer }) {
   return {
     home: homeReducer
   }

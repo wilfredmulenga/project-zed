@@ -36,11 +36,28 @@ class SignInModal extends React.Component<Props, State> {
     })
   }
 
+   authenticationProvider = (provider: string) => {
+     let authProvider
+     switch (provider) {
+       case 'Facebook':
+         authProvider = new firebase.auth.FacebookAuthProvider()
+         break
+       case 'Google':
+         authProvider = new firebase.auth.GoogleAuthProvider()
+         break
+       case 'Github':
+         authProvider = new firebase.auth.GithubAuthProvider()
+         break
+       default:
+         authProvider = new firebase.auth.GoogleAuthProvider()
+     }
+     return authProvider
+   }
+
   authenticate = async (provider: string) => {
     this.props.dispatch(toggleSignInModal())
-    const authProvider = new firebase.auth[`${provider}AuthProvider`]()
     try {
-      await firebase.auth().signInWithPopup(authProvider)
+      await firebase.auth().signInWithPopup(this.authenticationProvider(provider))
     } catch (error) {
       if (error.code === 'auth/account-exists-with-different-credential') {
         const email = error.email

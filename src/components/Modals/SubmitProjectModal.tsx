@@ -1,11 +1,11 @@
-import * as React from 'react'
+import React, { FormEvent } from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import firebase from '../../config/firebase'
 import ChipInput from 'material-ui-chip-input'
 import { toggleSubmitProjectModal } from '../../actions/actionCreators'
 import Loader from '../Loader'
-import { Home, Dispatch } from '../../types/types'
+import { Home, Dispatch, HomeReducer } from '../../types/types'
 
 type Props = {
   home: Home,
@@ -32,7 +32,7 @@ class SumbitProjectModal extends React.Component<Props> {
       likedBy: ['0'] // firebase does not allow empty arrays
     }
 
-  handleInput = (field, value) => {
+  handleInput = (field: string, value: string) => {
     this.setState({
       [field]: value
     })
@@ -52,7 +52,7 @@ class SumbitProjectModal extends React.Component<Props> {
     }))
   }
 
-  onFormSubmit = (evt) => {
+  onFormSubmit = (evt: FormEvent) => {
     evt.preventDefault()
     this.setState({
       loading: true,
@@ -215,7 +215,7 @@ const customStyles = {
   }
 }
 
-function mapStateToProps ({ homeReducer }) {
+function mapStateToProps ({ homeReducer }: { homeReducer: HomeReducer }) {
   return {
     home: homeReducer
   }

@@ -6,7 +6,7 @@ export type Home = {
   submitProjectModalOpen: boolean
 }
 
-export type Dispatch = (any) => void
+export type Dispatch = (arg0: any) => void
 
 export type Project = {
   projectOwner: string,
@@ -24,10 +24,18 @@ export type Project = {
   type: string
 }
 
-export interface HOME_REDUCER {
+export interface HomeReducer {
   signInModalOpen: boolean,
   signOutModalOpen: boolean,
   userUID: null | string,
   loggedIn: boolean,
   submitProjectModalOpen: boolean
+}
+
+export type Action = {
+  type: string,
+  payload: {
+    userUID: string,
+    loggedIn: boolean
+  }
 }

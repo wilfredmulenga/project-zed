@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { likeOrDislike, toggleSignInModal } from '../actions/actionCreators'
-import { Home, Project, HOME_REDUCER } from '../types/types'
+import { Home, Project, HomeReducer } from '../types/types'
 
 const whiteBackground = {
   backgroundColor: '#FFF'
@@ -65,7 +65,7 @@ class Card extends React.Component<Props> {
   }
 }
 
-function mapStateToProps ({ homeReducer }: { homeReducer: HOME_REDUCER }) {
+function mapStateToProps ({ homeReducer }: { homeReducer: HomeReducer }) {
   return {
     home: homeReducer
   }
