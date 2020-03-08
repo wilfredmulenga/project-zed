@@ -1,9 +1,7 @@
-// @flow
-
 import React from 'react'
 import { connect } from 'react-redux'
 import { likeOrDislike, toggleSignInModal } from '../actions/actionCreators'
-import { Home, Project } from '../types/types'
+import { Home, Project, HomeReducer } from '../types/types'
 
 const whiteBackground = {
   backgroundColor: '#FFF'
@@ -11,13 +9,13 @@ const whiteBackground = {
 
 type Props = {
   home: Home,
-  dispatch: (any) => void,
+  dispatch: (arg0: any) => void,
   index: number,
   project: Project
 }
 
 class Card extends React.Component<Props> {
-  handleClick = (projectId, index) => {
+  handleClick = (projectId: string, index: number) => {
     const { home: { loggedIn, userUID }, dispatch, project, project: { userUID: projectUserUID } } = this.props
 
     if (loggedIn) {
@@ -67,7 +65,7 @@ class Card extends React.Component<Props> {
   }
 }
 
-function mapStateToProps ({ homeReducer }) {
+function mapStateToProps ({ homeReducer }: { homeReducer: HomeReducer }) {
   return {
     home: homeReducer
   }

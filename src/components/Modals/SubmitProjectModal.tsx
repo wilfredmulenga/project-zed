@@ -1,13 +1,11 @@
-// @flow
-
-import * as React from 'react'
+import React, { FormEvent } from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import firebase from '../../config/firebase'
 import ChipInput from 'material-ui-chip-input'
 import { toggleSubmitProjectModal } from '../../actions/actionCreators'
 import Loader from '../Loader'
-import { Home, Dispatch } from '../../types/types'
+import { Home, Dispatch, HomeReducer } from '../../types/types'
 
 type Props = {
   home: Home,
@@ -15,25 +13,11 @@ type Props = {
   dispatch: Dispatch
 }
 
-type State = {
-  projectOwner: string,
-  tools: Array<string>,
-  description: string,
-  typeOfProject: string,
-  link: string,
-  likes: number,
-  loading: boolean,
-  responseMessage: string,
-  submitted: boolean,
-  projectId: string,
-  likedBy: Array<string>
-}
-
 Modal.setAppElement('#root')
 
 const chipsPlaceholderValues = ['javascript', 'css']
 
-class SumbitProjectModal extends React.Component<Props, State> {
+class SumbitProjectModal extends React.Component<Props> {
     state = {
       projectOwner: '',
       tools: chipsPlaceholderValues,
@@ -68,7 +52,7 @@ class SumbitProjectModal extends React.Component<Props, State> {
     }))
   }
 
-  onFormSubmit = (evt) => {
+  onFormSubmit = (evt: FormEvent) => {
     evt.preventDefault()
     this.setState({
       loading: true,
@@ -141,7 +125,6 @@ class SumbitProjectModal extends React.Component<Props, State> {
           <label>description</label>
           <textarea
             placeholder="description"
-            type="text"
             value={description}
             rows={3}
             onChange={(evt) => this.handleInput('description', evt.target.value)}
@@ -232,7 +215,7 @@ const customStyles = {
   }
 }
 
-function mapStateToProps ({ homeReducer }) {
+function mapStateToProps ({ homeReducer }: { homeReducer: HomeReducer }) {
   return {
     home: homeReducer
   }
