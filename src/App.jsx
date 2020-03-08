@@ -14,7 +14,6 @@ import {
   toggleSubmitProjectModal,
   toggleSignInModal
 } from './actions/actionCreators'
-import { Dispatch, Project, Home } from './types/types'
 
 import './App.scss'
 
