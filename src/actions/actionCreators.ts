@@ -15,8 +15,10 @@ import {
 } from './actionTypes'
 
 // actionCreators
-export function likeOrDislike (projectId, projectUserUID, userUID, liked, index) {
-  return function (dispatch, getState) {
+// TODO: user object paramaters here
+export function likeOrDislike ({ projectId, projectUserUID, userUID, liked, index }:
+  { projectId: string, projectUserUID: string, userUID: string, liked: boolean, index: number }) {
+  return function (dispatch) {
     if (liked) {
       dispatch({ type: LIKE_PROJECT, index, userUID })
     } else {
@@ -53,7 +55,7 @@ export function loadProjects () {
       const listOfProjects = []
 
       for (const project in snapshot.val()) {
-        const projects = snapshot.val()[project]['projects']
+        const projects: {} = snapshot.val()[project]['projects']
         for (const i in projects) {
           listOfProjects.push(projects[i])
         }
