@@ -1,4 +1,9 @@
-import { TOGGLE_SIGN_IN_MODAL, LOG_IN_STATUS_CHANGE, TOGGLE_SIGN_OUT_MODAL, TOGGLE_SUBMIT_PROJECT_MODAL } from '../actions/actionTypes'
+import {
+  TOGGLE_SIGN_IN_MODAL,
+  LOG_IN_STATUS_CHANGE,
+  TOGGLE_SIGN_OUT_MODAL,
+  TOGGLE_SUBMIT_PROJECT_MODAL
+} from '../actions/actionTypes'
 import { HomeReducer, Action } from '../types/types'
 const initialState = {
   signInModalOpen: false,
@@ -8,7 +13,10 @@ const initialState = {
   submitProjectModalOpen: false
 }
 
-export default function homeReducer (state = initialState, action: Action): HomeReducer {
+export default function homeReducer(
+  state = initialState,
+  action: Action
+): HomeReducer {
   switch (action.type) {
     case TOGGLE_SIGN_IN_MODAL:
       return {
@@ -21,7 +29,6 @@ export default function homeReducer (state = initialState, action: Action): Home
         signOutModalOpen: !state.signOutModalOpen
       }
     case LOG_IN_STATUS_CHANGE:
-
       return {
         ...state,
         userUID: action.payload.userUID,
@@ -29,11 +36,11 @@ export default function homeReducer (state = initialState, action: Action): Home
       }
 
     case TOGGLE_SUBMIT_PROJECT_MODAL:
-
       return {
         ...state,
         submitProjectModalOpen: !state.submitProjectModalOpen
       }
-    default: return state
+    default:
+      return state
   }
 }

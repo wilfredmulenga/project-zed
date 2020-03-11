@@ -16,9 +16,20 @@ import {
 
 // actionCreators
 // TODO: user object paramaters here
-export function likeOrDislike ({ projectId, projectUserUID, userUID, liked, index }:
-  { projectId: string, projectUserUID: string, userUID: string, liked: boolean, index: number }) {
-  return function (dispatch) {
+export function likeOrDislike({
+  projectId,
+  projectUserUID,
+  userUID,
+  liked,
+  index
+}: {
+  projectId: string;
+  projectUserUID: string;
+  userUID: string;
+  liked: boolean;
+  index: number;
+}) {
+  return function(dispatch) {
     if (liked) {
       dispatch({ type: LIKE_PROJECT, index, userUID })
     } else {
@@ -27,60 +38,77 @@ export function likeOrDislike ({ projectId, projectUserUID, userUID, liked, inde
     dispatch({ type: UPDATE_PROJECTS_START })
 
     // uncomment this code block if you are using firebase database
-    firebase.database().ref(`users/${projectUserUID}/projects/${projectId}/`).once('value')
-      .then(function (snapshot) {
+    firebase
+      .database()
+      .ref(`users/${projectUserUID}/projects/${projectId}/`)
+      .once('value')
+      .then(function(snapshot) {
         const project = snapshot.val()
+        console.log('test eslint');
         const { likes, likedBy } = project
-        firebase.database().ref(`users/${projectUserUID}/projects/${projectId}/`).update({
-          likes: liked ? likes + 1 : likes - 1,
-          likedBy: liked ? [...likedBy, userUID] : likedBy.filter(userUIDs => userUIDs !== userUID)
-        }, function () {
-          dispatch({ type: UPDATE_PROJECTS_SUCCESS })
-        }).catch(function (error) {
-          dispatch({
-            type: UPDATE_PROJECTS_FAIL,
-            payload: error
+        firebase
+          .database()
+          .ref(`users/${projectUserUID}/projects/${projectId}/`)
+          .update(
+            {
+              likes: liked ? likes + 1 : likes - 1,
+              likedBy: liked
+                ? [...likedBy, userUID]
+                : likedBy.filter(userUIDs => userUIDs !== userUID)
+            },
+            function() {
+              dispatch({ type: UPDATE_PROJECTS_SUCCESS })
+            }
+          )
+          .catch(function(error) {
+            dispatch({
+              type: UPDATE_PROJECTS_FAIL,
+              payload: error
+            })
           })
-        })
       })
   }
 }
 
-export function loadProjects () {
-  return function (dispatch) {
+export function loadProjects() {
+  return function(dispatch) {
     dispatch({ type: LOAD_PROJECTS_START })
 
     const projectsRef = firebase.database().ref('users')
-    projectsRef.once('value', (snapshot) => {
-      const listOfProjects = []
+    projectsRef.once(
+      'value',
+      snapshot => {
+        const listOfProjects = []
 
-      for (const project in snapshot.val()) {
-        const projects: {} = snapshot.val()[project]['projects']
-        for (const i in projects) {
-          listOfProjects.push(projects[i])
+        for (const project in snapshot.val()) {
+          const projects: {} = snapshot.val()[project]['projects']
+          for (const i in projects) {
+            listOfProjects.push(projects[i])
+          }
         }
+        dispatch({
+          type: LOAD_PROJECTS_SUCCESS,
+          payload: listOfProjects
+        })
+      },
+      error => {
+        dispatch({
+          type: LOAD_PROJECTS_FAIL,
+          payload: error
+        })
       }
-      dispatch({
-        type: LOAD_PROJECTS_SUCCESS,
-        payload: listOfProjects
-      })
-    }, error => {
-      dispatch({
-        type: LOAD_PROJECTS_FAIL,
-        payload: error
-      })
-    })
+    )
   }
 }
 
-export function toggleSignInModal () {
+export function toggleSignInModal() {
   return {
     type: TOGGLE_SIGN_IN_MODAL
   }
 }
 
-export function logInStateChange ({ userUID, loggedIn }) {
-  return function (dispatch) {
+export function logInStateChange({ userUID, loggedIn }) {
+  return function(dispatch) {
     dispatch({
       type: LOG_IN_STATUS_CHANGE,
       payload: {
@@ -91,13 +119,13 @@ export function logInStateChange ({ userUID, loggedIn }) {
   }
 }
 
-export function toggleSignOutModal () {
+export function toggleSignOutModal() {
   return {
     type: TOGGLE_SIGN_OUT_MODAL
   }
 }
 
-export function toggleSubmitProjectModal () {
+export function toggleSubmitProjectModal() {
   return {
     type: TOGGLE_SUBMIT_PROJECT_MODAL
   }
