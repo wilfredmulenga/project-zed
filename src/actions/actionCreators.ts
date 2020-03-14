@@ -13,6 +13,7 @@ import {
   TOGGLE_SIGN_OUT_MODAL,
   TOGGLE_SUBMIT_PROJECT_MODAL
 } from './actionTypes'
+import { Project } from '../types/types'
 
 // actionCreators
 // TODO: user object paramaters here
@@ -23,11 +24,11 @@ export function likeOrDislike({
   liked,
   index
 }: {
-  projectId: string;
-  projectUserUID: string;
-  userUID: string;
-  liked: boolean;
-  index: number;
+  projectId: string,
+  projectUserUID: string,
+  userUID: string,
+  liked: boolean,
+  index: number,
 }) {
   return function(dispatch) {
     if (liked) {
@@ -44,7 +45,6 @@ export function likeOrDislike({
       .once('value')
       .then(function(snapshot) {
         const project = snapshot.val()
-        console.log('test eslint');
         const { likes, likedBy } = project
         firebase
           .database()
@@ -81,7 +81,7 @@ export function loadProjects() {
         const listOfProjects = []
 
         for (const project in snapshot.val()) {
-          const projects: {} = snapshot.val()[project]['projects']
+          const projects: Project  = snapshot.val()[project]['projects']
           for (const i in projects) {
             listOfProjects.push(projects[i])
           }

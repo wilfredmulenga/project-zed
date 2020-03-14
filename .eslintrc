@@ -10,6 +10,16 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "no-console": 2
+    "no-console": 2,
+    "@typescript-eslint/member-delimiter-style": ["error", {
+      "multiline": {
+        "delimiter": "comma",   
+        "requireLast": true
+      },
+      "singleline": {
+        "delimiter": "comma",  
+        "requireLast": false
+      }
+    }]
   }
 }
