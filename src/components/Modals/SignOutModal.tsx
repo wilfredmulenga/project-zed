@@ -6,16 +6,16 @@ import { toggleSignOutModal, logInStateChange } from '../../actions/actionCreato
 
 type Props = {
   isOpen: boolean,
-  dispatch: (arg0: any) => void
+  dispatch: (arg0: any) => void,
 }
 
 Modal.setAppElement('#root')
 
 class SignOutModal extends React.Component<Props> {
-  signOut = () => {
+  signOut = (): void => {
     firebase.auth().signOut()
     localStorage.removeItem('userInfo')
-    this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
+    this.props.dispatch(logInStateChange({ userUID: '', loggedIn: false }))
     this.props.dispatch(toggleSignOutModal())
   }
 

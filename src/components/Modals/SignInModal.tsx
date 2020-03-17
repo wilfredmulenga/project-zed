@@ -10,11 +10,11 @@ import github from '../../images/github.png'
 
 type Props = {
   isOpen: boolean,
-  dispatch: Dispatch
+  dispatch: Dispatch,
 }
 
 type State = {
-  errorMessage: string
+  errorMessage: string,
 }
 
 Modal.setAppElement('#root')
@@ -73,7 +73,7 @@ class SignInModal extends React.Component<Props, State> {
         this.props.dispatch(logInStateChange(userInfo))
       } else {
         localStorage.removeItem('userInfo')
-        this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
+        this.props.dispatch(logInStateChange({ userUID: '', loggedIn: false }))
       }
     })
   }

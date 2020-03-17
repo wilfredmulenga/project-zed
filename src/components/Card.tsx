@@ -9,19 +9,20 @@ const whiteBackground = {
 
 type Props = {
   home: Home,
-  dispatch: (arg0: any) => void,
+  // dispatch: () => void,
   index: number,
-  project: Project
+  project: Project,
 }
 
+// TODO: stop using dispatch
 class Card extends React.Component<Props> {
-  handleClick = (projectId: string, index: number) => {
-    const { home: { loggedIn, userUID }, dispatch, project, project: { userUID: projectUserUID } } = this.props
+  handleClick = (projectId: string, index: number): void => {
+    const { home: { loggedIn, userUID }, project, project: { userUID: projectUserUID } } = this.props
 
     if (loggedIn) {
-      dispatch(likeOrDislike(projectId, projectUserUID, userUID, !project.likedBy.includes(userUID), index))
+      // dispatch(likeOrDislike(projectId, projectUserUID, userUID, !project.likedBy.includes(userUID), index))
     } else {
-      dispatch(toggleSignInModal())
+      // dispatch(toggleSignInModal())
     }
   }
 

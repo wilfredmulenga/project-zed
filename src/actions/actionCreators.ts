@@ -30,7 +30,7 @@ export function likeOrDislike({
   liked: boolean,
   index: number,
 }) {
-  return function(dispatch) {
+  return function(dispatch: any) {
     if (liked) {
       dispatch({ type: LIKE_PROJECT, index, userUID })
     } else {
@@ -54,7 +54,7 @@ export function likeOrDislike({
               likes: liked ? likes + 1 : likes - 1,
               likedBy: liked
                 ? [...likedBy, userUID]
-                : likedBy.filter(userUIDs => userUIDs !== userUID)
+                : likedBy.filter((userUIDs: any) => userUIDs !== userUID)
             },
             function() {
               dispatch({ type: UPDATE_PROJECTS_SUCCESS })
@@ -71,19 +71,19 @@ export function likeOrDislike({
 }
 
 export function loadProjects() {
-  return function(dispatch) {
+  return function(dispatch: any) {
     dispatch({ type: LOAD_PROJECTS_START })
 
     const projectsRef = firebase.database().ref('users')
     projectsRef.once(
       'value',
       snapshot => {
-        const listOfProjects = []
+        const listOfProjects: Project[] = []
 
         for (const project in snapshot.val()) {
-          const projects: Project  = snapshot.val()[project]['projects']
-          for (const i in projects) {
-            listOfProjects.push(projects[i])
+          const projects: []  = snapshot.val()[project]['projects']
+          for (const i of projects) {
+            listOfProjects.push[i]
           }
         }
         dispatch({
@@ -101,14 +101,14 @@ export function loadProjects() {
   }
 }
 
-export function toggleSignInModal() {
+export function toggleSignInModal(): { type: string } {
   return {
     type: TOGGLE_SIGN_IN_MODAL
   }
 }
 
-export function logInStateChange({ userUID, loggedIn }) {
-  return function(dispatch) {
+export function logInStateChange({ userUID, loggedIn }: { userUID: string, loggedIn: boolean }) {
+  return function(dispatch: any) {
     dispatch({
       type: LOG_IN_STATUS_CHANGE,
       payload: {
@@ -119,13 +119,13 @@ export function logInStateChange({ userUID, loggedIn }) {
   }
 }
 
-export function toggleSignOutModal() {
+export function toggleSignOutModal():  { type: string } {
   return {
     type: TOGGLE_SIGN_OUT_MODAL
   }
 }
 
-export function toggleSubmitProjectModal() {
+export function toggleSubmitProjectModal():  { type: string } {
   return {
     type: TOGGLE_SUBMIT_PROJECT_MODAL
   }

@@ -3,7 +3,7 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "strictNullChecks": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "module": "esnext",
     "jsx": "preserve",
     "target": "es5",
