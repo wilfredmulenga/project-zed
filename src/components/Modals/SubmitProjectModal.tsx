@@ -2,9 +2,7 @@ import React, { FormEvent } from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import firebase from '../../config/firebase'
-import ChipInput from 'material-ui-chip-input'
 import { toggleSubmitProjectModal } from '../../actions/actionCreators'
-import Loader from '../Loader'
 import { Home, Dispatch, HomeReducer } from '../../types/types'
 
 type Props = {

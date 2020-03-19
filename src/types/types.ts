@@ -3,7 +3,7 @@ export type Home = {
   signOutModalOpen: boolean,
   userUID: string,
   loggedIn: boolean,
-  submitProjectModalOpen: boolean,
+  submitProjectModalOpen: boolean
 }
 
 export type Dispatch = (arg0: any) => void
@@ -21,7 +21,7 @@ export type Project = {
   userUID: string,
   likedBy: string,
   likes: number,
-  type: string,
+  type: string
 }
 
 export interface HomeReducer {
@@ -29,13 +29,13 @@ export interface HomeReducer {
   signOutModalOpen: boolean,
   userUID: null | string,
   loggedIn: boolean,
-  submitProjectModalOpen: boolean,
+  submitProjectModalOpen: boolean
 }
 
 export type Action = {
   type: string,
   payload: {
     userUID: string,
-    loggedIn: boolean,
-  },
+    loggedIn: boolean
+  }
 }

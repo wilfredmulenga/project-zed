@@ -8,6 +8,7 @@
     "jsx": "preserve",
     "target": "es5",
     "allowJs": true,
+    "checkJs": false,
     "skipLibCheck": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

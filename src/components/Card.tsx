@@ -11,7 +11,7 @@ type Props = {
   home: Home,
   // dispatch: () => void,
   index: number,
-  project: Project,
+  project: Project
 }
 
 // TODO: stop using dispatch

@@ -1,11 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import firebase from './config/firebase'
-import Card from './components/Card'
-import Navbar from './components/Navbar'
-import SignInModal from './components/Modals/SignInModal'
-import SignOutModal from './components/Modals/SignOutModal'
-import SubmitProposalModal from './components/Modals/SubmitProjectModal'
-import Loader from './components/Loader'
 
 import { connect } from 'react-redux'
 import {
@@ -23,7 +17,7 @@ import './App.scss'
 //   home: Home
 // }
 
-class App extends Component {
+class App extends React.Component {
   componentDidMount () {
     // uncomment the line below if you are using data from your firebase database
     this.props.dispatch(loadProjects())

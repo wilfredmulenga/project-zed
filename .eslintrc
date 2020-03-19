@@ -14,17 +14,14 @@
     "@typescript-eslint/member-delimiter-style": ["error", {
       "multiline": {
         "delimiter": "comma",   
-        "requireLast": true
+        "requireLast": false
       },
       "singleline": {
         "delimiter": "comma",  
         "requireLast": false
       }
     }],
-    "@typescript-eslint/explicit-function-return-type": ["error",
-      {
-        "allowExpressions": true
-      }
-    ]
+    "@typescript-eslint/explicit-function-return-type": ["off"],
+    "@typescript-eslint/no-explicit-any": ["off"]
   }
 }

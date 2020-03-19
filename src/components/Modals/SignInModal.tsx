@@ -17,6 +17,18 @@ type State = {
   errorMessage: string,
 }
 
+const customStyles = {
+  content: {
+    width: '40%',
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+}
+
 Modal.setAppElement('#root')
 
 class SignInModal extends React.Component<Props, State> {
@@ -24,7 +36,7 @@ class SignInModal extends React.Component<Props, State> {
     errorMessage: ''
   }
 
-  componentDidUpdate (props: Props) {
+  componentDidUpdate () {
     this.setState({ errorMessage: '' })
   }
 
@@ -116,18 +128,6 @@ class SignInModal extends React.Component<Props, State> {
         </div>
       </Modal>
     )
-  }
-}
-
-const customStyles = {
-  content: {
-    width: '40%',
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
   }
 }
 

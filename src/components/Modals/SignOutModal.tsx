@@ -9,6 +9,18 @@ type Props = {
   dispatch: (arg0: any) => void,
 }
 
+const customStyles = {
+  content: {
+    width: '30%',
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+}
+
 Modal.setAppElement('#root')
 
 class SignOutModal extends React.Component<Props> {
@@ -46,18 +58,6 @@ class SignOutModal extends React.Component<Props> {
         </div>
       </Modal>
     )
-  }
-}
-
-const customStyles = {
-  content: {
-    width: '30%',
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
   }
 }
 
