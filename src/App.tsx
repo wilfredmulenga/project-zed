@@ -1,41 +1,54 @@
 import React from 'react'
 import firebase from './config/firebase'
-
 import { connect } from 'react-redux'
+
+import Card from './components/Card'
+import Navbar from './components/Navbar'
+import SignInModal from './components/Modals/SignInModal'
+import SignOutModal from './components/Modals/SignOutModal'
+import SubmitProposalModal from './components/Modals/SubmitProjectModal'
+import Loader from './components/Loader'
 import {
   loadProjects,
   logInStateChange,
   toggleSubmitProjectModal,
   toggleSignInModal
 } from './actions/actionCreators'
+import { Project } from './types/types'
+import './styles/App.scss'
 
-import './App.scss'
+type Props = {
+  home: {
+    signInModalOpen: boolean,
+     signOutModalOpen: boolean,
+      submitProjectModalOpen: boolean,
+    loggedIn: boolean 
+  },
+  projects: Project[]
+}
 
-// type Props = {
-//   dispatch: Dispatch,
-//   projects: Array<Project>,
-//   home: Home
-// }
-
-class App extends React.Component {
+class App extends React.Component<Props> {
   componentDidMount () {
     // uncomment the line below if you are using data from your firebase database
-    this.props.dispatch(loadProjects())
+    loadProjects()
     this.checkLoggedInUser()
   }
 
   componentWillUnmount () {
     firebase.auth().signOut()
-    this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
+  logInStateChange({ userUID: '', loggedIn: false })
   }
 
 checkLoggedInUser = () => {
   const userInfoJSON = localStorage.getItem('userInfo')
-  const userInfo = JSON.parse(userInfoJSON)
+  let userInfo
+  if(userInfoJSON) {
+  userInfo = JSON.parse(userInfoJSON)
+  }
   if (userInfo && userInfo.loggedIn) {
-    this.props.dispatch(logInStateChange(userInfo))
+   logInStateChange(userInfo)
   } else {
-    this.props.dispatch(logInStateChange({ userUID: null, loggedIn: false }))
+    logInStateChange({ userUID: '', loggedIn: false })
   }
 }
 
@@ -43,19 +56,19 @@ render () {
   const { home: { signInModalOpen, signOutModalOpen, submitProjectModalOpen, loggedIn }, projects } = this.props
   if (projects && projects.length !== 0) {
     return (
-      <div style={{ backgroundColor: '#000' }}>
+      <div className="main">
+        //@ts-ignore
         <Navbar/>
-        {/* landing page */}
-        <div style={{ height: '100vh' }}>
-          <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '70%', textAlign: 'center' }}>
+        <div className="max-height">
+          <div className="landing-page-wrapper">
             <div>
-              <p style={{ fontSize: 60, color: '#FFF', float: 'center' }}>Project Zed</p>
+              <p className="landing-page-text">Project Zed</p>
             </div>
-            <p style={{ fontSize: 40, color: '#FFF', float: 'center', marginLeft: '20px' }}>
+            <p className="landing-page-subtext">
               Find projects done by Zambian Developers
             </p>
             <button
-              onClick={() => loggedIn ? this.props.dispatch(toggleSubmitProjectModal()) : this.props.dispatch(toggleSignInModal())}
+              onClick={() => loggedIn ? toggleSubmitProjectModal() : toggleSignInModal()}
               className="btn btn-outline-info my-2 my-sm-0">
               Submit a project</button>
             <div className="arrow bounce">
@@ -64,7 +77,8 @@ render () {
           </div>
         </div>
         <div id='projects'>
-          { projects.map((project, i) => <Card key={i} index={i} project= {project} />) }
+          //@ts-ignore
+          { projects.map((project, i) => <Card key={i} index={i} project={project} />) }
         </div>
         <SignInModal isOpen={signInModalOpen} />
         <SignOutModal isOpen={signOutModalOpen} />
@@ -73,8 +87,7 @@ render () {
     )
   }
   return (
-    <div style={{ height: '100vh', backgroundColor: '#000' }}
-      className=" row justify-content-center align-items-center">
+    <div className=" row justify-content-center align-items-center loader-wrapper">
       <Loader />
     </div>
   )

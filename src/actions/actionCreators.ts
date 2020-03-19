@@ -28,7 +28,7 @@ export function likeOrDislike({
   projectUserUID: string,
   userUID: string,
   liked: boolean,
-  index: number,
+  index: number
 }) {
   return function(dispatch: any) {
     if (liked) {
