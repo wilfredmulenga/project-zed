@@ -5,10 +5,19 @@
     "@typescript-eslint"
   ],
   "extends": [
+    "plugin:react/recommended",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
+  "ecmaFeatures":  {
+    "jsx":  true  
+  },
+  "settings":  {
+    "react":  {
+      "version":  "detect"  
+    }
+  },
   "rules": {
     "no-console": 2,
     "@typescript-eslint/member-delimiter-style": ["error", {

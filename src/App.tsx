@@ -54,6 +54,7 @@ checkLoggedInUser = () => {
 
 render () {
   const { home: { signInModalOpen, signOutModalOpen, submitProjectModalOpen, loggedIn }, projects } = this.props
+  console.log('here', projects)
   if (projects && projects.length !== 0) {
     return (
       <div className="main">
@@ -80,8 +81,10 @@ render () {
           //@ts-ignore
           { projects.map((project, i) => <Card key={i} index={i} project={project} />) }
         </div>
+        //@ts-ignore
         <SignInModal isOpen={signInModalOpen} />
         <SignOutModal isOpen={signOutModalOpen} />
+        //@ts-ignore
         <SubmitProposalModal isOpen={submitProjectModalOpen} />
       </div>
     )

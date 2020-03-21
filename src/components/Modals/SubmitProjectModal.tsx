@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import firebase from '../../config/firebase'
 
 import ChipInput from 'material-ui-chip-input'
+import Loader from '../Loader'
 import { toggleSubmitProjectModal } from '../../actions/actionCreators'
 import { Home, Dispatch, HomeReducer } from '../../types/types'
 

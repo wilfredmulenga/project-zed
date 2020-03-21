@@ -9,12 +9,12 @@ import google from '../../images/google.png'
 import github from '../../images/github.png'
 
 type Props = {
-  isOpen: boolean,
-  dispatch: Dispatch,
+  isOpen?: boolean,
+  dispatch: Dispatch
 }
 
 type State = {
-  errorMessage: string,
+  errorMessage: string
 }
 
 const customStyles = {
