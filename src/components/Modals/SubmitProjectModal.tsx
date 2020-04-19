@@ -1,6 +1,5 @@
 import React, { FormEvent } from 'react'
 import Modal from 'react-modal'
-import { connect } from 'react-redux'
 import firebase from '../../config/firebase'
 
 import ChipInput from 'material-ui-chip-input'
@@ -222,4 +221,4 @@ function mapStateToProps ({ homeReducer }: { homeReducer: HomeReducer }) {
   }
 }
 
-export default connect(mapStateToProps, null)(SumbitProjectModal)
+export default SumbitProjectModal

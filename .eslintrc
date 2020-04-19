@@ -4,22 +4,17 @@
   "plugins": [
     "@typescript-eslint"
   ],
-  "extends": [
-    "plugin:react/recommended",
-    "eslint:recommended",
+  "extends": ["standard",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
-  "ecmaFeatures":  {
-    "jsx":  true  
-  },
   "settings":  {
     "react":  {
       "version":  "detect"  
     }
   },
   "rules": {
-    "no-console": 2,
+    "no-console": 1,
     "@typescript-eslint/member-delimiter-style": ["error", {
       "multiline": {
         "delimiter": "comma",   

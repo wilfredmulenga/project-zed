@@ -1,12 +1,11 @@
 import React from 'react'
 import Modal from 'react-modal'
 import firebase from '../../config/firebase'
-import { connect } from 'react-redux'
 import { toggleSignOutModal, logInStateChange } from '../../actions/actionCreators'
 
 type Props = {
   isOpen: boolean,
-  dispatch: (arg0: any) => void,
+  dispatch: (arg0: any) => void
 }
 
 const customStyles = {
@@ -61,4 +60,4 @@ class SignOutModal extends React.Component<Props> {
   }
 }
 
-export default connect(null)(SignOutModal)
+export default SignOutModal

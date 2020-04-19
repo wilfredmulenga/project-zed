@@ -12,6 +12,7 @@ const config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 }
 
+
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
 }

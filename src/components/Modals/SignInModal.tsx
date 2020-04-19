@@ -1,6 +1,5 @@
 import React from 'react'
 import Modal from 'react-modal'
-import { connect } from 'react-redux'
 import firebase from '../../config/firebase'
 import { toggleSignInModal, logInStateChange } from '../../actions/actionCreators'
 import { Dispatch } from '../../types/types'
@@ -131,4 +130,4 @@ class SignInModal extends React.Component<Props, State> {
   }
 }
 
-export default connect(null)(SignInModal)
+export default SignInModal
