@@ -1,7 +1,7 @@
 ## projectZed
 A webpage showing a list of projects done by Zambian Developers. A great place to find Zambian Developer works and contribute to Zambian Open Source projects.
 
-Link to Live version of the app: https://project-zed-be264.firebaseapp.com/
+Link to Live version of the app: https://project-zed-3d057.web.app/
 
 I am looking for anyone that would like to help contribute to this page. Just raise an issue if you want to suggest something to be added to the site.
 
