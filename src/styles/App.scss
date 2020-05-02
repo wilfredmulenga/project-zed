@@ -3,25 +3,25 @@
 @import './colors.scss';
 
 .main {
-  background-color: $PURE-WHITE;
+  background-color: $MATTE-BLACK;
 }
 
 .landing-page-wrapper {
-  position: 'absolute';
+  position: absolute;
   bottom: 0;
-  width: '100%'; 
-  height: '70%'; 
-  text-align: 'center';
+  width: 100%; 
+  height: 70%; 
+  text-align: center;
 }
 
 .landing-page-text {
-   font-size: 60; 
+   font-size: 3rem; 
    color: $PURE_WHITE; 
-   float: 'center';
+   float: center;
 }
 
 .landing-page-subtext {
- font-size: 40;
+ font-size: 1.5rem;
   color: $PURE-WHITE; 
   float: center; 
   margin-left: 20px;

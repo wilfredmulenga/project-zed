@@ -1,4 +1,4 @@
-const projects = [{
+const data = [{
   userUID: '2b17fe8f-42ac-405e-9466-b62418d6e029',
   description: 'self-paced way of learning the basics of javascript',
   projectOwner: 'OlivierJM',
@@ -140,4 +140,4 @@ const projects = [{
   type: 'Open Source'
 }]
 
-export default projects
+export default data

@@ -9,7 +9,7 @@
     "target": "es5",
     "allowJs": true,
     "checkJs": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
