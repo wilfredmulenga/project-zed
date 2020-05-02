@@ -54,10 +54,11 @@ const App = () => {
             <p className="landing-page-subtext">
               Find projects done by Zambian Developers
             </p>
-            <button
+            {/* TODO: refactor logic to submit a project */}
+            {/* <button
               // onClick={() => loggedIn ? toggleSubmitProjectModal() : toggleSignInModal()}
               className="btn btn-outline-info my-2 my-sm-0">
-              Submit a project</button>
+              Submit a project</button> */}
             <div className="arrow bounce">
               <a className="fa fa-arrow-down fa-2x down-arrow" href="#projects"><span></span></a>
             </div>
