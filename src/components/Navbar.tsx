@@ -1,15 +1,10 @@
-import React from 'react'
-import { toggleSignInModal, toggleSignOutModal } from '../actions/actionCreators'
-import { Dispatch, Home, HomeReducer } from '../types/types'
+import React, { useContext } from 'react'
+import { Context as AuthContext } from '../config/authContext'
 
-type Props = {
-  dispatch: Dispatch,
-  home: Home
-}
+const Navbar = ({ handleModalOpen = () => {} }) => {
+  const { state } = useContext(AuthContext)
+  const { loggedIn } = state
 
-const Navbar = () => {
-  // NOTE: setting this to 'true' for testing for now
-  const loggedIn = true
   return (
     <div>
       <nav className="navbar navbar-dark bg-dark">
@@ -18,8 +13,9 @@ const Navbar = () => {
           <button
             onClick={(e) => {
               e.preventDefault()
-              // loggedIn ? this.props.dispatch(toggleSignOutModal()) : this.props.dispatch(toggleSignInModal())
-            }}
+              handleModalOpen()
+            }
+            }
             className="btn btn-outline-success my-2 my-sm-0"
             type="submit">
             { loggedIn ? `Sign Out` : `Sign In` }

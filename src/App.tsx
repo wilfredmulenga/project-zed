@@ -1,34 +1,20 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import firebase from './config/firebase'
-import { Context } from './config/context'
+import { Context as ProjectContext } from './config/projectContext'
+import { Context as AuthContext } from './config/authContext'
 
 import Card from './components/Card'
 import Navbar from './components/Navbar'
-import SignInModal from './components/Modals/SignInModal'
-import SignOutModal from './components/Modals/SignOutModal'
+import LoginModal from './components/Modals/LoginModal'
 import SubmitProposalModal from './components/Modals/SubmitProjectModal'
 import Loader from './components/Loader'
-import {
-  loadProjects,
-  logInStateChange,
-  toggleSubmitProjectModal,
-  toggleSignInModal
-} from './actions/actionCreators'
-import { Project } from './types/types'
 import './styles/App.scss'
 
-type Props = {
-  home: {
-    signInModalOpen: boolean,
-     signOutModalOpen: boolean,
-      submitProjectModalOpen: boolean,
-    loggedIn: boolean
-  },
-  projects: Project[]
-}
-
 const App = () => {
-  const { state } = useContext(Context)
+  const [state, setState] = useState({ isLoginModalOpen: false })
+  const { state: projects } = useContext(ProjectContext)
+  const { state: auth } = useContext(AuthContext)
+  const { loggedIn } = auth
   // componentDidMount () {
   //   // uncomment the line below if you are using data from your firebase database
   //   // loadProjects()
@@ -40,26 +26,32 @@ const App = () => {
   // logInStateChange({ userUID: '', loggedIn: false })
   // }
 
-  const checkLoggedInUser = () => {
-    const userInfoJSON = localStorage.getItem('userInfo')
-    let userInfo
-    if (userInfoJSON) {
-      userInfo = JSON.parse(userInfoJSON)
-    }
-    if (userInfo && userInfo.loggedIn) {
-      logInStateChange(userInfo)
-    } else {
-      logInStateChange({ userUID: '', loggedIn: false })
-    }
-  }
+  // const checkLoggedInUser = () => {
+  //   const userInfoJSON = localStorage.getItem('userInfo')
+  //   let userInfo
+  //   if (userInfoJSON) {
+  //     userInfo = JSON.parse(userInfoJSON)
+  //   }
+  //   if (userInfo && userInfo.loggedIn) {
+  //     logInStateChange(userInfo)
+  //   } else {
+  //     logInStateChange({ userUID: '', loggedIn: false })
+  //   }
+  // }
 
   // const { home: { signInModalOpen, signOutModalOpen, submitProjectModalOpen, loggedIn }, projects } = this.props
-  if (state && state.length !== 0) {
+
+  const toggleLoginModalOpen = () => {
+    setState(state => ({ ...state, isLoginModalOpen: !state.isLoginModalOpen }))
+  }
+
+  const { isLoginModalOpen } = state
+  if (projects && projects.length !== 0) {
     return (
       <div className="main">
         {/*
         // @ts-ignore */}
-        <Navbar/>
+        <Navbar handleModalOpen={toggleLoginModalOpen} />
         <div className="max-height">
           <div className="landing-page-wrapper">
             <div>
@@ -80,11 +72,17 @@ const App = () => {
         <div id='projects'>
           {/*
           // @ts-ignore */}
-          { state.map((project, i) => <Card key={i} index={i} project={project} />) }
+          { projects.map((project, i) => <Card key={i} index={i} project={project} />) }
         </div>
         {/*
         // @ts-ignore */}
-        {/* <SignInModal isOpen={signInModalOpen} /> */}
+        {
+          isLoginModalOpen
+            ? <LoginModal
+              handleModalClose={toggleLoginModalOpen}
+              loggedIn={loggedIn} />
+            : null
+        }
         {/* <SignOutModal isOpen={signOutModalOpen} /> */}
         {/*
         // @ts-ignore */}

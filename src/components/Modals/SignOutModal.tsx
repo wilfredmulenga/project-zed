@@ -5,6 +5,7 @@ import { toggleSignOutModal, logInStateChange } from '../../actions/actionCreato
 
 type Props = {
   isOpen: boolean,
+  loggedIn: boolean,
   dispatch: (arg0: any) => void
 }
 
@@ -31,31 +32,9 @@ class SignOutModal extends React.Component<Props> {
   }
 
   render () {
-    const { isOpen } = this.props
+    const { isOpen, loggedIn } = this.props
     return (
-      <Modal
-        isOpen={isOpen}
-        style={customStyles}
-        contentLabel="Sign out modal">
-        <div className='sign-out-modal'>
-          <h3>Sign Out ?</h3>
-          <hr/>
-          <div className='sign-out-modal'>
-            <button
-              onClick={this.signOut}
-              type="button"
-              className="btn btn-outline-danger sign-out-modal-yes">
-            Yes
-            </button>
-            <button
-              onClick={() => this.props.dispatch(toggleSignOutModal())}
-              type="button"
-              className="btn btn-outline-danger sign-out-modal-no">
-            No
-            </button>
-          </div>
-        </div>
-      </Modal>
+      <div></div>
     )
   }
 }
