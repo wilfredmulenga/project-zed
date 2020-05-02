@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { Context as AuthContext } from '../config/authContext'
 
-const Navbar = ({ handleModalOpen = () => {} }) => {
-  const { state } = useContext(AuthContext)
+const Navbar = ({ handleModalOpen }) => {
+  const { state, openLoginModal } = useContext(AuthContext)
   const { loggedIn } = state
 
   return (
@@ -13,7 +13,7 @@ const Navbar = ({ handleModalOpen = () => {} }) => {
           <button
             onClick={(e) => {
               e.preventDefault()
-              handleModalOpen()
+              openLoginModal()
             }
             }
             className="btn btn-outline-success my-2 my-sm-0"

@@ -11,10 +11,9 @@ import Loader from './components/Loader'
 import './styles/App.scss'
 
 const App = () => {
-  const [state, setState] = useState({ isLoginModalOpen: false })
   const { state: projects } = useContext(ProjectContext)
   const { state: auth } = useContext(AuthContext)
-  const { loggedIn } = auth
+  const { loggedIn, isLoginModalOpen } = auth
   // componentDidMount () {
   //   // uncomment the line below if you are using data from your firebase database
   //   // loadProjects()
@@ -41,17 +40,12 @@ const App = () => {
 
   // const { home: { signInModalOpen, signOutModalOpen, submitProjectModalOpen, loggedIn }, projects } = this.props
 
-  const toggleLoginModalOpen = () => {
-    setState(state => ({ ...state, isLoginModalOpen: !state.isLoginModalOpen }))
-  }
-
-  const { isLoginModalOpen } = state
   if (projects && projects.length !== 0) {
     return (
       <div className="main">
         {/*
         // @ts-ignore */}
-        <Navbar handleModalOpen={toggleLoginModalOpen} />
+        <Navbar />
         <div className="max-height">
           <div className="landing-page-wrapper">
             <div>
@@ -79,7 +73,6 @@ const App = () => {
         {
           isLoginModalOpen
             ? <LoginModal
-              handleModalClose={toggleLoginModalOpen}
               loggedIn={loggedIn} />
             : null
         }

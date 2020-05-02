@@ -20,9 +20,9 @@ const customStyles = {
 
 Modal.setAppElement('#root')
 
-const LoginModal = ({ loggedIn, handleModalClose }) => {
+const LoginModal = ({ loggedIn }) => {
   const [errorMessage, setErrorMessage] = useState('')
-  const { state, loginUser, logoutUser, closeLoginModal } = useContext(AuthContext)
+  const { state, loginUser, closeLoginModal } = useContext(AuthContext)
 
   const authenticationProvider = (provider: string) => {
     let authProvider
@@ -58,13 +58,14 @@ const LoginModal = ({ loggedIn, handleModalClose }) => {
       }
     }
     if (result) {
-      // login user
-      loginUser()
-      closeLoginModal()
-    } else {
-      // show error message and ask them to sign in annonymously
-      setErrorMessage('We are unable to log you in with the given provider. Please try log in annonymously.')
+      const { uid } = result.user
+      if (uid) {
+        loginUser(uid)
+        return closeLoginModal()
+      }
     }
+    // show error message and ask them to sign in annonymously
+    return setErrorMessage('We are unable to log you in with the given provider. Please try log in annonymously.')
   }
 
   const LogoutContent = () =>
@@ -117,7 +118,7 @@ const LoginModal = ({ loggedIn, handleModalClose }) => {
       </div>
       <div className='modalCloseButton'>
         <button
-          onClick={() => handleModalClose()}
+          onClick={() => closeLoginModal()}
           type="button"
           className="btn btn-outline-danger">
           Close

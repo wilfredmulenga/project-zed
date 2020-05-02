@@ -1,35 +1,29 @@
-import React from 'react'
-import { likeOrDislike, toggleSignInModal } from '../actions/actionCreators'
-import { Home, Project, HomeReducer } from '../types/types'
+import React, { useContext } from 'react'
+import { Context as AuthContext } from '../config/authContext'
+import { Context as ProjectContext } from '../config/projectContext'
 
-const whiteBackground = {
-  backgroundColor: '#FFF'
-}
+const Card = ({ project, index }) => {
+  const { state: { loggedIn, userUID }, openLoginModal } = useContext(AuthContext)
+  const { likeProject, unlikeProject } = useContext(ProjectContext)
 
-type Props = {
-  home: Home,
-  // dispatch: () => void,
-  index: number,
-  project: Project
-}
-
-// TODO: stop using dispatch
-const Card = ({ project }) => {
-//  const handleClick = (projectId: string, index: number): void => {
-  // const { home: { loggedIn, userUID }, project, project: { userUID: projectUserUID } } = props
-
-  //   if (loggedIn) {
-  //     // dispatch(likeOrDislike(projectId, projectUserUID, userUID, !project.likedBy.includes(userUID), index))
-  //   } else {
-  //     // dispatch(toggleSignInModal())
-  //   }
-  // }
-  const { projectId, tools, type, likes, description, likedBy, projectOwner, userUID, link } = project
+  const handleClick = () => {
+    const { likedBy } = project
+    if (loggedIn) {
+      if (likedBy.includes(userUID)) {
+        unlikeProject(index, userUID)
+      } else {
+        likeProject(index, userUID)
+      }
+    } else {
+      openLoginModal()
+    }
+  }
+  const { projectId, tools, type, likes, description, likedBy, projectOwner, link } = project
   return (
     <div key={projectId} className="row justify-content-center">
       <div className="col-md-8 col-sm-8 mb-4">
         <div>
-          <div className="card-body row" style={whiteBackground}>
+          <div className="card-body row" style={{ backgroundColor: '#FFF' }}>
             <div className="col-5">
               <p
                 style={{ display: 'inline', marginBottom: 20 }}
@@ -47,7 +41,7 @@ const Card = ({ project }) => {
               <div className="like-container">
                 <div
                   className="like"
-                  // onClick={() => this.handleClick(projectId, index)}
+                  onClick={handleClick}
                 >
                   <p>{likedBy && likedBy.includes(userUID) ? 'unlike' : 'like' }</p>
                 </div>
