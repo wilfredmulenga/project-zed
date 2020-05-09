@@ -4,20 +4,17 @@ import firebase from '../../config/firebase'
 
 import ChipInput from 'material-ui-chip-input'
 import Loader from '../Loader'
-import { toggleSubmitProjectModal } from '../../actions/actionCreators'
 import { Home, Dispatch, HomeReducer } from '../../types/types'
 
-type Props = {
-  home: Home,
-  isOpen: boolean,
-  dispatch: Dispatch
-}
+// type Props = {
+//   isOpen: boolean
+// }
 
 Modal.setAppElement('#root')
 
 const chipsPlaceholderValues = ['javascript', 'css']
 
-class SumbitProjectModal extends React.Component<Props> {
+class SumbitProjectModal extends React.Component {
     state = {
       projectOwner: '',
       tools: chipsPlaceholderValues,
@@ -32,27 +29,27 @@ class SumbitProjectModal extends React.Component<Props> {
       likedBy: ['0'] // firebase does not allow empty arrays
     }
 
-  handleInput = (field: string, value: string) => {
+  handleInput = (field, value) => {
     this.setState({
       [field]: value
     })
   }
 
-  handleToolsChange = (value: Array<string>) => {
+  handleToolsChange = (value) => {
     this.setState(state => ({
       ...state,
       tools: value
     }))
   }
 
-  handleTypeOfProjectChange = (typeOfProject: string) => {
+  handleTypeOfProjectChange = (typeOfProject) => {
     this.setState(state => ({
       ...state,
       typeOfProject
     }))
   }
 
-  onFormSubmit = (evt: FormEvent) => {
+  onFormSubmit = (evt) => {
     evt.preventDefault()
     this.setState({
       loading: true,
@@ -92,7 +89,7 @@ class SumbitProjectModal extends React.Component<Props> {
         <p>{responseMessage}</p>
         <div className="modal-button-container">
           <button
-            onClick={() => this.props.dispatch(toggleSubmitProjectModal())}
+            // onClick={() => this.props.dispatch(toggleSubmitProjectModal())}
             type="button"
             className="btn btn-outline-danger">
             Close
@@ -166,7 +163,7 @@ class SumbitProjectModal extends React.Component<Props> {
         </div>
         <div className="modal-button-container">
           <button
-            onClick={() => this.props.dispatch(toggleSubmitProjectModal())}
+            // onClick={() => this.props.dispatch(toggleSubmitProjectModal())}
             type="button"
             className="btn btn-outline-danger">
             Close
@@ -212,12 +209,6 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)'
-  }
-}
-
-function mapStateToProps ({ homeReducer }: { homeReducer: HomeReducer }) {
-  return {
-    home: homeReducer
   }
 }
 
