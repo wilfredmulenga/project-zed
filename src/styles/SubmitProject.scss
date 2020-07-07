@@ -1,0 +1,25 @@
+@import './colors.scss';
+
+.submit-project-container {
+  background-color: $MATTE_BLACK;
+}
+
+.form-container {
+  background-color: white;
+  margin: 0rem 15rem;
+  padding: 3rem 5rem;
+
+
+  .inputField {
+    padding-top: 0.5rem;
+    border-radius: 10px;
+  }
+
+  .project-owner {
+    width: 70%;
+  }
+
+  .link {
+    width: 70%;
+  };
+}

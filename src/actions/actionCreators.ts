@@ -16,7 +16,6 @@ import {
 import { Project } from '../types/types'
 
 // actionCreators
-// TODO: user object paramaters here
 export function likeOrDislike ({
   projectId,
   projectUserUID,
@@ -129,4 +128,16 @@ export function toggleSubmitProjectModal (): { type: string } {
   return {
     type: TOGGLE_SUBMIT_PROJECT_MODAL
   }
+}
+
+export function addProject () {
+  firebase.firestore().collection('projects').add({
+    firname: 'wilfred'
+  })
+    .then(function (docRef) {
+      console.log('Document written with ID: ', docRef.id)
+    })
+    .catch(function (error) {
+      console.error('Error adding document: ', error)
+    })
 }
