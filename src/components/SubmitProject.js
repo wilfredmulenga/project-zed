@@ -16,10 +16,7 @@ const SubmitProject = () => {
   const chipsPlaceholderSkills = ['javascript', 'css']
 
   const handleTypeOfProjectChange = (typeOfProject) => {
-    // this.setState(state => ({
-    //   ...state,
-    //   typeOfProject
-    // }))
+    setState(prevState => ({ ...prevState, typeOfProject }))
   }
 
   const handleInputChange = (evt) => {
@@ -31,10 +28,10 @@ const SubmitProject = () => {
     setState(prevState => ({ ...prevState, skills }))
   }
 
-  const onFormSubmit = () => {
-    return console.log('here', state)
+  const onFormSubmit = (evt) => {
+    evt.preventDefault()
   }
-  const { projectOwner, skills, description, typeOfProject, link } = state
+  const { projectOwner, description, typeOfProject, link } = state
 
   return (
     <div className="submit-project-container">
@@ -50,7 +47,7 @@ const SubmitProject = () => {
               placeholder="project owner"
               type="text"
               value={projectOwner}
-              onChange={(evt, text) => handleInputChange(evt)}
+              onChange={(evt) => handleInputChange(evt)}
               required
             />
           </div>
@@ -68,7 +65,8 @@ const SubmitProject = () => {
               placeholder="description"
               value={description}
               rows={3}
-              // onChange={(evt) => this.handleInput('description', evt.target.value)}
+              id="description"
+              onChange={(evt) => handleInputChange(evt)}
               required
             />
           </div>
@@ -76,11 +74,11 @@ const SubmitProject = () => {
           <div>
             <input
               type="radio"
-              id="Open Source"
+              id="typeOfProject"
               name="type-of-project"
               value="Open Source"
               checked={typeOfProject === 'Open Source' }
-              onChange={(evt) => handleTypeOfProjectChange(evt.target.value) }
+              onChange={(evt) => handleInputChange(evt) }
             />
             <label htmlFor="Open Source">Open Source</label>
           </div>
@@ -101,8 +99,9 @@ const SubmitProject = () => {
               placeholder="link"
               type="text"
               value={link}
+              id="link"
               className="link"
-              // onChange={(evt) => this.handleInput('link', evt.target.value)}
+              onChange={(evt) => handleInputChange(evt)}
               required
             />
           </div>

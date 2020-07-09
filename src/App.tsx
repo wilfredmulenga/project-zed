@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import Home from './components/Home'
 import SubmitProject from './components/SubmitProject'
-import './styles/App.scss'
 
 const App = () => {
   return (

@@ -6,6 +6,7 @@ import Loader from './Loader'
 import Card from './Card'
 import Navbar from './Navbar'
 import LoginModal from './Modals/LoginModal'
+import '../styles/App.scss'
 
 const Home = () => {
   const { state: projects } = useContext(ProjectContext)
@@ -14,7 +15,7 @@ const Home = () => {
 
   if (!projects) {
     return (
-      <div className=" row justify-content-center align-items-center loader-wrapper">
+      <div className="row justify-content-center align-items-center loader-wrapper">
         <Loader />
       </div>
     )
