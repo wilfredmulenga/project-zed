@@ -28,11 +28,16 @@ const SubmitProject = () => {
     setState(prevState => ({ ...prevState, skills }))
   }
 
-  const onFormSubmit = (evt) => {
+  const onFormSubmit = async (evt) => {
     evt.preventDefault()
+    const result = await addProject({ project: state })
+    if (result) {
+      // TODO: open a modal or something
+    }
   }
   const { projectOwner, description, typeOfProject, link } = state
 
+  // TODO: make sure this fits on one screen
   return (
     <div className="submit-project-container">
       <div className="form-container">
