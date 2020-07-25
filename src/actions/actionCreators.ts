@@ -130,12 +130,10 @@ export function toggleSubmitProjectModal (): { type: string } {
   }
 }
 
-export function addProject () {
-  firebase.firestore().collection('projects').add({
-    firname: 'wilfred'
-  })
-    .then(function (docRef) {
-      console.log('Document written with ID: ', docRef.id)
+export async function addProject ({ project }) {
+  await firebase.firestore().collection('projects').add({ project })
+    .then(function (result) {
+      return result
     })
     .catch(function (error) {
       console.error('Error adding document: ', error)

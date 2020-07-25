@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { Context as ProjectContext } from '../config/projectContext'
 import { Context as AuthContext } from '../config/authContext'
 
@@ -32,11 +33,12 @@ const Home = () => {
           <p className="landing-page-subtext">
               Find projects done by Zambian Developers
           </p>
-          {/* TODO: refactor logic to submit a project */}
-          <button
-            // onClick={() => setIsModalOpen(true) }
-            className="btn btn-outline-info my-2 my-sm-0">
-              Submit a project</button>
+          <Link to='/submit'>
+            <button
+              className="btn btn-outline-info my-2 my-sm-0">
+              Submit a project
+            </button>
+          </Link>
           <div className="arrow bounce">
             <a className="fa fa-arrow-down fa-2x down-arrow" href="#projects"><span></span></a>
           </div>
