@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
 import { Context as ProjectContext } from '../config/projectContext'
 import { Context as AuthContext } from '../config/authContext'
 
@@ -9,9 +8,9 @@ import Navbar from './Navbar'
 import LoginModal from './Modals/LoginModal'
 import '../styles/App.scss'
 
-const Home = () => {
+const Home = ({ history }) => {
   const { state: projects } = useContext(ProjectContext)
-  const { state: auth } = useContext(AuthContext)
+  const { state: auth, openLoginModal } = useContext(AuthContext)
   const { loggedIn, isLoginModalOpen } = auth
 
   if (!projects) {
@@ -20,6 +19,13 @@ const Home = () => {
         <Loader />
       </div>
     )
+  }
+
+  const handleSubmitButtonClick = () => {
+    if (!loggedIn) {
+      return openLoginModal()
+    }
+    history.push('/submit')
   }
 
   return (
@@ -33,12 +39,11 @@ const Home = () => {
           <p className="landing-page-subtext">
               Find projects done by Zambian Developers
           </p>
-          <Link to='/submit'>
-            <button
-              className="btn btn-outline-info my-2 my-sm-0">
+          <button
+            className="btn btn-outline-info my-2 my-sm-0"
+            onClick={() => handleSubmitButtonClick()}>
               Submit a project
-            </button>
-          </Link>
+          </button>
           <div className="arrow bounce">
             <a className="fa fa-arrow-down fa-2x down-arrow" href="#projects"><span></span></a>
           </div>
