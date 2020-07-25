@@ -132,8 +132,8 @@ export function toggleSubmitProjectModal (): { type: string } {
 
 export async function addProject ({ project }) {
   await firebase.firestore().collection('projects').add({ project })
-    .then(function (docRef) {
-      return docRef.id
+    .then(function (result) {
+      return result
     })
     .catch(function (error) {
       console.error('Error adding document: ', error)

@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 import { addProject } from '../actions/actionCreators'
 import ChipInput from 'material-ui-chip-input'
+import TransitionsModal from './Modals/TransitionsModal'
 import '../styles/SubmitProject.scss'
 
 const initialState = {
   projectOwner: '',
-  skills: [],
+  skills: ['javascript', 'css'],
   description: '',
   typeOfProject: '',
   link: ''
 }
 
-const SubmitProject = () => {
+const SubmitProject = (props) => {
   const [state, setState] = useState(initialState)
-  const chipsPlaceholderSkills = ['javascript', 'css']
-
+  const [isModalOpen, setModalOpen] = useState(false)
+  const [modalText, setModalText] = useState('')
   const handleTypeOfProjectChange = (typeOfProject) => {
     setState(prevState => ({ ...prevState, typeOfProject }))
   }
@@ -32,12 +33,19 @@ const SubmitProject = () => {
     evt.preventDefault()
     const result = await addProject({ project: state })
     if (result) {
-      // TODO: open a modal or something
+      return setModalText('You\'re project has been submitted.')
     }
+    setModalText('An error occurred. Please try again later.')
+    setModalOpen(true)
   }
-  const { projectOwner, description, typeOfProject, link } = state
 
-  // TODO: make sure this fits on one screen
+  const handleModalClose = () => {
+    setModalOpen(false)
+    props.history.push('/')
+  }
+
+  const { projectOwner, description, typeOfProject, link, skills } = state
+
   return (
     <div className="submit-project-container">
       <div className="form-container">
@@ -60,7 +68,7 @@ const SubmitProject = () => {
             <label>Tools used</label>
             <ChipInput
               id="skillsInputField"
-              defaultValue={chipsPlaceholderSkills}
+              defaultValue={skills}
               onChange={(skills) => handleToolsChange(skills)}
             />
           </div>
@@ -119,6 +127,11 @@ const SubmitProject = () => {
           </div>
         </form>
       </div>
+      <TransitionsModal
+        isOpen={isModalOpen}
+        title={modalText}
+        handleClose={() => handleModalClose()}
+      />
     </div>
   )
 }
