@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { Context as ProjectContext } from '../config/projectContext'
 import { Context as AuthContext } from '../config/authContext'
 
@@ -6,12 +6,17 @@ import Loader from './Loader'
 import Card from './Card'
 import Navbar from './Navbar'
 import LoginModal from './Modals/LoginModal'
+import { fetchProjects } from '../common/helpers'
 import '../styles/App.scss'
 
 const Home = ({ history }) => {
   const { state: projects } = useContext(ProjectContext)
   const { state: auth, openLoginModal } = useContext(AuthContext)
   const { loggedIn, isLoginModalOpen } = auth
+  const { getProjects } = fetchProjects()
+  useEffect(() => {
+    getProjects()
+  }, [])
 
   if (!projects) {
     return (

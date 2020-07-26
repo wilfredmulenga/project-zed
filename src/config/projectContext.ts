@@ -1,5 +1,6 @@
 import createDataContext from './createDataContext'
 import data from '../data'
+import { LOAD_PROJECTS_SUCCESS } from '../actions/actionTypes'
 
 const projectsReducer = (state, action) => {
   const { index, userUID, value } = action.payload
@@ -24,6 +25,11 @@ const projectsReducer = (state, action) => {
         },
         ...state.slice(index + 1)
       ]
+    case LOAD_PROJECTS_SUCCESS:
+      return [
+        ...state,
+        ...value
+      ]
     default:
       return state
   }
@@ -42,11 +48,18 @@ const unlikeProject = dispatch => {
   }
 }
 
+const loadProjects = dispatch => {
+  return (result) => {
+    dispatch({ type: LOAD_PROJECTS_SUCCESS, payload: { value: result } })
+  }
+}
+
 export const { Context, Provider } = createDataContext(
   projectsReducer,
   {
     likeProject,
-    unlikeProject
+    unlikeProject,
+    loadProjects
   },
-  data
+  []
 )
