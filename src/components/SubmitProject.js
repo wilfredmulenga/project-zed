@@ -10,7 +10,8 @@ const initialState = {
   skills: ['javascript', 'css'],
   description: '',
   typeOfProject: '',
-  link: ''
+  link: '',
+  likes: 0
 }
 
 const SubmitProject = (props) => {
@@ -34,10 +35,12 @@ const SubmitProject = (props) => {
     evt.preventDefault()
     const result = await addProject({ project: state })
     if (result) {
+      setModalOpen(true)
       return setModalText('You\'re project has been submitted.')
+    } else {
+      setModalText('An error occurred. Please try again later.')
+      setModalOpen(true)
     }
-    setModalText('An error occurred. Please try again later.')
-    setModalOpen(true)
   }
 
   const handleModalClose = () => {
