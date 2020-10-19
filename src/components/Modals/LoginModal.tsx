@@ -23,6 +23,7 @@ Modal.setAppElement('#root')
 
 const LoginModal = ({ loggedIn }) => {
   const [errorMessage, setErrorMessage] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
   const { state, loginUser, closeLoginModal } = useContext(AuthContext)
 
   const authenticationProvider = (provider: string) => {
@@ -64,12 +65,17 @@ const LoginModal = ({ loggedIn }) => {
     if (result) {
       const { uid } = result.user
       if (uid) {
-        loginUser(uid)
-        return closeLoginModal()
+        setSuccessMessage('Sigin in successfully')
+        setTimeout(() => {
+          loginUser(uid)
+          return closeLoginModal()
+          }, 2000);
+      } else {
+         // show error message and ask them to sign in annonymously
+        return setErrorMessage('We are unable to log you in with the given provider. Please try log in anonymously.')
       }
     }
-    // show error message and ask them to sign in annonymously
-    return setErrorMessage('We are unable to log you in with the given provider. Please try log in anonymously.')
+   
   }
 
   const handleAnonymousAuthentication = () => {
@@ -85,15 +91,19 @@ const LoginModal = ({ loggedIn }) => {
 
       firebase.auth().onAuthStateChanged((user) => {
       if (user && user.uid) {
-      loginUser(user.uid)
-      return closeLoginModal()
+        
+        setSuccessMessage('Sigin in successfully')
+        setTimeout(() => {
+          loginUser(user.uid)
+          closeLoginModal()
+      }, 2000);
       } else {
         return setErrorMessage('Failed to log in anonymously.')
       }
     })
   }
 
-  const LogoutContent = () =>
+  const LogoutContent = () => (
     <div className='sign-out-modal'>
       <h3>Sign Out ?</h3>
       <hr/>
@@ -112,14 +122,12 @@ const LoginModal = ({ loggedIn }) => {
         </button>
       </div>
     </div>
+  )
 
   const LoginContent = () => (
     <div className='sign-in-modal'>
       <h3>Sign In</h3>
       <hr/>
-      {
-        <div className='error-message'>{errorMessage}</div>
-      }
       <div
         className='social-signin-button google'
         onClick={() => authenticate('Google')}
@@ -146,6 +154,12 @@ const LoginModal = ({ loggedIn }) => {
         onClick={() => handleAnonymousAuthentication()}
       >
         <p>Stay Anonymous</p>
+      </div>
+      <div>
+       <>
+       { errorMessage && <p className='error-message'>{errorMessage}</p> }
+       { successMessage && <p className="response-message">{successMessage}</p> }
+       </>
       </div>
       <div className='modalCloseButton'>
         <button
