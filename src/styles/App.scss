@@ -147,7 +147,7 @@
     margin-bottom: 30px;
     & p {
       margin-bottom: 0px;
-      width: 130px;
+      margin-left: 0.5rem;
     }
     &.facebook {
       background-color: $MARINER-BLUE;
@@ -166,8 +166,9 @@
       }
     }
     &.github {
-      background-color: $CHARCOAL-BLUE;
-      color: $PURE-WHITE;
+      border-style: solid;
+      border-width: 0.5px;
+      border-color: $CHARCOAL-BLUE;
       &:hover {
         background-color: $DARK-GREY;
       }

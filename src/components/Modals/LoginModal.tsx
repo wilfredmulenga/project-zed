@@ -5,6 +5,7 @@ import firebase from '../../config/firebase'
 import facebook from '../../images/facebook.svg'
 import google from '../../images/google.png'
 import github from '../../images/github.png'
+import twitter from '../../images/twitter.png'
 
 const customStyles = {
   content: {
@@ -36,6 +37,9 @@ const LoginModal = ({ loggedIn }) => {
       case 'Github':
         authProvider = new firebase.auth.GithubAuthProvider()
         break
+      case 'Twitter': 
+        authProvider = new firebase.auth.TwitterAuthProvider()
+        break
       default:
         authProvider = new firebase.auth.GoogleAuthProvider()
     }
@@ -65,7 +69,28 @@ const LoginModal = ({ loggedIn }) => {
       }
     }
     // show error message and ask them to sign in annonymously
-    return setErrorMessage('We are unable to log you in with the given provider. Please try log in annonymously.')
+    return setErrorMessage('We are unable to log you in with the given provider. Please try log in anonymously.')
+  }
+
+  const handleAnonymousAuthentication = () => {
+    firebase.auth().signInAnonymously().catch(function(error) {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ...
+      console.log(errorMessage)
+      return setErrorMessage('Failed to log in anonymously.')
+    });
+
+
+      firebase.auth().onAuthStateChanged((user) => {
+      if (user && user.uid) {
+      loginUser(user.uid)
+      return closeLoginModal()
+      } else {
+        return setErrorMessage('Failed to log in anonymously.')
+      }
+    })
   }
 
   const LogoutContent = () =>
@@ -95,26 +120,32 @@ const LoginModal = ({ loggedIn }) => {
       {
         <div className='error-message'>{errorMessage}</div>
       }
-      {/* <div
-        className='social-signin-button facebook'
-        onClick={() => authenticate('Facebook')}
-      >
-        <img src={facebook} alt='facebook icon' />
-        <p>Facebook</p>
-      </div>
       <div
         className='social-signin-button google'
         onClick={() => authenticate('Google')}
       >
         <img src={google} alt='google icon' />
         <p>Google</p>
-      </div> */}
+      </div> 
+      <div
+        className='social-signin-button google'
+        onClick={() => authenticate('Twitter')}
+      >
+        <img src={twitter} alt='twitter icon' />
+        <p>Twitter</p>
+      </div> 
       <div
         className='social-signin-button github'
         onClick={() => authenticate('Github')}
       >
         <img src={github} alt='github icon' />
         <p>Github</p>
+      </div>
+      <div
+        className='social-signin-button github'
+        onClick={() => handleAnonymousAuthentication()}
+      >
+        <p>Stay Anonymous</p>
       </div>
       <div className='modalCloseButton'>
         <button
@@ -127,17 +158,6 @@ const LoginModal = ({ loggedIn }) => {
     </div>
   )
 
-  //   firebase.auth().onAuthStateChanged((user) => {
-  //     if (user) {
-  //       const userInfo = { userUID: user.uid, loggedIn: true }
-  //       localStorage.setItem('userInfo', JSON.stringify(userInfo))
-  //       this.props.dispatch(logInStateChange(userInfo))
-  //     } else {
-  //       localStorage.removeItem('userInfo')
-  //       this.props.dispatch(logInStateChange({ userUID: '', loggedIn: false }))
-  //     }
-  //   })
-  // }
   return (
     <Modal
       isOpen={true || !!errorMessage}
