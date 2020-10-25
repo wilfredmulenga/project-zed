@@ -1,14 +1,9 @@
-import React, { FormEvent } from 'react'
+import React from 'react'
 import Modal from 'react-modal'
 import firebase from '../../config/firebase'
 
 import ChipInput from 'material-ui-chip-input'
 import Loader from '../Loader'
-import { Home, Dispatch, HomeReducer } from '../../types/types'
-
-// type Props = {
-//   isOpen: boolean
-// }
 
 Modal.setAppElement('#root')
 

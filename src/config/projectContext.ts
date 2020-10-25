@@ -1,5 +1,5 @@
 import createDataContext from './createDataContext'
-import data from '../data'
+// import data from '../data'
 import { LOAD_PROJECTS_SUCCESS } from '../actions/actionTypes'
 
 const projectsReducer = (state, action) => {
@@ -28,7 +28,7 @@ const projectsReducer = (state, action) => {
     case LOAD_PROJECTS_SUCCESS:
       return [
         ...value // NOTE: not returning 'state' here as the it is hard to distinguish which entries from 'state'
-      ]          // and those from 'values'
+      ] // and those from 'values'
     default:
       return state
   }

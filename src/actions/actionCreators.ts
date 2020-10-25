@@ -29,7 +29,7 @@ export function likeOrDislike ({
   liked: boolean,
   index: number
 }) {
-  return function (dispatch: any) {
+  return function (dispatch: { type: string, index?: number, userUID?: string }) {
     if (liked) {
       dispatch({ type: LIKE_PROJECT, index, userUID })
     } else {
@@ -53,7 +53,7 @@ export function likeOrDislike ({
               likes: liked ? likes + 1 : likes - 1,
               likedBy: liked
                 ? [...likedBy, userUID]
-                : likedBy.filter((userUIDs: any) => userUIDs !== userUID)
+                : likedBy.filter((userUIDs: Array<string>) => userUIDs !== userUID)
             },
             function () {
               dispatch({ type: UPDATE_PROJECTS_SUCCESS })
@@ -70,7 +70,7 @@ export function likeOrDislike ({
 }
 
 export function loadProjects () {
-  return function (dispatch: any) {
+  return function (dispatch: { type: string, payload?: Project[] }) {
     dispatch({ type: LOAD_PROJECTS_START })
 
     const projectsRef = firebase.database().ref('users')
@@ -82,6 +82,7 @@ export function loadProjects () {
         for (const project in snapshot.val()) {
           const projects: [] = snapshot.val()[project]['projects']
           for (const i of projects) {
+            // eslint-disable-next-line  no-unused-expressions
             listOfProjects.push[i]
           }
         }
@@ -91,9 +92,10 @@ export function loadProjects () {
         })
       },
       error => {
+        // eslint-disable-next-line no-console
+        console.log(error)
         dispatch({
-          type: LOAD_PROJECTS_FAIL,
-          payload: error
+          type: LOAD_PROJECTS_FAIL
         })
       }
     )
@@ -107,7 +109,7 @@ export function toggleSignInModal (): { type: string } {
 }
 
 export function logInStateChange ({ userUID, loggedIn }: { userUID: string, loggedIn: boolean }) {
-  return function (dispatch: any) {
+  return function (dispatch: { type: string, payload: { userUID: string, loggedIn: boolean } }) {
     dispatch({
       type: LOG_IN_STATUS_CHANGE,
       payload: {
@@ -137,6 +139,7 @@ export async function addProject ({ project }) {
       result = value
     })
     .catch(function (error) {
+      // eslint-disable-next-line no-console
       console.error('Error adding document: ', error)
     })
   return result
