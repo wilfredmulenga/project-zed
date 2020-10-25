@@ -24,7 +24,7 @@ Modal.setAppElement('#root')
 const LoginModal = ({ loggedIn }) => {
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
-  const { state, loginUser, closeLoginModal } = useContext(AuthContext)
+  const { state, loginUser, closeLoginModal, logoutUser } = useContext(AuthContext)
 
   const authenticationProvider = (provider: string) => {
     let authProvider
@@ -38,7 +38,7 @@ const LoginModal = ({ loggedIn }) => {
       case 'Github':
         authProvider = new firebase.auth.GithubAuthProvider()
         break
-      case 'Twitter': 
+      case 'Twitter':
         authProvider = new firebase.auth.TwitterAuthProvider()
         break
       default:
@@ -69,34 +69,30 @@ const LoginModal = ({ loggedIn }) => {
         setTimeout(() => {
           loginUser(uid)
           return closeLoginModal()
-          }, 2000);
+        }, 2000)
       } else {
-         // show error message and ask them to sign in annonymously
+        // show error message and ask them to sign in annonymously
         return setErrorMessage('We are unable to log you in with the given provider. Please try log in anonymously.')
       }
     }
-   
   }
 
   const handleAnonymousAuthentication = () => {
-    firebase.auth().signInAnonymously().catch(function(error) {
+    firebase.auth().signInAnonymously().catch(function (error) {
       // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      const errorMessage = error.message
       // ...
       console.log(errorMessage)
       return setErrorMessage('Failed to log in anonymously.')
-    });
+    })
 
-
-      firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user && user.uid) {
-        
         setSuccessMessage('Sigin in successfully')
         setTimeout(() => {
           loginUser(user.uid)
           closeLoginModal()
-      }, 2000);
+        }, 2000)
       } else {
         return setErrorMessage('Failed to log in anonymously.')
       }
@@ -109,13 +105,13 @@ const LoginModal = ({ loggedIn }) => {
       <hr/>
       <div className='sign-out-modal'>
         <button
-          // onClick={this.signOut}
+          onClick={() => logoutUser(state.userUID)}
           type="button"
           className="btn btn-outline-danger sign-out-modal-yes">
         Yes
         </button>
         <button
-          // onClick={() => this.props.dispatch(toggleSignOutModal())}
+          onClick={() => closeLoginModal()}
           type="button"
           className="btn btn-outline-danger sign-out-modal-no">
         No
@@ -134,14 +130,14 @@ const LoginModal = ({ loggedIn }) => {
       >
         <img src={google} alt='google icon' />
         <p>Google</p>
-      </div> 
+      </div>
       <div
         className='social-signin-button google'
         onClick={() => authenticate('Twitter')}
       >
         <img src={twitter} alt='twitter icon' />
         <p>Twitter</p>
-      </div> 
+      </div>
       <div
         className='social-signin-button github'
         onClick={() => authenticate('Github')}
@@ -156,10 +152,10 @@ const LoginModal = ({ loggedIn }) => {
         <p>Stay Anonymous</p>
       </div>
       <div>
-       <>
-       { errorMessage && <p className='error-message'>{errorMessage}</p> }
-       { successMessage && <p className="response-message">{successMessage}</p> }
-       </>
+        <>
+          { errorMessage && <p className='error-message'>{errorMessage}</p> }
+          { successMessage && <p className="response-message">{successMessage}</p> }
+        </>
       </div>
       <div className='modalCloseButton'>
         <button

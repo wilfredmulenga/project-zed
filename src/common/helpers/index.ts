@@ -19,3 +19,15 @@ export function fetchProjects () {
 
   return { getProjects }
 }
+
+export async function addProject ({ project }) {
+  let result
+  await firebase.firestore().collection('projects').add({ project })
+    .then(function (value) {
+      result = value
+    })
+    .catch(function (error) {
+      console.error('Error adding document: ', error)
+    })
+  return result
+}

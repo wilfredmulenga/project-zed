@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
-import { addProject } from '../actions/actionCreators'
 import ChipInput from 'material-ui-chip-input'
 import TransitionsModal from './Modals/TransitionsModal'
+import { addProject } from './../common/helpers'
 import '../styles/SubmitProject.scss'
 
 const initialState = {

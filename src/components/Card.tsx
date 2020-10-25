@@ -41,7 +41,7 @@ const Card = ({ project, index }) => {
               <div className="like-container">
                 <div
                   className="like"
-                  onClick={handleClick}
+                  onClick={() => handleClick()}
                 >
                   <p>{likedBy && likedBy.includes(userUID) ? 'unlike' : 'like' }</p>
                 </div>
