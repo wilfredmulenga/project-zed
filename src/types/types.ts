@@ -6,8 +6,6 @@ export type Home = {
   submitProjectModalOpen: boolean
 }
 
-export type Dispatch = (arg0: any) => void
-
 export type Project = {
   projectOwner: string,
   tools: Array<string>,

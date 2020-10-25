@@ -6,7 +6,7 @@ const authReducer = (state, action) => {
       return { ...state, loggedIn: value, userUID }
     }
     case 'logout': {
-      return { ...state, loggedIn: value, userUID }
+      return { ...state, loggedIn: value, userUID: '', isLoginModalOpen: false }
     }
     case 'openLoginModal': {
       return { ...state, isLoginModalOpen: value }

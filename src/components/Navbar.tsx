@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Context as AuthContext } from '../config/authContext'
 
-const Navbar = ({ handleModalOpen }) => {
+const Navbar = () => {
   const { state, openLoginModal } = useContext(AuthContext)
   const { loggedIn } = state
 

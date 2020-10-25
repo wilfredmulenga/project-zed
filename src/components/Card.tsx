@@ -18,7 +18,7 @@ const Card = ({ project, index }) => {
       openLoginModal()
     }
   }
-  const { projectId, tools, type, likes, description, likedBy, projectOwner, link } = project
+  const { projectId, skills, type, likes, description, likedBy, projectOwner, link } = project
   return (
     <div key={projectId} className="row justify-content-center">
       <div className="col-md-8 col-sm-8 mb-4">
@@ -31,9 +31,9 @@ const Card = ({ project, index }) => {
                 {projectOwner}
               </p>
               <p>
-              Tools:
+              skills:
                 {' '}
-                {tools && tools.map((element, i) =>
+                {skills && skills.map((element, i) =>
                   (<span key={i} className="card-subtitle mr-1">{element}</span>))}
               </p>
 
@@ -41,7 +41,7 @@ const Card = ({ project, index }) => {
               <div className="like-container">
                 <div
                   className="like"
-                  onClick={handleClick}
+                  onClick={() => handleClick()}
                 >
                   <p>{likedBy && likedBy.includes(userUID) ? 'unlike' : 'like' }</p>
                 </div>
