@@ -36,11 +36,15 @@ const SubmitProject = (props) => {
     const result = await addProject({ project: state })
     if (result) {
       setModalOpen(true)
-      return setModalText('You\'re project has been submitted.')
+      setModalText('You\'re project has been submitted.')
     } else {
       setModalText('An error occurred. Please try again later.')
       setModalOpen(true)
     }
+
+    setTimeout(() => {
+      handleModalClose()
+    }, 2500);
   }
 
   const handleModalClose = () => {

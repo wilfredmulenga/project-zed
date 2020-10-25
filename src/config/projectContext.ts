@@ -27,9 +27,8 @@ const projectsReducer = (state, action) => {
       ]
     case LOAD_PROJECTS_SUCCESS:
       return [
-        ...state,
-        ...value
-      ]
+        ...value // NOTE: not returning 'state' here as the it is hard to distinguish which entries from 'state'
+      ]          // and those from 'values'
     default:
       return state
   }
