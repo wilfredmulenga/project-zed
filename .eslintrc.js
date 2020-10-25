@@ -14,7 +14,7 @@ module.exports = {
     }
   },
   "rules": {
-    "no-console": 1,
+    "no-console": 0,
     "@typescript-eslint/member-delimiter-style": ["error", {
       "multiline": {
         "delimiter": "comma",   

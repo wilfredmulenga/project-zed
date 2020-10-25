@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Navbar from '../components/Navbar'
+import Navbar from './Navbar'
 import { addProject } from '../actions/actionCreators'
 import ChipInput from 'material-ui-chip-input'
 import TransitionsModal from './Modals/TransitionsModal'
@@ -31,6 +31,11 @@ const SubmitProject = (props) => {
     setState(prevState => ({ ...prevState, skills }))
   }
 
+  const handleModalClose = () => {
+    setModalOpen(false)
+    props.history.push('/')
+  }
+
   const onFormSubmit = async (evt) => {
     evt.preventDefault()
     const result = await addProject({ project: state })
@@ -44,12 +49,7 @@ const SubmitProject = (props) => {
 
     setTimeout(() => {
       handleModalClose()
-    }, 2500);
-  }
-
-  const handleModalClose = () => {
-    setModalOpen(false)
-    props.history.push('/')
+    }, 2500)
   }
 
   const { projectOwner, description, typeOfProject, link, skills } = state
