@@ -14,7 +14,7 @@
     "eslint-plugin-react": "^7.19.0",
     "firebase": "^7.14.1",
     "material-ui-chip-input": "^1.0.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-modal": "^3.11.2",
